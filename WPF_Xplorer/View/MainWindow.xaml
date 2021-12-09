@@ -19,9 +19,9 @@
         <Menu Grid.ColumnSpan="2" FontSize="14" Margin="3">
             <MenuItem Header="File" >
                 <MenuItem Header="Open" Command="ApplicationCommands.Open"/>
-                <MenuItem Header="Close file"/>
+                <MenuItem Header="Close file" Command="ApplicationCommands.Close"/>
                 <Separator />
-                <MenuItem Header="Exit" Command="ApplicationCommands.Close"/>
+                <MenuItem Header="Exit" Command="{Binding CloseApplication}"/>
             </MenuItem>
             <MenuItem Header="Help" ></MenuItem>
         </Menu>
@@ -37,10 +37,14 @@
         <TreeView Grid.Row="2" Padding="2"
                   VirtualizingStackPanel.IsVirtualizing="True"
                   VirtualizingStackPanel.VirtualizationMode="Recycling"
+                  SelectedItemChanged="SelectedTree"
                   Name="tree_pdf">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding}">
-                    <Label Content="{Binding }"/>
+                    <DockPanel>
+                        <Image Source=""/>
+                        <TextBlock VerticalAlignment="Center"  Text ="{Binding }"/>
+                    </DockPanel>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
@@ -50,9 +54,12 @@
                  Name="Description">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="3">
+                    <StackPanel Margin="3" Orientation="Horizontal" >
+                        <Label Content="Key"/>
                         <TextBlock Text="{Binding Key}"/>
+                        <Label Content="Type"/>
                         <TextBlock Text="{Binding Type}"/>
+                        <Label Content="Value"/>
                         <TextBlock Text="{Binding Value}"/>
                     </StackPanel>
                 </DataTemplate>
