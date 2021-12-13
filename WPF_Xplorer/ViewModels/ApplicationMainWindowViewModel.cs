@@ -32,6 +32,5 @@ namespace WPF_Xplorer.ViewModels
                     }));
             }
         }
-
     }
 }
