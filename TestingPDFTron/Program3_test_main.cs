@@ -4,26 +4,17 @@ using pdftron.PDF;
 using pdftron.PDF.Struct;
 using pdftron.SDF;
 using System;
+using TestingPDFTron.Interfaces;
+using TestingPDFTron.Services;
+using static pdftron.SDF.Obj;
 
 namespace TestingPDFTron
 {
-    //public enum ObjType
-    //{
-    //    e_null = 0,
-    //    e_bool = 1,
-    //    e_number = 2,
-    //    e_name = 3,
-    //    e_string = 4,
-    //    e_dict = 5,
-    //    e_array = 6,
-    //    e_stream = 7
-    //}
-
-
     class Program3_test_main
     {
-        static string input_path = "C:/Users/skafa/Desktop/test.pdf";
+        static string input_path3 = "C:/Users/skafa/Desktop/test.pdf";
         static string input_path2 = "C:/Users/skafa/Downloads/PDF32000_2008-1-200.pdf";
+        static string input_path = @"C:\Users\Badyan\Downloads\test.pdf";
 
         static void Main(string[] args)
         {
@@ -31,7 +22,6 @@ namespace TestingPDFTron
 
             Pdf_Struct();
         }
-
 
         static void Pdf_Struct()
         {
@@ -41,7 +31,7 @@ namespace TestingPDFTron
                 var fileSize = file.FileSize();
                 byte[] mem = new byte[fileSize];
                 reader.Read(mem);
-                
+
                 //получение рута и его имени "root"
                 PDFDoc pDFDoc = new PDFDoc(mem, fileSize);
                 pDFDoc.InitSecurityHandler();
@@ -49,57 +39,18 @@ namespace TestingPDFTron
                 var root = pDFDoc.GetRoot();
                 var root_name = root.Find("Type").Value().GetName();
 
-                // DisplayInfo(pDFDoc);
-              
+                //DisplayInfo(pDFDoc);
                 // вывод свойств сatalog
-                var root_dict = root.GetDictIterator();
-                DisplayStructKeyAndValueTreePdf(root);
+                //DisplayStructKeyAndValueTreePdf(root);
 
-                Console.WriteLine("-----------------");
-                //for (var itr = root_dict; itr.HasNext(); itr.Next())
-                //{
-                //    var choose = itr.Value().GetType();
-                //    Console.WriteLine("-----------------");
-                //    Console.WriteLine(itr.Value().GetType());
-                //    switch (choose)
-                //    {
-                //        case Obj.ObjType.e_name:
-                //            Console.WriteLine(itr.Key().GetName() + " | " + itr.Value().GetName());
-                //            break;
-                //        case Obj.ObjType.e_dict:
-                //            Console.WriteLine(itr.Key().GetName() + " -->");
-                //            if (itr.Value().IsIndirect())
-                //            {
-                //                Console.WriteLine(" | " + itr.Value().GetObjNum() + " " + itr.Value().GetGenNum() + " R");
-                //            }
-                //            else
-                //                for (var itr2 = itr.Value().GetDictIterator(); itr2.HasNext(); itr2.Next())
-                //                {
-                //                    Console.WriteLine(itr2.Key().GetName());
-                //                }
-                //            break;
-                //        case Obj.ObjType.e_stream:
-                //            Console.WriteLine(itr.Key().GetName() + " | " + itr.Value().GetObjNum() + " " + itr.Value().GetGenNum() + " R");
-                //            break;
-                //        case Obj.ObjType.e_string:
-                //            Console.WriteLine(itr.Key().GetName() + " | " + itr.Value().GetAsPDFText());
-                //            break;
-                //        case Obj.ObjType.e_bool:
-                //            Console.WriteLine(itr.Key().GetName() + " | " + itr.Value().GetBool());
-                //            break;
-                //        case Obj.ObjType.e_array:
-                //            Console.WriteLine(itr.Key().GetName() + " | ");
-                //            for (var itr2 = itr.Value().GetDictIterator(); itr2.HasNext(); itr2.Next())
-                //            {
-                //                Console.WriteLine(itr2.Value().GetName());
-                //            }
-                //            break;
-                //        case Obj.ObjType.e_number:
-                //            Console.WriteLine(itr.Key().GetName() + " | " + itr.Value().GetNumber());
-                //            break;
-                //    }
-                //}
+                PdfObjectValueProc pdfObjectValueProc = new PdfObjectValueProc();
+                PdfObjectProc p = new PdfObjectProc(pdfObjectValueProc);
+                bool t = true;
+                p.StructObjectBranchOnType(root, "Root", out t);
 
+
+                var obj = root.Get("Pages").Value();
+                //  DisplayStructKeyAndValueTreePdf(obj)
 
                 //вывод на дисплей информации //Catalog 7 0 R  /  Info 4 0 R  / 4 0 Object
                 //Console.WriteLine(root_name + " " + root.GetObjNum() + " " + root.GetGenNum() + " R");
@@ -116,6 +67,8 @@ namespace TestingPDFTron
             var info_dict = trailer.Get("Info").Value();
             var info_name = info.Key().GetName();
 
+            pDFDoc.GetDocInfo();
+
             //done
             Console.WriteLine("-----------------");
             Console.WriteLine(info.Key().GetName() + " " + info_dict.GetObjNum() + " " + info_dict.GetGenNum() + " R");
@@ -127,9 +80,17 @@ namespace TestingPDFTron
 
         static void DisplayStructKeyAndValueTreePdf(Obj obj)
         {
+            bool hasKid = false;
+            if (obj.IsIndirect())
+            {
+                hasKid = true;
+
+                // call func case inderect(dict) 
+            }
+
             var root = obj.GetDictIterator();
-            StructTree(root);
-            void StructTree(DictIterator branch)
+            CreateStructTree(root);
+            void CreateStructTree(DictIterator branch)
             {
                 // вывод свойств сatalog
                 var root_dict = branch;
@@ -139,13 +100,14 @@ namespace TestingPDFTron
                     var choose = itr.Value().GetType();
                     Console.WriteLine("-----------------");
                     Console.WriteLine(itr.Value().GetType());
+
                     switch (choose)
                     {
                         case Obj.ObjType.e_name:
                             Console.WriteLine(itr.Key().GetName() + " | " + itr.Value().GetName());
                             break;
                         case Obj.ObjType.e_dict:
-                            Console.WriteLine(itr.Key().GetName() + " -->");
+                            Console.WriteLine(itr.Key().GetName() + "   -->");
                             if (itr.Value().IsIndirect())
                             {
                                 Console.WriteLine(" | " + itr.Value().GetObjNum() + " " + itr.Value().GetGenNum() + " R");
@@ -155,7 +117,7 @@ namespace TestingPDFTron
                                 {
                                     Console.WriteLine(itr2.Key().GetName());
                                     if (itr2.Value().GetType() == Obj.ObjType.e_dict)
-                                        StructTree(itr2);
+                                        CreateStructTree(itr2);
                                 }
                             break;
                         case Obj.ObjType.e_stream:
@@ -168,34 +130,44 @@ namespace TestingPDFTron
                             Console.WriteLine(itr.Key().GetName() + " | " + itr.Value().GetBool());
                             break;
                         case Obj.ObjType.e_array:
-                            for(int i = 0; i < itr.Value().Size(); ++i)
+                            for (int i = 0; i < itr.Value().Size(); ++i)
                             {
                                 var el_array = itr.Value().GetAt(i);
-                                Console.WriteLine(el_array);
+                                Console.WriteLine(el_array.GetType());
+                                if (el_array.GetType() == Obj.ObjType.e_number)
+                                {
+                                    Console.WriteLine(itr.Key().GetName() + " | " + itr.Value().GetAt(i).GetNumber());
+                                }
+                                else
+                                {
+                                    DisplayStructKeyAndValueTreePdf(el_array);
+                                }
                             }
-
-
-                            //Console.WriteLine(itr.Key().GetName() + " | ");
-                            //for (var itr2 = itr; itr2.HasNext(); itr2.Next()) // предположительно не работает 
-                            //{
-                            //    Console.WriteLine(itr2.Value().GetName());
-                            //}
                             break;
                         case Obj.ObjType.e_number:
                             Console.WriteLine(itr.Key().GetName() + " | " + itr.Value().GetNumber());
                             break;
+
+                        default:
+                            Console.Write("null");
+                            break;
                     }
-                    if (choose == Obj.ObjType.e_dict && itr.HasNext())
-                    {
-                        for (var itr2 = itr.Value().GetDictIterator(); itr2.HasNext(); itr2.Next())
-                        {
-                            StructTree(itr2);
-                        }
-                    }
+                    //  if (choose == Obj.ObjType.e_dict)
+                    //{
+                    //    for (var itr2 = itr.Value().GetDictIterator(); itr2.HasNext(); itr2.Next())
+                    //    {
+                    //        CreateStructTree(itr2);
+                    //    }
+                    //}
                 }
-                
+
+
             }
         }
 
+
+
     }
+
 }
+

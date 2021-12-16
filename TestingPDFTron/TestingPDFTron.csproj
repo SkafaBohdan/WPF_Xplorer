@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DevExpressMvvm" Version="21.1.5" />
     <PackageReference Include="PDFTron.NETCore.Windows.x64" Version="9.1.0" />
   </ItemGroup>
 

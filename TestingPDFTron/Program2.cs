@@ -3,10 +3,7 @@ using pdftron.Filters;
 using pdftron.PDF;
 using pdftron.SDF;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace TestingPDFTron
 {
@@ -15,7 +12,6 @@ namespace TestingPDFTron
        
         static void Main2(string[] args)
         {
-            Console.WriteLine("Hello World!");
             PDFNet.Initialize("demo:1638797506699:7b62627f0300000000e7c9c9b56709b97ba1634ef4ec416ab001038e68");
             //PDFTest()
 
