@@ -1,36 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows.Input;
+using WPF_Xplorer.Commands;
+using WPF_Xplorer.Models;
+using WPF_Xplorer.Services;
 using WPF_Xplorer.Services.Interfaces;
-using WPF_Xplorer.ViewModels.Commands;
+
 
 namespace WPF_Xplorer.ViewModels
 {
     public class ApplicationMainWindowViewModel : BaseViewModel
     {
-        private Tree selectedTree;
+        private PdfObj selectedItem;
+        private bool isStream;
 
-        IFileService fileService;
-        IDialogService dialogService;
+        public IPdfDocProc PdfDocProc { get; set; }
 
-        public ObservableCollection<PDF> pDFs { get; set; }
-
-
-        private RelayCommand closeApplication;
-        public RelayCommand CloseApplication
+        public ApplicationMainWindowViewModel(IPdfDocProc pdfDocProc)
         {
-            get
+            CreateCommands();
+
+            PdfDocProc = pdfDocProc;
+        }
+
+        #region Command
+
+        public ICommand OpenFileCommand { get; set; }
+        public ICommand ClosePdfFileCommand { get; set; }
+        public ICommand SelectedItemCommand { get; set; }
+        public ICommand ExpandCommand { get; set; }
+
+        #endregion
+
+        private void CreateCommands()
+        {
+            OpenFileCommand = new OpenFileCommand(this, new DialogOpen());
+            ClosePdfFileCommand = new ClosePdfFileCommand(this);
+            SelectedItemCommand = new SelectedItemCommand(this);
+            ExpandCommand = new ExpandCommand(this);
+        }
+
+
+        public PdfObj SelectedObject
+        {
+            get => selectedItem;
+            set
             {
-                return closeApplication ??
-                    (closeApplication = new RelayCommand(obj =>
-                    {
-                        Application.Current.Shutdown();
-                    }));
+                selectedItem = value;
+                isStream = !string.IsNullOrEmpty(selectedItem?.StreamStringValue);
+                OnPropertyChanged(nameof(SelectedObject));
             }
         }
+
+        public bool IsStreamNotEmpty
+        {
+            get => isStream;
+            set
+            {
+                isStream = value;
+                OnPropertyChanged(nameof(IsStreamNotEmpty));
+            }
+        }
+
     }
 }

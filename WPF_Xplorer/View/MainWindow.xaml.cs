@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-
+using WPF_Xplorer.ViewModels;
 
 namespace WPF_Xplorer.View
 {
@@ -8,9 +8,11 @@ namespace WPF_Xplorer.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(object dataContext)
         {
             InitializeComponent();
+
+            DataContext = dataContext;
         }
     }
 }

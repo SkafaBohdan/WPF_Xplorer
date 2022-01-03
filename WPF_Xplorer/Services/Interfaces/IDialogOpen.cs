@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace WPF_Xplorer.Services.Interfaces
 {
-    public interface IDialogService
+    public interface IDialogOpen
     {
-        void ShowMessage(string message);
-        string FilePath { get; set; }
-        bool OpenFileDialog();
+        bool OpenDialog(object parameter, out string fileName);
     }
 }

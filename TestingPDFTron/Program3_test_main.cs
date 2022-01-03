@@ -12,9 +12,9 @@ namespace TestingPDFTron
 {
     class Program3_test_main
     {
-        static string input_path3 = "C:/Users/skafa/Desktop/test.pdf";
+        static string input_path = "C:/Users/skafa/Desktop/test.pdf";
         static string input_path2 = "C:/Users/skafa/Downloads/PDF32000_2008-1-200.pdf";
-        static string input_path = @"C:\Users\Badyan\Downloads\test.pdf";
+        static string input_path3 = @"C:\Users\Badyan\Downloads\test.pdf";
 
         static void Main(string[] args)
         {
@@ -46,7 +46,8 @@ namespace TestingPDFTron
                 PdfObjectValueProc pdfObjectValueProc = new PdfObjectValueProc();
                 PdfObjectProc p = new PdfObjectProc(pdfObjectValueProc);
                 bool t = true;
-                p.StructObjectBranchOnType(root, "Root", out t);
+                var d = p.StructObjectBranchOnType(root, "Root", out t);
+                Console.WriteLine(d.DisplayKeyAndValue);
 
 
                 var obj = root.Get("Pages").Value();

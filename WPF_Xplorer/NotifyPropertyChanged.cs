@@ -2,9 +2,9 @@
 using System.Runtime.CompilerServices;
 
 
-namespace WPF_Xplorer.ViewModels
+namespace WPF_Xplorer
 {
-    public abstract class BaseViewModel : INotifyPropertyChanged
+    public class NotifyPropertyChanged : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
