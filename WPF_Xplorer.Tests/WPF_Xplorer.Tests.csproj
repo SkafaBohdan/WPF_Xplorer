@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="CommandsTests\" />
+    <Folder Include="ServicesTests\NewFolder\" />
   </ItemGroup>
 
 </Project>

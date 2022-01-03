@@ -6,7 +6,7 @@ using WPF_Xplorer.Services.Interfaces;
 
 namespace WPF_Xplorer.Interfaces
 {
-    public interface IPdfObjectProc
+    public interface IPdfObjProc
     {
         Dictionary<string, string> GetInfoObj(PDFDocInfo docInfo);
         PdfObj StructObjectBranchOnType(Obj obj, string name, out bool hasKid);

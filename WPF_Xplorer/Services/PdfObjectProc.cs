@@ -7,7 +7,7 @@ using WPF_Xplorer.Services.Interfaces;
 
 namespace WPF_Xplorer.Services
 {
-    public class PdfObjectProc: IPdfObjectProc
+    public class PdfObjectProc: IPdfObjProc
     {
         private IPdfObjectValueProc objValueProc;
         private int streamNumb = 1;

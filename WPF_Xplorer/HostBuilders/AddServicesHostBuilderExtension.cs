@@ -48,7 +48,7 @@ namespace WPF_Xplorer.HostBuilders
             return new PdfTronInitializer(configurator);
         }
 
-        private static IPdfObjectProc CreatePdfObjectProcessor(IServiceProvider provider)
+        private static IPdfObjProc CreatePdfObjectProcessor(IServiceProvider provider)
         {
             var valueProcessor = provider.GetRequiredService<IPdfObjectValueProc>();
 
@@ -65,7 +65,7 @@ namespace WPF_Xplorer.HostBuilders
 
         public static IPdfTreeProc CreatePdfTreeProcessor(IServiceProvider provider)
         {
-            var objectProcessor = provider.GetRequiredService<IPdfObjectProc>();
+            var objectProcessor = provider.GetRequiredService<IPdfObjProc>();
 
             return new PdfTreeProc(objectProcessor);
         }

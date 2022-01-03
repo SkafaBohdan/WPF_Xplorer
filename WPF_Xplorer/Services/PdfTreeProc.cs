@@ -10,9 +10,9 @@ namespace WPF_Xplorer.Services
 {
     public class PdfTreeProc : IPdfTreeProc
     {
-        private readonly IPdfObjectProc pdfObjectProc;
+        private readonly IPdfObjProc pdfObjectProc;
 
-        public PdfTreeProc(IPdfObjectProc pdfObjectProc)
+        public PdfTreeProc(IPdfObjProc pdfObjectProc)
         {
             this.pdfObjectProc = pdfObjectProc;
         }

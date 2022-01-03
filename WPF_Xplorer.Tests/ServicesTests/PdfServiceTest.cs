@@ -70,8 +70,8 @@ namespace WPF_Xplorer.Tests.ServicesTests
             pdfService.GetDocumentNode(path, treeView);
 
             pdfTreeProcMock.Verify(service => service.GetDocumentNode(path), Times.Once);
-            Assert.That(treeViewItem.Items.Count, Is.EqualTo(1));
-            Assert.That(treeView.Items.Count, Is.EqualTo(1));
+            Assert.AreEqual(1, treeView.Items.Count);
+            Assert.AreEqual(1, treeViewItem.Items.Count);
         }
 
         [Test]
@@ -82,7 +82,7 @@ namespace WPF_Xplorer.Tests.ServicesTests
             pdfService.AddInfoStrings(treeViewItem);
 
             pdfTronServiceMock.Verify(service => service.GetInfoStrings(It.IsAny<ObjBinder>()), Times.Once);
-            Assert.That(treeViewItem.Items.Count, Is.EqualTo(2));
+            Assert.AreEqual(2, treeViewItem.Items.Count);
         }
 
         [Test]
@@ -103,8 +103,8 @@ namespace WPF_Xplorer.Tests.ServicesTests
             pdfService.AddInfoNode(treeViewItem);
 
             pdfTronServiceMock.Verify(service => service.GetInfoNode(), Times.Once);
-            Assert.That(treeViewItem.Items[0], Is.EqualTo(kid));
-            Assert.That(treeViewItem.Items.Count, Is.EqualTo(1));
+            Assert.AreEqual(kid, treeViewItem.Items[0]);
+            Assert.AreEqual(1, treeViewItem.Items.Count);
         }
 
         [Test]
@@ -116,7 +116,7 @@ namespace WPF_Xplorer.Tests.ServicesTests
             pdfService.AddInfoNode(treeViewItem);
 
             pdfTronServiceMock.Verify(service => service.GetInfoNode(), Times.Once);
-            Assert.That(treeViewItem.Items.Count, Is.EqualTo(0));
+            Assert.AreEqual(0, treeViewItem.Items.Count);
         }
 
         [Test]
@@ -127,7 +127,7 @@ namespace WPF_Xplorer.Tests.ServicesTests
             pdfService.AddChildNodes(treeViewItem);
 
             pdfTronServiceMock.Verify(service => service.GetChildNodes(It.IsAny<Obj>(), It.IsAny<string>()), Times.Once);
-            Assert.That(treeViewItem.Items.Count, Is.EqualTo(2));
+            Assert.AreEqual(2, treeViewItem.Items.Count);
         }
 
         [Test]
@@ -138,7 +138,7 @@ namespace WPF_Xplorer.Tests.ServicesTests
             pdfService.AddChildNodes(treeViewItem);
 
             pdfTronServiceMock.Verify(service => service.GetChildNodes(It.IsAny<Obj>(), It.IsAny<string>()), Times.Never);
-            Assert.That(treeViewItem.Items.Count, Is.EqualTo(0));
+            Assert.AreEqual(0, treeViewItem.Items.Count);
         }
     }
 }
