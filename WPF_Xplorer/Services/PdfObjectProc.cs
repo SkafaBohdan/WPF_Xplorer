@@ -91,7 +91,7 @@ namespace WPF_Xplorer.Services
         {
             var num = objValueProc.GetName(obj);
 
-            return new PdfNumber()
+            return new PdfName()
             {
                 Key = name,
                 Value = num
@@ -128,7 +128,7 @@ namespace WPF_Xplorer.Services
             };
         }
 
-       
+
         public PdfObj BoolObj(Obj obj, string name)
         {
             var valueBool = objValueProc.GetBool(obj);
