@@ -18,8 +18,4 @@
     <ProjectReference Include="..\WPF_Xplorer\WPF_Xplorer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CommandsTests\" />
-  </ItemGroup>
-
 </Project>

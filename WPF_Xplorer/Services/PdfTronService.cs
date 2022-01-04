@@ -1,7 +1,6 @@
 ﻿using pdftron.Filters;
 using pdftron.PDF;
 using pdftron.SDF;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
