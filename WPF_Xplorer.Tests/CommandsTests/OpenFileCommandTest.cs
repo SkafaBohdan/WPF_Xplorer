@@ -1,6 +1,5 @@
 ﻿using Moq;
 using NUnit.Framework;
-using pdftron.SDF;
 using System.Threading;
 using System.Windows.Controls;
 using WPF_Xplorer.Commands;
@@ -39,7 +38,7 @@ namespace WPF_Xplorer.Tests.CommandsTests
         }
 
         [Test]
-        public void Execute_Uploaded_ReturnFileLoaded()
+        public void Execute_Open_ReturnFileLoaded()
         {
             TreeView treeView = new TreeView();
             openDialog.Setup(command => command.OpenDialog(It.IsAny<object>(), out fileName)).Returns(true);
