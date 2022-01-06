@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using WPF_Xplorer.Services.Interfaces;
 using static WPF_Xplorer.Models.PdfObj;
 
@@ -35,13 +30,9 @@ namespace WPF_Xplorer.Services
         public string Name
         {
             get => name;
-            private set
+            set
             {
-                var normalizedPath = value.Replace('/', '\\');
-                var lastIndex = normalizedPath.LastIndexOf('\\');
-
-                name = lastIndex <= 0 ? value : value[(lastIndex + 1)..];
-
+                name = value;
                 OnPropertyChanged(nameof(Name));
             }
         }
@@ -52,14 +43,11 @@ namespace WPF_Xplorer.Services
             DocPath = path;
         }
 
-        public void AddRelativeLeaves(ref TreeViewItem treeViewItem)
+        public void RelativeLeaveAdd(ref TreeViewItem treeViewItem)
         {
-            //var items = treeViewItem.Items;
-            //if (items[0] != null || items.Count > 1) return;
+            treeViewItem.Items.Clear();
 
-            treeViewItem.Items.Clear(); //Delete dummy item
-
-            var type = ((ObjBinder)treeViewItem.Tag).PdfObj.Type;
+            var type = ((BinderObj)treeViewItem.Tag).PdfObj.Type;
             switch (type)
             {
                 case PdfType.Document:
@@ -72,7 +60,7 @@ namespace WPF_Xplorer.Services
                     break;
 
                 default:
-                    service.AddChildNodes(treeViewItem);
+                    service.AddKidNodes(treeViewItem);
                     break;
             }
         }

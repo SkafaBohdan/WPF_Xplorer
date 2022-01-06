@@ -55,9 +55,9 @@ namespace WPF_Xplorer.Tests.ServicesTests
         [Test]
         public void AddRelativeLeaves_TypeIsDocument_AddCatalogNodeAndAddInfoNode()
         {
-            treeViewItem.Tag = new ObjBinder(new PdfObj() { Type = PdfObj.PdfType.Document }, It.IsAny<Obj>());
+            treeViewItem.Tag = new BinderObj(new PdfObj() { Type = PdfObj.PdfType.Document }, It.IsAny<Obj>());
 
-            pdfDocProc.AddRelativeLeaves(ref treeViewItem);
+            pdfDocProc.RelativeLeaveAdd(ref treeViewItem);
 
             pdfService.Verify(service => service.AddCatalogNode(treeViewItem), Times.Once);
             pdfService.Verify(service => service.AddInfoNode(treeViewItem), Times.Once);
@@ -67,9 +67,9 @@ namespace WPF_Xplorer.Tests.ServicesTests
         [Test]
         public void AddRelativeLeaves_TypeIsInfo_AddInfoStrings()
         {
-            treeViewItem.Tag = new ObjBinder(new PdfObj() { Type = PdfObj.PdfType.Info }, It.IsAny<Obj>());
+            treeViewItem.Tag = new BinderObj(new PdfObj() { Type = PdfObj.PdfType.Info }, It.IsAny<Obj>());
 
-            pdfDocProc.AddRelativeLeaves(ref treeViewItem);
+            pdfDocProc.RelativeLeaveAdd(ref treeViewItem);
 
             pdfService.Verify(service => service.AddInfoStrings(treeViewItem), Times.Once);
         }
@@ -82,11 +82,11 @@ namespace WPF_Xplorer.Tests.ServicesTests
         [TestCase(PdfObj.PdfType.String)]
         public void AddRelativeLeaves_DefaultCase_AddChildNodes(PdfObj.PdfType pdfType)
         {
-            treeViewItem.Tag = new ObjBinder(new PdfObj() { Type = pdfType }, It.IsAny<Obj>());
+            treeViewItem.Tag = new BinderObj(new PdfObj() { Type = pdfType }, It.IsAny<Obj>());
 
-            pdfDocProc.AddRelativeLeaves(ref treeViewItem);
+            pdfDocProc.RelativeLeaveAdd(ref treeViewItem);
 
-            pdfService.Verify(service => service.AddChildNodes(treeViewItem), Times.Once);
+            pdfService.Verify(service => service.AddKidNodes(treeViewItem), Times.Once);
         }
 
 

@@ -10,12 +10,12 @@ namespace WPF_Xplorer.Services
         public bool OpenDialog(object parameter, out string fileName)
         {
             fileName = "";
-            var openDialogFile = new OpenFileDialog();
-            openDialogFile.Filter = "Pdf files (*.pdf)  | *.pdf";
+            var openDialog = new OpenFileDialog();
+            openDialog.Filter = "Pdf files (*.pdf)  | *.pdf";
 
-            if (openDialogFile.ShowDialog() != true) return false;
+            if (openDialog.ShowDialog() != true) return false;
 
-            fileName = openDialogFile.FileName;
+            fileName = openDialog.FileName;
 
             return parameter is TreeView;
         }

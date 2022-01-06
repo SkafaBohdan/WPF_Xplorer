@@ -20,17 +20,13 @@ namespace WPF_Xplorer.HostBuilders
 
                 services.AddScoped(CreatePdfTronConfigurator);
                 services.AddScoped(CreatePdfTronInitializer);
-
-
                 services.AddScoped<IPdfObjectValueProc, PdfObjectValueProc>();
                 services.AddScoped(CreatePdfObjectProcessor);
-
                 services.AddScoped(CreateStreamService);
                 services.AddScoped(CreatePdfTreeProcessor);
-
                 services.AddScoped(CreatePdfTronDoc);
                 services.AddScoped(CreatePdfService);
-                services.AddScoped(CreatePdfDocProcessor);
+                services.AddScoped(CreatePdfDocProc);
             });
 
             return host;
@@ -38,7 +34,7 @@ namespace WPF_Xplorer.HostBuilders
 
         private static IPdfTronConfigurator CreatePdfTronConfigurator(IServiceProvider provider)
         {
-            return new PdfTronConfigurator(hostContext.Configuration["PdfTronKey"]);
+            return new PdfTronConfigurator(hostContext.Configuration["TronKey"]);
         }
 
         private static IPdfTronInitializer CreatePdfTronInitializer(IServiceProvider provider)
@@ -50,32 +46,32 @@ namespace WPF_Xplorer.HostBuilders
 
         private static IPdfObjProc CreatePdfObjectProcessor(IServiceProvider provider)
         {
-            var valueProcessor = provider.GetRequiredService<IPdfObjectValueProc>();
+            var valueProc = provider.GetRequiredService<IPdfObjectValueProc>();
 
-            return new PdfObjectProc(valueProcessor);
+            return new PdfObjectProc(valueProc);
         }
 
         private static IPdfService CreatePdfService(IServiceProvider provider)
         {
             var pdfTronService = provider.GetRequiredService<IPdfTronService>();
-            var pdfTreeProcessor = provider.GetRequiredService<IPdfTreeProc>();
+            var pdfTreeProc = provider.GetRequiredService<IPdfTreeProc>();
 
-            return new PdfService(pdfTronService, pdfTreeProcessor);
+            return new PdfService(pdfTronService, pdfTreeProc);
         }
 
         public static IPdfTreeProc CreatePdfTreeProcessor(IServiceProvider provider)
         {
-            var objectProcessor = provider.GetRequiredService<IPdfObjProc>();
+            var objectProc = provider.GetRequiredService<IPdfObjProc>();
 
-            return new PdfTreeProc(objectProcessor);
+            return new PdfTreeProc(objectProc);
         }
 
         private static IStreamService CreateStreamService(IServiceProvider provider)
         {
-            var docFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var streamFolderPath = Path.Combine(docFolderPath, "streams");
+            var PathDoc = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var PathStream = Path.Combine(PathDoc, "tempStreams");
 
-            return new StreamService(streamFolderPath);
+            return new StreamService(PathStream);
         }
 
         private static IPdfTronService CreatePdfTronDoc(IServiceProvider provider)
@@ -88,7 +84,7 @@ namespace WPF_Xplorer.HostBuilders
         }
 
 
-        private static IPdfDocProc CreatePdfDocProcessor(IServiceProvider provider)
+        private static IPdfDocProc CreatePdfDocProc(IServiceProvider provider)
         {
             var pdfService = provider.GetRequiredService<IPdfService>();
 

@@ -5,11 +5,9 @@ VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_Xplorer", "WPF_Xplorer\WPF_Xplorer.csproj", "{C6280961-1445-480B-8FD9-64217BE2DF64}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingPDFTron", "TestingPDFTron\TestingPDFTron.csproj", "{A5DB320D-4D00-4F24-986E-2E8302995B33}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9194DAA8-A688-4645-9A91-9204C2101D6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_Xplorer.Tests", "WPF_Xplorer.Tests\WPF_Xplorer.Tests.csproj", "{516A62CB-F60A-40F1-B7B2-17815FF5A978}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_Xplorer.Tests", "WPF_Xplorer.Tests\WPF_Xplorer.Tests.csproj", "{516A62CB-F60A-40F1-B7B2-17815FF5A978}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +19,6 @@ Global
 		{C6280961-1445-480B-8FD9-64217BE2DF64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6280961-1445-480B-8FD9-64217BE2DF64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6280961-1445-480B-8FD9-64217BE2DF64}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A5DB320D-4D00-4F24-986E-2E8302995B33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A5DB320D-4D00-4F24-986E-2E8302995B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A5DB320D-4D00-4F24-986E-2E8302995B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A5DB320D-4D00-4F24-986E-2E8302995B33}.Release|Any CPU.Build.0 = Release|Any CPU
 		{516A62CB-F60A-40F1-B7B2-17815FF5A978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{516A62CB-F60A-40F1-B7B2-17815FF5A978}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{516A62CB-F60A-40F1-B7B2-17815FF5A978}.Release|Any CPU.ActiveCfg = Release|Any CPU

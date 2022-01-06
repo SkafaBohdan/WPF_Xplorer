@@ -13,6 +13,6 @@ namespace WPF_Xplorer.Services.Interfaces
         void AddCatalogNode(TreeViewItem ancestor);
         void AddInfoNode(TreeViewItem ancestor);
         void AddInfoStrings(TreeViewItem ancestor);
-        void AddChildNodes(TreeViewItem ancestor);
+        void AddKidNodes(TreeViewItem ancestor);
     }
 }

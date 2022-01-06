@@ -11,7 +11,7 @@ namespace WPF_Xplorer.Models
         public int GenNumber { get; set; }
         public int ObjNum { get; set; }
         public override string DisplayKey => $"/{Key} {ObjNum} {GenNumber} obj";
-        public override string DisplayValue => $"/{Key} {ObjNum} {GenNumber} R";
+        public override string DisplayValue => $"{Key} {ObjNum} {GenNumber} R";
         public override string DisplayKeyAndValue => DisplayKey;
         public PdfIndirectObj()
         {

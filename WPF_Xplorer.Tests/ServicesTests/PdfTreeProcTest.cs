@@ -57,7 +57,7 @@ namespace WPF_Xplorer.Tests.ServicesTests
             dict.Setup(dict => dict.GetEnumerator()).Returns(new DictEnumerator(It.IsAny<DictIterator>()));
             pdfObjProc.Setup(service => service.StructObjectBranchOnType(It.IsAny<Obj>(), It.IsAny<string>(), out hasKids));
 
-            var result = pdfTreeProc.GetChildNodes(dict.Object);
+            var result = pdfTreeProc.GetKidNodes(dict.Object);
             
             Assert.IsInstanceOf<IEnumerable<TreeViewItem>>(result);
         }
@@ -80,7 +80,7 @@ namespace WPF_Xplorer.Tests.ServicesTests
             pdfObjProc.Setup(service => service.InderectObj(It.IsAny<Obj>(), It.IsAny<string>())).Returns(new PdfObj());
 
             var result = pdfTreeProc.GetInfoNode(It.IsAny<Obj>(), It.IsAny<pdftron.PDF.PDFDocInfo>());
-            var pdfObj = ((ObjBinder)result.Tag).PdfObj;
+            var pdfObj = ((BinderObj)result.Tag).PdfObj;
 
             pdfObjProc.Verify(service => service.InderectObj(It.IsAny<Obj>(), It.IsAny<string>()), Times.Once);
             Assert.That(pdfObj.Type, Is.EqualTo(PdfObj.PdfType.Info));
@@ -102,7 +102,7 @@ namespace WPF_Xplorer.Tests.ServicesTests
             pdfObjProc.Setup(service => service.StringObj(key, value)).Returns(new PdfObj());
 
             var result = pdfTreeProc.GetInfoNodes(It.IsAny<pdftron.PDF.PDFDocInfo>());
-            var resultObj = ((ObjBinder)result.First().Tag).PdfObj;
+            var resultObj = ((BinderObj)result.First().Tag).PdfObj;
 
 
             pdfObjProc.Verify(service => service.StringObj(key, value), Times.Once);
@@ -119,7 +119,7 @@ namespace WPF_Xplorer.Tests.ServicesTests
             pdfObjProc.Setup(service => service.StreamObj(It.IsAny<Obj>(), It.IsAny<IStreamService>(), It.IsAny<string>())).Returns(new PdfStream());
 
             var result = pdfTreeProc.GetStream(key, It.IsAny<IStreamService>(), It.IsAny<Obj>());
-            var resultBind = ((ObjBinder)result.Tag).PdfObj;
+            var resultBind = ((BinderObj)result.Tag).PdfObj;
 
             pdfObjProc.Verify(service => service.StreamObj(It.IsAny<Obj>(), It.IsAny<IStreamService>(), It.IsAny<string>()), Times.Once);
             Assert.IsInstanceOf<TreeViewItem>(result);

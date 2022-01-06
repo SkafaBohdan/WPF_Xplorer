@@ -18,11 +18,11 @@ namespace WPF_Xplorer.Commands
 
         public override void Execute(object parameter)
         {
-            var treeViewItem = ArgsConverter.ConvertToTreeViewItem(parameter);
+            var treeViewItem = ArgsConverter.ConverterTreeViewItem(parameter);
 
             if (treeViewItem != null)
             {
-                AppViewModel.PdfDocProc.AddRelativeLeaves(ref treeViewItem);
+                AppViewModel.PdfDocProc.RelativeLeaveAdd(ref treeViewItem);
             }
         }
     }

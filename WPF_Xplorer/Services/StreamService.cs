@@ -21,14 +21,14 @@ namespace WPF_Xplorer.Services
 
         public Filter CreateStream(Obj streamObj, int streamNumber, out string fullPath)
         {
-            //TODO: попробовать вести запись не в файл, а читать ридером
+
             if (!Directory.Exists(Path))
             {
                 Directory.CreateDirectory(Path);
             }
 
             var stream = streamObj.GetDecodedStream();
-            fullPath = System.IO.Path.Combine(Path, $"stream{streamNumber++}.txt");
+            fullPath = System.IO.Path.Combine(Path, $"tempStream{streamNumber++}.txt");
 
             stream.WriteToFile(fullPath, true);
 

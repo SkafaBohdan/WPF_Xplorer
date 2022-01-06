@@ -25,13 +25,13 @@ namespace WPF_Xplorer.Services
             return new TreeViewItem
             {
                 Header = pdfObj.DisplayKey,
-                Tag = new ObjBinder(pdfObj, root)
+                Tag = new BinderObj(pdfObj, root)
             };
         }
 
-        public IEnumerable<TreeViewItem> GetChildNodes(IEnumerable<KeyValuePair<string, Obj>> dictionary)
+        public IEnumerable<TreeViewItem> GetKidNodes(IEnumerable<KeyValuePair<string, Obj>> dictionary)
         {
-            var child = dictionary.Select(item => GetChild(item.Key, item.Value)).Where(child => child.Tag is ObjBinder);
+            var child = dictionary.Select(item => GetKid(item.Key, item.Value)).Where(child => child.Tag is BinderObj);
 
             return child;
         }
@@ -43,7 +43,7 @@ namespace WPF_Xplorer.Services
             return new TreeViewItem
             {
                 Header = path,
-                Tag = new ObjBinder(pdfObject, null)
+                Tag = new BinderObj(pdfObject, null)
             };
         }
 
@@ -55,7 +55,7 @@ namespace WPF_Xplorer.Services
             return new TreeViewItem
             {
                 Header = pdfObject.DisplayKeyAndValue,
-                Tag = new ObjBinder(pdfObject, infoObj)
+                Tag = new BinderObj(pdfObject, infoObj)
                 {
                     InfoDoc = docInfo
                 }
@@ -73,7 +73,7 @@ namespace WPF_Xplorer.Services
                 yield return new TreeViewItem
                 {
                     Header = pdfString.DisplayKeyAndValue,
-                    Tag = new ObjBinder(pdfString, null)
+                    Tag = new BinderObj(pdfString, null)
                 };
             }
         }
@@ -85,19 +85,19 @@ namespace WPF_Xplorer.Services
             return new TreeViewItem
             {
                 Header = pdfStream.DisplayKeyAndValue,
-                Tag = new ObjBinder(pdfStream, null)
+                Tag = new BinderObj(pdfStream, null)
             };
         }
 
 
-        private TreeViewItem GetChild(string key, Obj value)
+        private TreeViewItem GetKid(string key, Obj value)
         {
             var pdfObject = pdfObjectProc.StructObjectBranchOnType(value, key, out var hasChild);
 
             var treeViewItem = new TreeViewItem
             {
                 Header = pdfObject.DisplayKeyAndValue,
-                Tag = new ObjBinder(pdfObject, value)
+                Tag = new BinderObj(pdfObject, value)
             };
 
             if (hasChild)

@@ -22,18 +22,18 @@ namespace WPF_Xplorer.Services
         {
             var catalogNode = pdfTronService.GetCatalogNode();
 
-            if (catalogNode.Tag is ObjBinder)
+            if (catalogNode.Tag is BinderObj)
             {
-                catalogNode.Items.Add(null); //Add dummy item
+                catalogNode.Items.Add(null); 
                 parent.Items.Add(catalogNode);
             }
         }
 
-        public void AddChildNodes(TreeViewItem parent)
+        public void AddKidNodes(TreeViewItem parent)
         {
-            if (!(parent.Tag is ObjBinder binder)) return;
+            if (!(parent.Tag is BinderObj binder)) return;
 
-            var children = pdfTronService.GetChildNodes(binder.Obj, binder.PdfObj.Key);
+            var children = pdfTronService.GetKidNodes(binder.Obj, binder.PdfObj.Key);
 
             foreach (var treeViewItem in children)
             {
@@ -45,16 +45,16 @@ namespace WPF_Xplorer.Services
         {
             var infoNode = pdfTronService.GetInfoNode();
 
-            if (infoNode.Tag is ObjBinder)
+            if (infoNode.Tag is BinderObj)
             {
-                infoNode.Items.Add(null); //Add dummy item
+                infoNode.Items.Add(null);
                 parent.Items.Add(infoNode);
             }
         }
 
         public void AddInfoStrings(TreeViewItem parent)
         {
-            if (!(parent.Tag is ObjBinder binder)) return;
+            if (!(parent.Tag is BinderObj binder)) return;
 
             var children = pdfTronService.GetInfoStrings(binder);
 
@@ -68,11 +68,10 @@ namespace WPF_Xplorer.Services
         {
             try
             {
-                pdfTronService.LoadDocument(path);
+                pdfTronService.LoadDoc(path);
 
                 var documentNode = pdfTreeProc.GetDocumentNode(path);
-                documentNode.Items.Add(null); //Add dummy item
-
+                documentNode.Items.Add(null); 
                 parent.Items.Add(documentNode);
             }
             catch (Exception e)

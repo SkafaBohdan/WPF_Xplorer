@@ -6,7 +6,7 @@ namespace WPF_Xplorer.Converters
 {
     public class ArgsConverter: IArgsConverter
     {
-        public TreeViewItem ConvertToTreeViewItem(object args)
+        public TreeViewItem ConverterTreeViewItem(object args)
         {
             return args is RoutedEventArgs { Source: TreeViewItem treeViewItem } ? treeViewItem : null;
         }

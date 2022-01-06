@@ -1,11 +1,8 @@
 ﻿using pdftron.Filters;
 using pdftron.PDF;
 using pdftron.SDF;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 using WPF_Xplorer.Models;
 using WPF_Xplorer.Services.Interfaces;
@@ -48,21 +45,21 @@ namespace WPF_Xplorer.Services
             return catalogTreeView;
         }
 
-        public IEnumerable<TreeViewItem> GetChildNodes(Obj obj, string name)
+        public IEnumerable<TreeViewItem> GetKidNodes(Obj obj, string name)
         {
             switch (obj.GetType())
             {
                 case Obj.ObjType.e_dict:
                     var dictionary = new DictObjCollection(obj.GetDictIterator());
-                    return pdfTreeProc.GetChildNodes(dictionary);
+                    return pdfTreeProc.GetKidNodes(dictionary);
 
                 case Obj.ObjType.e_array:
-                    var array = new ArrayObjCollection(obj, name);
-                    return pdfTreeProc.GetChildNodes(array);
+                    var array = new ObjectArrayCollection(obj, name);
+                    return pdfTreeProc.GetKidNodes(array);
 
                 case Obj.ObjType.e_stream:
                     var dict = new DictObjCollection(obj.GetDictIterator());
-                    var children = pdfTreeProc.GetChildNodes(dict).ToList();
+                    var children = pdfTreeProc.GetKidNodes(dict).ToList();
                     children.Add(pdfTreeProc.GetStream(name, streamService, obj));
                     return children;
 
@@ -84,14 +81,14 @@ namespace WPF_Xplorer.Services
             return pdfTreeProc.GetInfoNode(infoObj, docInfo);
         }
 
-        public IEnumerable<TreeViewItem> GetInfoStrings(ObjBinder binder)
+        public IEnumerable<TreeViewItem> GetInfoStrings(BinderObj binder)
         {
             var docInfo = binder.InfoDoc;
 
             return pdfTreeProc.GetInfoNodes(docInfo);
         }
 
-        public void LoadDocument(string path)
+        public void LoadDoc(string path)
         {
             var buffer = GetBuffer(path);
             doc = new PDFDoc(buffer, buffer.Length);

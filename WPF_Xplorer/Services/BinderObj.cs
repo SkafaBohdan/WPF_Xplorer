@@ -9,13 +9,13 @@ using WPF_Xplorer.Models;
 
 namespace WPF_Xplorer.Services
 {
-    public class ObjBinder
+    public class BinderObj
     {
         public Obj Obj { get; set; }
         public PdfObj PdfObj { get; set; }
         public PDFDocInfo InfoDoc { get; set; }
     
-        public ObjBinder (PdfObj pdfObject, Obj obj)
+        public BinderObj (PdfObj pdfObject, Obj obj)
         {
             Obj = obj;
             PdfObj = pdfObject;

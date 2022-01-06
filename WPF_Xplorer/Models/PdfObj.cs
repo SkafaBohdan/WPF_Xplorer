@@ -93,18 +93,15 @@ namespace WPF_Xplorer.Models
         {
             get
             {
-                if (!(Type is PdfType.Stream)) return string.Empty;
 
-                var streamValue = (PdfStream)this;
+                var streamValue = (PdfStream)this;             
 
-                if (!File.Exists(streamValue.Path)) return string.Empty;
+                var fileStream = new FileStream(streamValue.Path, FileMode.Open);
 
-                using var fileStream = new FileStream(streamValue.Path, FileMode.Open);
+                var byteArr = new byte[fileStream.Length];
+                fileStream.Read(byteArr, 0, byteArr.Length);
 
-                var byteArray = new byte[fileStream.Length];
-                fileStream.Read(byteArray, 0, byteArray.Length);
-
-                return Encoding.Default.GetString(byteArray);
+                return Encoding.Default.GetString(byteArr);
             }
         }
     }

@@ -140,7 +140,8 @@ namespace WPF_Xplorer.Tests.ServicesTests
 
             var result = pdfObjectProc.StructObjectBranchOnType(obj, key, out hasKid);
 
-            Assert.AreEqual(null, result);
+            Assert.AreEqual(PdfObj.PdfType.Null, result.Type);
+            Assert.IsInstanceOf<PdfObj>(result);
         }
 
         [Test]

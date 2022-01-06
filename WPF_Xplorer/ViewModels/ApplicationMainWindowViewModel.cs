@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using WPF_Xplorer.Commands;
 using WPF_Xplorer.Models;
 using WPF_Xplorer.Services;
@@ -7,10 +9,9 @@ using WPF_Xplorer.Services.Interfaces;
 
 namespace WPF_Xplorer.ViewModels
 {
-    public class ApplicationMainWindowViewModel : BaseViewModel
+    public class ApplicationMainWindowViewModel : INotifyPropertyChanged
     {
         private PdfObj selectedItem;
-        private bool isStream;
 
         public IPdfDocProc PdfDocProc { get; set; }
 
@@ -21,7 +22,7 @@ namespace WPF_Xplorer.ViewModels
             PdfDocProc = pdfDocProc;
         }
 
-        //TODO: после закрытия файла не очищаеться табличка, нейм, и стрим
+       
         #region Command
 
         public ICommand OpenFileCommand { get; set; }
@@ -46,20 +47,16 @@ namespace WPF_Xplorer.ViewModels
             set
             {
                 selectedItem = value;
-                isStream = !string.IsNullOrEmpty(selectedItem?.StreamStringValue);
                 OnPropertyChanged(nameof(SelectedObject));
             }
         }
 
-        public bool IsStreamNotEmpty
-        {
-            get => isStream;
-            set
-            {
-                isStream = value;
-                OnPropertyChanged(nameof(IsStreamNotEmpty));
-            }
-        }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }

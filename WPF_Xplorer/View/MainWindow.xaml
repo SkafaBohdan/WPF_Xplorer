@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF_Xplorer"
         xmlns:command="clr-namespace:WPF_Xplorer.Commands" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:conv="clr-namespace:WPF_Xplorer.Converters" xmlns:viewmodels="clr-namespace:WPF_Xplorer.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ApplicationMainWindowViewModel}"
+        xmlns:viewmodels="clr-namespace:WPF_Xplorer.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ApplicationMainWindowViewModel}"
         mc:Ignorable="d"
         Title="WPF_PDFXplorer" Height="600" Width="800" Name="WPF_PDFXplorer"
         MinHeight="500" MinWidth="650">

@@ -36,8 +36,8 @@ namespace WPF_Xplorer.Tests.CommandsTests
         [Test]
         public void Execute_SelectedObject()
         {
-            TreeViewItem treeViewItem = new TreeViewItem() { Tag = new ObjBinder(new Models.PdfObj(), null) };
-            var pdfObject = ((ObjBinder)treeViewItem.Tag).PdfObj;
+            TreeViewItem treeViewItem = new TreeViewItem() { Tag = new BinderObj(new Models.PdfObj(), null) };
+            var pdfObject = ((BinderObj)treeViewItem.Tag).PdfObj;
 
             selectedItemCommand.Execute(treeViewItem);
 

@@ -12,6 +12,6 @@ namespace WPF_Xplorer.Services.Interfaces
         string DocPath { get; set; }
         string Name { get; }
         void OpenFile(string path, ref TreeView treeView);
-        void AddRelativeLeaves(ref TreeViewItem treeViewItem);
+        void RelativeLeaveAdd(ref TreeViewItem treeViewItem);
     }
 }

@@ -46,11 +46,11 @@ namespace WPF_Xplorer.Tests.CommandsTests
         [Test]
         public void Execute_Open_ReturnFileLoaded()
         {
-            argsConverter.Setup(conv => conv.ConvertToTreeViewItem(It.IsAny<object>())).Returns(treeViewItem);
+            argsConverter.Setup(conv => conv.ConverterTreeViewItem(It.IsAny<object>())).Returns(treeViewItem);
 
             expandCommand.Execute(It.IsAny<object>());
 
-            pdfDocProc.Verify(service => service.AddRelativeLeaves(ref treeViewItem), Times.Once);
+            pdfDocProc.Verify(service => service.RelativeLeaveAdd(ref treeViewItem), Times.Once);
         }
 
     }

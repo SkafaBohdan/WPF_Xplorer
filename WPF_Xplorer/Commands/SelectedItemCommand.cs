@@ -15,7 +15,7 @@ namespace WPF_Xplorer.Commands
 
         public override void Execute (object parameter)
         {
-            if (parameter is TreeViewItem {Tag: ObjBinder binder})
+            if (parameter is TreeViewItem {Tag: BinderObj binder})
             {
                 ViewModel.SelectedObject = binder.PdfObj;
             }

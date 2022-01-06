@@ -22,6 +22,8 @@ namespace WPF_Xplorer.Commands
 
             treeView.Items.Clear();
             ViewModel.SelectedItemCommand = null;
+            ViewModel.SelectedObject = null;
+            ViewModel.PdfDocProc.DocPath = null;
         }
     }
 }

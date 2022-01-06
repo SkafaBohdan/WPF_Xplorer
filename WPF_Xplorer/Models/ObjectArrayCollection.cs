@@ -3,22 +3,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WPF_Xplorer.Models
 {
-    public class ArrayObjCollection: IEnumerable<KeyValuePair<string, Obj>>, IDisposable
+    public class ObjectArrayCollection: IEnumerable<KeyValuePair<string, Obj>>, IDisposable
     {
         private readonly Obj arrayObj;
         private readonly string ancestorName;
 
-        public ArrayObjCollection(Obj array, string ancestorName)
+        public ObjectArrayCollection(Obj array, string ancestorName)
         {
             arrayObj = array;
             this.ancestorName = ancestorName;
         }
-
 
         public IEnumerator<KeyValuePair<string, Obj>> GetEnumerator()
         {

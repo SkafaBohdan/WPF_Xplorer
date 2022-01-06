@@ -20,7 +20,7 @@ namespace WPF_Xplorer
 
         public static IHostBuilder CreateHostBuilder(string[] args = null)
         {
-            return Host.CreateDefaultBuilder(args).AddConfiguration().AddServices().AddViewModels().AddViews();
+            return Host.CreateDefaultBuilder(args).AddConfig().AddServices().AddViewModels().AddViews();
         }
 
         protected override async void OnStartup(StartupEventArgs e)
