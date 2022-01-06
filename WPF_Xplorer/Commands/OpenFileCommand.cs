@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using WPF_Xplorer.Services.Interfaces;
 using WPF_Xplorer.ViewModels;
 

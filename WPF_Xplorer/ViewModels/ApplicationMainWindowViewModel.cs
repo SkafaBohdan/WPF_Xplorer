@@ -21,6 +21,7 @@ namespace WPF_Xplorer.ViewModels
             PdfDocProc = pdfDocProc;
         }
 
+        //TODO: после закрытия файла не очищаеться табличка, нейм, и стрим
         #region Command
 
         public ICommand OpenFileCommand { get; set; }

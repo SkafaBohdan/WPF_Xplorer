@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using WPF_Xplorer.Services.Interfaces;
 
 
@@ -64,12 +66,19 @@ namespace WPF_Xplorer.Services
 
         public void GetDocumentNode(string path, TreeView parent)
         {
-            pdfTronService.LoadDocument(path);
+            try
+            {
+                pdfTronService.LoadDocument(path);
 
-            var documentNode = pdfTreeProc.GetDocumentNode(path);
-            documentNode.Items.Add(null); //Add dummy item
+                var documentNode = pdfTreeProc.GetDocumentNode(path);
+                documentNode.Items.Add(null); //Add dummy item
 
-            parent.Items.Add(documentNode);
+                parent.Items.Add(documentNode);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Invalid document\n" + e.Message, "Error!");
+            }
         }
     }
 }

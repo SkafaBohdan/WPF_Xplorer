@@ -48,6 +48,9 @@ namespace WPF_Xplorer.Services
                 case Obj.ObjType.e_number:
                     return NumberObj(obj, name);
 
+                case Obj.ObjType.e_null:
+                    return NullObj(obj, name);
+
                 default:
                     return null;
             }
@@ -170,6 +173,16 @@ namespace WPF_Xplorer.Services
             {
                 Key = name,
                 Value = valueString
+            };
+        }
+
+        private PdfObj NullObj(Obj obj, string name)
+        {
+            return new PdfObj()
+            {
+                Key = "<null>",
+                Type = PdfObj.PdfType.Null,
+                Value = "null"
             };
         }
 

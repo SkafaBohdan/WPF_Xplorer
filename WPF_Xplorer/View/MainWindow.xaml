@@ -6,16 +6,12 @@
         xmlns:local="clr-namespace:WPF_Xplorer"
         xmlns:command="clr-namespace:WPF_Xplorer.Commands" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:conv="clr-namespace:WPF_Xplorer.Converters"
+        xmlns:conv="clr-namespace:WPF_Xplorer.Converters" xmlns:viewmodels="clr-namespace:WPF_Xplorer.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ApplicationMainWindowViewModel}"
         mc:Ignorable="d"
-        Title="WPF_PDFXplorer" Height="600" Width="800" Name="WPF_PDFXplorer">
+        Title="WPF_PDFXplorer" Height="600" Width="800" Name="WPF_PDFXplorer"
+        MinHeight="500" MinWidth="650">
 
-    <Window.Resources>
-        <ResourceDictionary>
-            <conv:VisibilityConverter x:Key="VisibilityConverter"/>
-        </ResourceDictionary>
-    </Window.Resources>
-
+    
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.8*"/>
@@ -35,27 +31,34 @@
                 <MenuItem Header="Close file" 
                           Command="{Binding ClosePdfFileCommand}"
                           CommandParameter="{Binding ElementName=tree_pdf}"/>
-                <Separator />
                 <MenuItem Header="Exit">
                     <MenuItem.Command>
                         <command:CloseApplicationCommand />
                     </MenuItem.Command>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Help" ></MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem.Command>
+                    <command:HelpAppCommand/>
+                </MenuItem.Command>
+            </MenuItem>
             <Separator/>
-            <TextBlock Text="Name Pdf file:"/>
-            <TextBlock Text="{Binding PdfDocProc.Name}"/>
         </Menu>
-
+        <TextBlock Margin="100 6 5 5" Text="Name Pdf file:"/>
+        <TextBlock  Margin="180 6 5 5" Text="{Binding PdfDocProc.Name,  Mode=OneWay, 
+            UpdateSourceTrigger=PropertyChanged}" />
+            
         <ToolBar Grid.Row="1" HorizontalAlignment="Left">
             <Button Command="{Binding OpenFileCommand}" 
                     CommandParameter="{Binding ElementName=tree_pdf}">
                 <Image Source="/Static/Image/open2.ico"/>
             </Button>
             <Separator/>
-            <Button Command="ApplicationCommands.Help">
+            <Button>
                 <Image Source="/Static/Image/about.png" />
+                <Button.Command>
+                    <command:HelpAppCommand/>
+                </Button.Command>
             </Button>
         </ToolBar>
 
@@ -73,22 +76,7 @@
             </i:Interaction.Triggers>
 
             <TreeView.Resources>
-                <Style x:Key="StyleTreeViewExpandCollapse"
-                               TargetType="{x:Type ToggleButton}">
-                    <Setter Property="OverridesDefaultStyle" Value="True"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                <Image Width="15" x:Name="image" Source="../Images/plus.png" />
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsChecked" Value="true">
-                                        <Setter TargetName="image" Property="Source" Value="../Static/Image/rectangle.png" />
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
+                
                 <Style TargetType="{x:Type TreeViewItem}" >
                     <Setter Property="command:Behaviour.ExpandingBehaviour"
                                     Value="{Binding ExpandCommand}"/>
@@ -117,14 +105,15 @@
                                     </Grid.RowDefinitions>
                                     <ToggleButton Grid.Column="0"
                                                 x:Name="Expander"
-                                                Style="{StaticResource StyleTreeViewExpandCollapse}"
                                                 IsChecked="{Binding Path=IsExpanded,
                                                 RelativeSource={RelativeSource TemplatedParent}}"
                                                 ClickMode="Press"
-                                                Width="16" Height="16"/>
+                                                Width="16" Height="16" >
+                                      
+                                    </ToggleButton>
                                     <ContentPresenter Grid.Row="0"
                                                               Grid.Column="1"
-                                                              x:Name="PART_Header"
+                                                              x:Name="Item_Header"
                                                               ContentSource="Header"
                                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                                     <ItemsPresenter x:Name="ItemsHost"
@@ -147,14 +136,14 @@
                                             <Condition Property="HasHeader" Value="false"/>
                                             <Condition Property="Width" Value="Auto"/>
                                         </MultiTrigger.Conditions>
-                                        <Setter TargetName="PART_Header" Property="MinWidth" Value="75"/>
+                                        <Setter TargetName="Item_Header" Property="MinWidth" Value="75"/>
                                     </MultiTrigger>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
                                             <Condition Property="HasHeader" Value="false"/>
                                             <Condition Property="Height" Value="Auto"/>
                                         </MultiTrigger.Conditions>
-                                        <Setter TargetName="PART_Header" Property="MinHeight" Value="19"/>
+                                        <Setter TargetName="Item_Header" Property="MinHeight" Value="19"/>
                                     </MultiTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -180,6 +169,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="1">
@@ -194,7 +184,7 @@
 
             <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="1">
                 <TextBlock Padding="5" 
-                           Text="{Binding SelectedObject.DisplayKey, 
+                           Text="{Binding SelectedObject.DisplayKey,
                     UpdateSourceTrigger=PropertyChanged}" />
             </Border>
             <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="1">
@@ -205,10 +195,19 @@
             <Border Grid.Column="2" Grid.Row="1" BorderBrush="Black" BorderThickness="1">
                 <TextBlock Padding="5" 
                            Text="{Binding SelectedObject.DisplayValue, 
-                    UpdateSourceTrigger=PropertyChanged}" />
+                    UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"  />
             </Border>
 
-        </Grid>
+            <TextBox Grid.ColumnSpan="3" 
+                     Grid.Row="2" 
+                     Grid.Column="0" 
+                     Margin="0 15 15 15" 
+                     ScrollViewer.CanContentScroll="True"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     Text="{Binding SelectedObject.StreamStringValue, 
+                UpdateSourceTrigger=PropertyChanged,
+                Mode=OneWay}"/>
+        </Grid> 
 
     </Grid>
 </Window>

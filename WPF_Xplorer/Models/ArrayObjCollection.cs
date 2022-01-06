@@ -39,16 +39,16 @@ namespace WPF_Xplorer.Models
     public class ArrayEnumerator : IEnumerator<KeyValuePair<string, Obj>>
     {
         private readonly Obj arrayObj;
-        private readonly string ancestorName;
+        private readonly string parentName;
         private readonly int size;
         private int position = -1;
 
 
-        public ArrayEnumerator(Obj array, string ancestorName)
+        public ArrayEnumerator(Obj array, string parentName)
         {
             arrayObj = array;
             size = array.Size();
-            this.ancestorName = ancestorName;
+            this.parentName = parentName;
         }
 
 
@@ -87,7 +87,7 @@ namespace WPF_Xplorer.Models
             }
             catch
             {
-                return $"{ancestorName}[{position}]";
+                return $"{parentName}[{position}]";
             }
         }
 

@@ -60,7 +60,7 @@ namespace WPF_Xplorer.HostBuilders
             var pdfTronService = provider.GetRequiredService<IPdfTronService>();
             var pdfTreeProcessor = provider.GetRequiredService<IPdfTreeProc>();
 
-            return new Services.PdfService(pdfTronService, pdfTreeProcessor);
+            return new PdfService(pdfTronService, pdfTreeProcessor);
         }
 
         public static IPdfTreeProc CreatePdfTreeProcessor(IServiceProvider provider)

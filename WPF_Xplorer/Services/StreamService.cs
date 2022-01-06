@@ -21,6 +21,7 @@ namespace WPF_Xplorer.Services
 
         public Filter CreateStream(Obj streamObj, int streamNumber, out string fullPath)
         {
+            //TODO: попробовать вести запись не в файл, а читать ридером
             if (!Directory.Exists(Path))
             {
                 Directory.CreateDirectory(Path);
@@ -30,6 +31,9 @@ namespace WPF_Xplorer.Services
             fullPath = System.IO.Path.Combine(Path, $"stream{streamNumber++}.txt");
 
             stream.WriteToFile(fullPath, true);
+
+            //FilterReader reader = new FilterReader(stream);
+            //var s = reader.Read();
 
             return stream;
         }

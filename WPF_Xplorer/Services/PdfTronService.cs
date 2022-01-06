@@ -1,8 +1,11 @@
 ﻿using pdftron.Filters;
 using pdftron.PDF;
 using pdftron.SDF;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using WPF_Xplorer.Models;
 using WPF_Xplorer.Services.Interfaces;
@@ -91,7 +94,6 @@ namespace WPF_Xplorer.Services
         public void LoadDocument(string path)
         {
             var buffer = GetBuffer(path);
-
             doc = new PDFDoc(buffer, buffer.Length);
             doc.InitSecurityHandler();
         }

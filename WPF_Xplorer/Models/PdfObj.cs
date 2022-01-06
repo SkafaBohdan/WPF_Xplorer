@@ -19,7 +19,8 @@ namespace WPF_Xplorer.Models
             Indirect,
             Array,
             Name,
-            Info
+            Info,
+            Null
         }
 
         public string Key
