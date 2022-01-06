@@ -59,6 +59,8 @@ namespace WPF_Xplorer.Services
                     service.AddInfoStrings(treeViewItem);
                     break;
 
+                case PdfType.String:
+                    break;
                 default:
                     service.AddKidNodes(treeViewItem);
                     break;

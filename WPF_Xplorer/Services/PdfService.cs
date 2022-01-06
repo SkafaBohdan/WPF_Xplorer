@@ -77,6 +77,7 @@ namespace WPF_Xplorer.Services
             catch (Exception e)
             {
                 MessageBox.Show("Invalid document\n" + e.Message, "Error!");
+                
             }
         }
     }

@@ -93,6 +93,8 @@ namespace WPF_Xplorer.Models
         {
             get
             {
+                if(!(Type is PdfType.Stream))
+                    return string.Empty;
 
                 var streamValue = (PdfStream)this;             
 
