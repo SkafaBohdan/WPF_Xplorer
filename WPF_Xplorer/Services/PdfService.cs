@@ -1,4 +1,5 @@
-﻿using System;
+﻿using pdftron.Common;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using WPF_Xplorer.Services.Interfaces;
@@ -12,10 +13,10 @@ namespace WPF_Xplorer.Services
         private readonly IPdfTreeProc pdfTreeProc;
 
 
-        public PdfService(IPdfTronService pdfTronService, IPdfTreeProc pdfTreeProcessor)
+        public PdfService(IPdfTronService pdfTronService, IPdfTreeProc pdfTreeProc)
         {
             this.pdfTronService = pdfTronService;
-            this.pdfTreeProc = pdfTreeProcessor;
+            this.pdfTreeProc = pdfTreeProc;
         }
 
         public void AddCatalogNode(TreeViewItem parent)
@@ -74,10 +75,13 @@ namespace WPF_Xplorer.Services
                 documentNode.Items.Add(null); 
                 parent.Items.Add(documentNode);
             }
+            catch (PDFNetException e)
+            {
+                MessageBox.Show(e.GetMessage(), "Error!");
+            }
             catch (Exception e)
             {
-                MessageBox.Show("Invalid document\n" + e.Message, "Error!");
-                
+                MessageBox.Show(e.Message, "Error!");
             }
         }
     }

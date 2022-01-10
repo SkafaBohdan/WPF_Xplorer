@@ -9,8 +9,8 @@ namespace WPF_Xplorer.Models
     public class PdfArray : PdfObj
     {
 
-        public override string DisplayValue => $"{Key} {Value} el.";
-        public override string DisplayKeyAndValue => $"{Key} {Value} el.";
+        public override string DisplayValue => $"/{Key} {Value} elements";
+        public override string DisplayKeyAndValue => $"/{Key} {Value} elements";
         public PdfArray()
         {
             Type = PdfType.Array;

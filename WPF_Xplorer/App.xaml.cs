@@ -19,7 +19,7 @@ namespace WPF_Xplorer
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args = null)
-        {
+        {   //TODO: Host buildеr - пересмотреть инверсию зависимойстей
             return Host.CreateDefaultBuilder(args).AddConfig().AddServices().AddViewModels().AddViews();
         }
 

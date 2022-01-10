@@ -79,7 +79,6 @@ namespace WPF_Xplorer.Tests.ServicesTests
         [TestCase(PdfObj.PdfType.Dictionary)]
         [TestCase(PdfObj.PdfType.Indirect)]
         [TestCase(PdfObj.PdfType.Stream)]
-        [TestCase(PdfObj.PdfType.String)]
         public void AddRelativeLeaves_DefaultCase_AddChildNodes(PdfObj.PdfType pdfType)
         {
             treeViewItem.Tag = new BinderObj(new PdfObj() { Type = pdfType }, It.IsAny<Obj>());

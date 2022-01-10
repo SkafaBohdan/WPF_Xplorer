@@ -81,11 +81,11 @@ namespace WPF_Xplorer.Services
         }
         public string GetCreationDate(PDFDocInfo docInfo)
         {
-            return docInfo.GetCreationDate().ToString();
+            return $"({docInfo.GetModDate().year}.0{docInfo.GetModDate().month}.{docInfo.GetModDate().day}/{docInfo.GetModDate().hour}.{docInfo.GetModDate().minute}.{docInfo.GetModDate().second} )";
         }
         public string GetModDate(PDFDocInfo docInfo)
         {
-            return docInfo.GetModDate().ToString();
+            return $" ({docInfo.GetModDate().year}.0{docInfo.GetModDate().month}.{docInfo.GetModDate().day}/{docInfo.GetModDate().hour}.{docInfo.GetModDate().minute}.{docInfo.GetModDate().second} )";
         }
         public string GetProducer(PDFDocInfo docInfo)
         {

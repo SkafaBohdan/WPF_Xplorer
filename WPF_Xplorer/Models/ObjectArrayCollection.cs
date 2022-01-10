@@ -9,17 +9,17 @@ namespace WPF_Xplorer.Models
     public class ObjectArrayCollection: IEnumerable<KeyValuePair<string, Obj>>, IDisposable
     {
         private readonly Obj arrayObj;
-        private readonly string ancestorName;
+        private readonly string parentName;
 
-        public ObjectArrayCollection(Obj array, string ancestorName)
+        public ObjectArrayCollection(Obj array, string parentName)
         {
             arrayObj = array;
-            this.ancestorName = ancestorName;
+            this.parentName = parentName;
         }
 
         public IEnumerator<KeyValuePair<string, Obj>> GetEnumerator()
         {
-            return new ArrayEnumerator(arrayObj, ancestorName);
+            return new ArrayEnumerator(arrayObj, parentName);
         }
 
         IEnumerator IEnumerable.GetEnumerator()

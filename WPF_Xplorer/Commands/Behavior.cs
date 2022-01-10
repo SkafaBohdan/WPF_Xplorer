@@ -10,21 +10,21 @@ namespace WPF_Xplorer.Commands
             DependencyProperty.RegisterAttached("ExpandingBehaviour", typeof(ICommand), typeof(Behaviour),
                 new PropertyMetadata(OnExpandingBehaviourChanged));
 
-        public static void SetExpandingBehaviour(DependencyObject o, ICommand value)
+        public static void SetExpandingBehaviour(DependencyObject dependencyObj, ICommand value)
         {
-            o.SetValue(ExpandingBehaviourProperty, value);
+            dependencyObj.SetValue(ExpandingBehaviourProperty, value);
         }
 
-        public static ICommand GetExpandingBehaviour(DependencyObject o)
+        public static ICommand GetExpandingBehaviour(DependencyObject dependencyObj)
         {
-            return (ICommand)o.GetValue(ExpandingBehaviourProperty);
+            return (ICommand)dependencyObj.GetValue(ExpandingBehaviourProperty);
         }
 
-        private static void OnExpandingBehaviourChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnExpandingBehaviourChanged(DependencyObject dependencyObj, DependencyPropertyChangedEventArgs dependencyPropertyEvent)
         {
-            if (!(d is TreeViewItem treeViewItem)) return;
+            if (!(dependencyObj is TreeViewItem treeViewItem)) return;
 
-            if (e.NewValue is ICommand command)
+            if (dependencyPropertyEvent.NewValue is ICommand command)
             {
                 treeViewItem.Expanded += (obj, routedEventArgs) =>
                 {

@@ -10,7 +10,7 @@ namespace WPF_Xplorer.Models
     {
         public int Size { get; set; }
         public override string DisplayKey => $"/{Key} {Size} entity";
-        public override string DisplayValue => $"{Size} entity";
+        public override string DisplayValue => $"/{Size} entity";
         public PdfDict()
         {
             Type = PdfType.Dictionary;

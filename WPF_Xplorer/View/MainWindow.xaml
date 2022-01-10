@@ -45,7 +45,7 @@
             <Separator/>
         </Menu>
         <TextBlock Margin="100 6 5 5" Text="Name Pdf file:"/>
-        <TextBlock  Margin="180 6 5 5" Text="{Binding PdfDocProc.Name,  Mode=OneWay, 
+        <TextBlock  Margin="180 6 5 5" Grid.ColumnSpan="2" Text="{Binding PdfDocProc.Name,  Mode=OneWay, 
             UpdateSourceTrigger=PropertyChanged}" />
             
         <ToolBar Grid.Row="1" HorizontalAlignment="Left">
@@ -109,7 +109,6 @@
                                                 RelativeSource={RelativeSource TemplatedParent}}"
                                                 ClickMode="Press"
                                                 Width="16" Height="16" >
-                                      
                                     </ToggleButton>
                                     <ContentPresenter Grid.Row="0"
                                                               Grid.Column="1"
@@ -159,6 +158,7 @@
               Grid.Column="1"
               Background="White"
               Name="Description">
+      
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -187,6 +187,7 @@
                            Text="{Binding SelectedObject.DisplayKey,
                     UpdateSourceTrigger=PropertyChanged}" />
             </Border>
+                        
             <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="1">
                 <TextBlock Padding="5" 
                            Text="{Binding SelectedObject.DisplayType, 
