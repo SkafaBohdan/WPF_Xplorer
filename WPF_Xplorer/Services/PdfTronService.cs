@@ -104,7 +104,6 @@ namespace WPF_Xplorer.Services
         //{
         //    var file = new MappedFile(path);
         //    var fileReader = new FilterReader(file);
-
         //    var fileSize = file.FileSize();
         //    var buffer = new byte[fileSize];
         //    fileReader.Read(buffer);

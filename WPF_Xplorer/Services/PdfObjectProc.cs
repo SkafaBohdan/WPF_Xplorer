@@ -131,7 +131,6 @@ namespace WPF_Xplorer.Services
             };
         }
 
-
         public PdfObj BoolObj(Obj obj, string name)
         {
             var valueBool = objValueProc.GetBool(obj);
@@ -143,6 +142,7 @@ namespace WPF_Xplorer.Services
 
             };
         }
+
         public PdfObj ArrayObj(Obj obj, string name)
         {
             var size = objValueProc.GetSize(obj);

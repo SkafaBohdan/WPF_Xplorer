@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 
+
 namespace WPF_Xplorer.Models
 {
     public class PdfObj : NotifyPropertyChanged
@@ -89,21 +90,32 @@ namespace WPF_Xplorer.Models
             }
         }
 
-        public string StreamStringValue
+        public string StreamValue
         {
             get
             {
-                if(!(Type is PdfType.Stream))
+                if (!(Type is PdfType.Stream))
                     return string.Empty;
 
-                var streamValue = (PdfStream)this;             
+                byte[] arr;
 
-                var fileStream = new FileStream(streamValue.Path, FileMode.Open);
+                //var streamValue = (PdfStream)this;
+                //var fileStream = new FileStream(streamValue.Path, FileMode.Open);
 
-                var byteArr = new byte[fileStream.Length];
-                fileStream.Read(byteArr, 0, byteArr.Length);
+                //var byteArr = new byte[fileStream.Length];
+                //fileStream.Read(byteArr, 0, byteArr.Length);
 
-                return Encoding.Default.GetString(byteArr);
+                //return Encoding.Default.GetString(byteArr);
+
+
+                var streamValue = (PdfStream)this;
+                using (var fileStream = new FileStream(streamValue.Path, FileMode.Open))
+                {
+
+                    arr = new byte[fileStream.Length];
+                    fileStream.Read(arr, 0, arr.Length);
+                }
+                return Encoding.Default.GetString(arr);
             }
         }
     }

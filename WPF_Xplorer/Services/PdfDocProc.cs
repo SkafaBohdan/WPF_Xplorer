@@ -45,6 +45,11 @@ namespace WPF_Xplorer.Services
 
         public void RelativeLeaveAdd(ref TreeViewItem treeViewItem)
         {
+            //TODO: тут обнаруженны баги, или в стрим
+            var items = treeViewItem.Items; 
+            if (items.Count > 1 || items.Count == 0 ) 
+                return;
+            
             treeViewItem.Items.Clear();
 
             var type = ((BinderObj)treeViewItem.Tag).PdfObj.Type;
@@ -61,12 +66,11 @@ namespace WPF_Xplorer.Services
 
                 case PdfType.String:
                     break;
+
                 default:
                     service.AddKidNodes(treeViewItem);
                     break;
             }
         }
-
-
     }
 }

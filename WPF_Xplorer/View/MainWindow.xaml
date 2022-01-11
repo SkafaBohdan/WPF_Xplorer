@@ -142,7 +142,7 @@
                                             <Condition Property="HasHeader" Value="false"/>
                                             <Condition Property="Height" Value="Auto"/>
                                         </MultiTrigger.Conditions>
-                                        <Setter TargetName="Item_Header" Property="MinHeight" Value="19"/>
+                                        <Setter TargetName="Item_Header" Property="MinHeight" Value="18"/>
                                     </MultiTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -168,6 +168,7 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -199,13 +200,33 @@
                     UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"  />
             </Border>
 
+            
+
+            <Border Grid.Column="0" Grid.Row="2" BorderBrush="Black" BorderThickness="1">
+                <TextBlock Padding="5" 
+                           Text="{Binding SelectedObject.DisplayKey,
+                    UpdateSourceTrigger=PropertyChanged}" />
+            </Border>
+
+            <Border Grid.Column="1" Grid.Row="2" BorderBrush="Black" BorderThickness="1">
+                <TextBlock Padding="5" 
+                           Text="{Binding SelectedObject.DisplayType, 
+                    UpdateSourceTrigger=PropertyChanged}" />
+            </Border>
+            <Border Grid.Column="2" Grid.Row="2" BorderBrush="Black" BorderThickness="1">
+                <TextBlock Padding="5" 
+                           Text="{Binding SelectedObject.DisplayValue, 
+                    UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"  />
+            </Border>
+
+
             <TextBox Grid.ColumnSpan="3" 
-                     Grid.Row="2" 
+                     Grid.Row="3" 
                      Grid.Column="0" 
                      Margin="0 15 15 15" 
                      ScrollViewer.CanContentScroll="True"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     Text="{Binding SelectedObject.StreamStringValue, 
+                     Text="{Binding SelectedObject.StreamValue, 
                 UpdateSourceTrigger=PropertyChanged,
                 Mode=OneWay}"/>
         </Grid> 

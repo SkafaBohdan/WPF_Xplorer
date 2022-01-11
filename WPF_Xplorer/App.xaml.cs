@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 using WPF_Xplorer.HostBuilders;
 using WPF_Xplorer.View;
+using System;
+using System.IO;
 
 namespace WPF_Xplorer
 {
@@ -19,7 +21,7 @@ namespace WPF_Xplorer
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args = null)
-        {   //TODO: Host buildеr - пересмотреть инверсию зависимойстей
+        {  
             return Host.CreateDefaultBuilder(args).AddConfig().AddServices().AddViewModels().AddViews();
         }
 
@@ -36,6 +38,10 @@ namespace WPF_Xplorer
         {
             await host.StopAsync();
             host.Dispose();
+            var PathDoc = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var PathStream = Path.Combine(PathDoc, "tempStreams");
+            if (Directory.Exists(PathStream))
+                Directory.Delete(PathStream, true);
             base.OnExit(e);
         }
     }
