@@ -1,12 +1,8 @@
 ﻿using pdftron.Filters;
 using pdftron.SDF;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WPF_Xplorer.Services.Interfaces;
+
 
 namespace WPF_Xplorer.Services
 {
@@ -21,7 +17,7 @@ namespace WPF_Xplorer.Services
 
         public Filter CreateStream(Obj streamObj, int streamNumber, out string fullPath)
         {
-
+            //TODO: читать из ридера, а не файла?
             if (!Directory.Exists(Path))
             {
                 Directory.CreateDirectory(Path);

@@ -90,25 +90,9 @@ namespace WPF_Xplorer.Services
 
         public void LoadDoc(string path)
         {
-            //TODO: посмотреть лоадДок через путь, а не буфер
-
-            //var buffer = GetBuffer(path);
-            //doc = new PDFDoc(buffer, buffer.Length);
-            //doc.InitSecurityHandler();
-
-             doc = new PDFDoc(path);
-             doc.InitSecurityHandler();
+            doc = new PDFDoc(path);
+            doc.InitSecurityHandler();
         }
 
-        //private byte[] GetBuffer(string path)
-        //{
-        //    var file = new MappedFile(path);
-        //    var fileReader = new FilterReader(file);
-        //    var fileSize = file.FileSize();
-        //    var buffer = new byte[fileSize];
-        //    fileReader.Read(buffer);
-
-        //    return buffer;
-        //}
     }
 }

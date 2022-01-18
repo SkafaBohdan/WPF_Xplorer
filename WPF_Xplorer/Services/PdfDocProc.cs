@@ -10,6 +10,7 @@ namespace WPF_Xplorer.Services
         private string docPath;
         private string name;
 
+
         public PdfDocProc(IPdfService service)
         {
             this.service = service;
@@ -45,7 +46,6 @@ namespace WPF_Xplorer.Services
 
         public void RelativeLeaveAdd(ref TreeViewItem treeViewItem)
         {
-            //TODO: тут обнаруженны баги, или в стрим
             var items = treeViewItem.Items; 
             if (items.Count > 1 || items.Count == 0 ) 
                 return;

@@ -9,7 +9,7 @@ namespace WPF_Xplorer.HostBuilders
         {
             host.ConfigureAppConfiguration(c =>
             {
-                c.AddJsonFile("AppConfig.json");
+                c.AddJsonFile("AppConfig.json", optional: true, reloadOnChange: true);
                 c.AddEnvironmentVariables();
             });
 

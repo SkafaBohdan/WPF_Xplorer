@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Title="WPF_PDFXplorer" Height="600" Width="800" Name="WPF_PDFXplorer"
         MinHeight="500" MinWidth="650">
-
+   
     
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
@@ -80,16 +80,7 @@
                 <Style TargetType="{x:Type TreeViewItem}" >
                     <Setter Property="command:Behaviour.ExpandingBehaviour"
                                     Value="{Binding ExpandCommand}"/>
-                    <Setter Property="HeaderTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock VerticalAlignment="Center" Text="{Binding}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-
+                   
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type TreeViewItem}">
@@ -106,7 +97,7 @@
                                     <ToggleButton Grid.Column="0"
                                                 x:Name="Expander"
                                                 IsChecked="{Binding Path=IsExpanded,
-                                                RelativeSource={RelativeSource TemplatedParent}}"
+                                                RelativeSource={RelativeSource TemplatedParent}}" 
                                                 ClickMode="Press"
                                                 Width="16" Height="16" >
                                     </ToggleButton>
@@ -117,7 +108,7 @@
                                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                                     <ItemsPresenter x:Name="ItemsHost"
                                                 Grid.Row="1"
-                                                Grid.Column="1" Grid.ColumnSpan="2"/>
+                                                Grid.Column="1"/>
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsExpanded" Value="false">
@@ -159,7 +150,6 @@
               Background="White"
               Name="Description">
       
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -170,7 +160,7 @@
                 <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="*" /> 
             </Grid.RowDefinitions>
 
             <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="1">
@@ -200,26 +190,22 @@
                     UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"  />
             </Border>
 
-            
+
 
             <Border Grid.Column="0" Grid.Row="2" BorderBrush="Black" BorderThickness="1">
-                <TextBlock Padding="5" 
-                           Text="{Binding SelectedObject.DisplayKey,
-                    UpdateSourceTrigger=PropertyChanged}" />
+                <ListBox ItemsSource="{Binding SelectedObject.GridListItemKey, 
+                    UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
-
             <Border Grid.Column="1" Grid.Row="2" BorderBrush="Black" BorderThickness="1">
-                <TextBlock Padding="5" 
-                           Text="{Binding SelectedObject.DisplayType, 
-                    UpdateSourceTrigger=PropertyChanged}" />
+                <ListBox ItemsSource="{Binding SelectedObject.GridListItemType, 
+                    UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
-            <Border Grid.Column="2" Grid.Row="2" BorderBrush="Black" BorderThickness="1">
-                <TextBlock Padding="5" 
-                           Text="{Binding SelectedObject.DisplayValue, 
-                    UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"  />
+             <Border Grid.Column="2" Grid.Row="2" BorderBrush="Black" BorderThickness="1">
+                <ListBox ItemsSource="{Binding SelectedObject.GridListItemValue, 
+                    UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
-
-
+            
+            
             <TextBox Grid.ColumnSpan="3" 
                      Grid.Row="3" 
                      Grid.Column="0" 
@@ -228,7 +214,8 @@
                      ScrollViewer.VerticalScrollBarVisibility="Auto"
                      Text="{Binding SelectedObject.StreamValue, 
                 UpdateSourceTrigger=PropertyChanged,
-                Mode=OneWay}"/>
+                Mode=OneWay}" 
+                     IsReadOnly="True"/>
         </Grid> 
 
     </Grid>

@@ -36,13 +36,14 @@ namespace WPF_Xplorer
 
         protected override async void OnExit(ExitEventArgs e)
         {
+            base.OnExit(e);
             await host.StopAsync();
             host.Dispose();
+
             var PathDoc = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             var PathStream = Path.Combine(PathDoc, "tempStreams");
             if (Directory.Exists(PathStream))
                 Directory.Delete(PathStream, true);
-            base.OnExit(e);
         }
     }
 }

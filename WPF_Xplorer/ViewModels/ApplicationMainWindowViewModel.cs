@@ -1,5 +1,13 @@
-﻿using System.ComponentModel;
+﻿using pdftron;
+using pdftron.Filters;
+using pdftron.PDF;
+using pdftron.SDF;
+using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Windows.Input;
 using WPF_Xplorer.Commands;
 using WPF_Xplorer.Models;
@@ -15,13 +23,13 @@ namespace WPF_Xplorer.ViewModels
 
         public IPdfDocProc PdfDocProc { get; set; }
 
+
         public ApplicationMainWindowViewModel(IPdfDocProc pdfDocProc)
         {
             CreateCommands();
 
             PdfDocProc = pdfDocProc;
         }
-
        
         #region Command
 
@@ -30,8 +38,7 @@ namespace WPF_Xplorer.ViewModels
         public ICommand SelectedItemCommand { get; set; }
         public ICommand ExpandCommand { get; set; }
 
-        #endregion
-
+     
         private void CreateCommands()
         {
             OpenFileCommand = new OpenFileCommand(this, new DialogOpen());
@@ -40,6 +47,7 @@ namespace WPF_Xplorer.ViewModels
             ExpandCommand = new ExpandCommand(this);
         }
 
+        #endregion
 
         public PdfObj SelectedObject
         {
@@ -58,5 +66,7 @@ namespace WPF_Xplorer.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
+
     }
 }
+
