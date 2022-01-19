@@ -1,7 +1,9 @@
 ﻿using pdftron.PDF;
 using pdftron.SDF;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Windows.Controls;
 using WPF_Xplorer.Interfaces;
 using WPF_Xplorer.Services.Interfaces;
@@ -94,6 +96,8 @@ namespace WPF_Xplorer.Services
         {
             var pdfObject = pdfObjectProc.StructObjectBranchOnType(value, key, out var hasChild);
 
+            GetKidNodesGRIDDD(pdfObject);
+
             var treeViewItem = new TreeViewItem
             {
                 Header = pdfObject.DisplayKeyAndValue,
@@ -107,5 +111,25 @@ namespace WPF_Xplorer.Services
 
             return treeViewItem;
         }
+
+
+        //TESTZOONEEE 
+        //TODO: test zone
+        private ObservableCollection<StringBuilder> gridListItemKey = new ObservableCollection<StringBuilder>();
+        public ObservableCollection<StringBuilder> GetGridListItemKey()
+        {
+            return gridListItemKey;
+        }
+        public ObservableCollection<StringBuilder> GetKidNodesGRIDDD(Models.PdfObj obj)
+        {
+          //  ObservableCollection<StringBuilder> gridListItemKey = new ObservableCollection<StringBuilder>();
+            StringBuilder childGrid = new StringBuilder();
+
+            gridListItemKey.Add(childGrid.Append(obj.Key));
+
+            return gridListItemKey;
+        }
+
+        ////
     }
 }

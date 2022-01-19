@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.ObjectModel;
+using System.Text;
+using System.Windows.Controls;
 using WPF_Xplorer.Services.Interfaces;
 using static WPF_Xplorer.Models.PdfObj;
 
@@ -46,10 +48,10 @@ namespace WPF_Xplorer.Services
 
         public void RelativeLeaveAdd(ref TreeViewItem treeViewItem)
         {
-            var items = treeViewItem.Items; 
-            if (items.Count > 1 || items.Count == 0 ) 
+            var items = treeViewItem.Items;
+            if (items.Count > 1 || items.Count == 0)
                 return;
-            
+
             treeViewItem.Items.Clear();
 
             var type = ((BinderObj)treeViewItem.Tag).PdfObj.Type;
@@ -72,5 +74,27 @@ namespace WPF_Xplorer.Services
                     break;
             }
         }
+
+
+
+        //TESTZOONEEE 
+        //TODO: test zone
+        private ObservableCollection<StringBuilder> gridListItemKey;
+        public ObservableCollection<StringBuilder> GridListItemKey
+        {
+            get
+            {
+                gridListItemKey = service.GetGridListItemKey();
+                return gridListItemKey;
+            }
+            //set
+            //{
+            //    gridListItemKey = service.GetGridListItemKey();
+            //    OnPropertyChanged(nameof(GridListItemKey));
+            //}
+        }
+
+        ////
+
     }
 }

@@ -1,13 +1,5 @@
-﻿using pdftron;
-using pdftron.Filters;
-using pdftron.PDF;
-using pdftron.SDF;
-using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows.Input;
 using WPF_Xplorer.Commands;
 using WPF_Xplorer.Models;
@@ -58,7 +50,6 @@ namespace WPF_Xplorer.ViewModels
                 OnPropertyChanged(nameof(SelectedObject));
             }
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

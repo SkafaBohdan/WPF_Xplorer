@@ -193,7 +193,7 @@
 
 
             <Border Grid.Column="0" Grid.Row="2" BorderBrush="Black" BorderThickness="1">
-                <ListBox ItemsSource="{Binding SelectedObject.GridListItemKey, 
+                <ListBox ItemsSource="{Binding PdfDocProc.GridListItemKey, 
                     UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
             <Border Grid.Column="1" Grid.Row="2" BorderBrush="Black" BorderThickness="1">

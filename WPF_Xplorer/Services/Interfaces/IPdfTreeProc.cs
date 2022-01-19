@@ -2,6 +2,8 @@
 using pdftron.PDF;
 using pdftron.SDF;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Text;
 using System.Windows.Controls;
 
 namespace WPF_Xplorer.Services.Interfaces
@@ -14,6 +16,9 @@ namespace WPF_Xplorer.Services.Interfaces
         TreeViewItem GetDocumentNode(string path);
         TreeViewItem GetCatalogNode(Obj root, Obj catalogObj, string name);
         TreeViewItem GetInfoNode(Obj infoObj, PDFDocInfo docInfo);
+        //TODO: test
+        ObservableCollection<StringBuilder> GetKidNodesGRIDDD(Models.PdfObj obj);
+        ObservableCollection<StringBuilder> GetGridListItemKey();
     }
 
     public interface IStreamService

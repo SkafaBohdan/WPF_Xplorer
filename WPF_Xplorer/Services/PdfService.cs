@@ -1,5 +1,7 @@
 ﻿using pdftron.Common;
 using System;
+using System.Collections.ObjectModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using WPF_Xplorer.Services.Interfaces;
@@ -25,7 +27,7 @@ namespace WPF_Xplorer.Services
 
             if (catalogNode.Tag is BinderObj)
             {
-                catalogNode.Items.Add(null); 
+                catalogNode.Items.Add(null);
                 parent.Items.Add(catalogNode);
             }
         }
@@ -72,7 +74,7 @@ namespace WPF_Xplorer.Services
                 pdfTronService.LoadDoc(path);
 
                 var documentNode = pdfTreeProc.GetDocumentNode(path);
-                documentNode.Items.Add(null); 
+                documentNode.Items.Add(null);
                 parent.Items.Add(documentNode);
             }
             catch (PDFNetException e)
@@ -84,6 +86,16 @@ namespace WPF_Xplorer.Services
                 MessageBox.Show(e.Message, "Error!");
             }
         }
+
+        //TODO: test zone
+        public ObservableCollection<StringBuilder> GetGridListItemKey()
+        {
+            var t = pdfTreeProc.GetGridListItemKey();
+            var c = t.Count;
+            return pdfTreeProc.GetGridListItemKey();
+        }
+
+        ///
 
     }
 }

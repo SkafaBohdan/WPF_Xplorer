@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace WPF_Xplorer.Services.Interfaces
     {
         string DocPath { get; set; }
         string Name { get; }
+        ObservableCollection<StringBuilder> GridListItemKey { get; }
         void OpenFile(string path, ref TreeView treeView);
         void RelativeLeaveAdd(ref TreeViewItem treeViewItem);
     }
