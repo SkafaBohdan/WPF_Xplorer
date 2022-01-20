@@ -96,7 +96,7 @@ namespace WPF_Xplorer.Services
         {
             var pdfObject = pdfObjectProc.StructObjectBranchOnType(value, key, out var hasChild);
 
-            GetKidNodesGRIDDD(pdfObject);
+            GetKidNodesKeyFromGridView(pdfObject);
 
             var treeViewItem = new TreeViewItem
             {
@@ -113,23 +113,33 @@ namespace WPF_Xplorer.Services
         }
 
 
-        //TESTZOONEEE 
+        //TEST ZOONEEE 
         //TODO: test zone
         private ObservableCollection<StringBuilder> gridListItemKey = new ObservableCollection<StringBuilder>();
+        private ObservableCollection<StringBuilder> gridListItemType = new ObservableCollection<StringBuilder>();
+        private ObservableCollection<StringBuilder> gridListItemValue = new ObservableCollection<StringBuilder>();
         public ObservableCollection<StringBuilder> GetGridListItemKey()
         {
             return gridListItemKey;
         }
-        public ObservableCollection<StringBuilder> GetKidNodesGRIDDD(Models.PdfObj obj)
+        public ObservableCollection<StringBuilder> GetGridListItemType()
         {
-          //  ObservableCollection<StringBuilder> gridListItemKey = new ObservableCollection<StringBuilder>();
-            StringBuilder childGrid = new StringBuilder();
-
-            gridListItemKey.Add(childGrid.Append(obj.Key));
-
-            return gridListItemKey;
+            return gridListItemType;
         }
+        public ObservableCollection<StringBuilder> GetGridListItemValue()
+        {
+            return gridListItemValue;
+        }
+        public void GetKidNodesKeyFromGridView(Models.PdfObj obj)
+        {
+            StringBuilder childGridKey = new StringBuilder();
+            StringBuilder childGridType = new StringBuilder();
+            StringBuilder childGridValue = new StringBuilder();
 
+            gridListItemKey.Add(childGridKey.Append(obj.Key));
+            gridListItemType.Add(childGridType.Append(obj.DisplayType));
+            gridListItemValue.Add(childGridValue.Append(obj.DisplayValue));
+        }
         ////
     }
 }

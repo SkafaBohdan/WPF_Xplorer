@@ -24,6 +24,9 @@ namespace WPF_Xplorer.Commands
             ViewModel.SelectedItemCommand = null;
             ViewModel.SelectedObject = null;
             ViewModel.PdfDocProc.DocPath = null;
+            ViewModel.PdfDocProc.GridListItemKey.Clear();
+            ViewModel.PdfDocProc.GridListItemType.Clear();
+            ViewModel.PdfDocProc.GridListItemValue.Clear();
         }
     }
 }

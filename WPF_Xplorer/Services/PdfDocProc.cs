@@ -83,15 +83,44 @@ namespace WPF_Xplorer.Services
         public ObservableCollection<StringBuilder> GridListItemKey
         {
             get
-            {
+            {   
                 gridListItemKey = service.GetGridListItemKey();
                 return gridListItemKey;
             }
-            //set
-            //{
-            //    gridListItemKey = service.GetGridListItemKey();
-            //    OnPropertyChanged(nameof(GridListItemKey));
-            //}
+            set
+            {
+                gridListItemKey = value;
+                OnPropertyChanged(nameof(GridListItemKey));
+            }
+        }
+        private ObservableCollection<StringBuilder> gridListItemType;
+        
+        public ObservableCollection<StringBuilder> GridListItemType
+        {
+            get
+            {
+                gridListItemType = service.GetGridListItemType();
+                return gridListItemType;
+            }
+            set
+            {
+                gridListItemType = value;
+                OnPropertyChanged(nameof(GridListItemType));
+            }
+        }
+        private ObservableCollection<StringBuilder> gridListItemValue;
+        public ObservableCollection<StringBuilder> GridListItemValue
+        {
+            get
+            {
+                gridListItemValue = service.GetGridListItemValue();
+                return gridListItemValue;
+            }
+            set
+            {
+                gridListItemValue = value;
+                OnPropertyChanged(nameof(GridListItemValue));
+            }
         }
 
         ////

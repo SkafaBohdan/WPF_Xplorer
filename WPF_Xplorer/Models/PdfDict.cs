@@ -8,9 +8,8 @@ namespace WPF_Xplorer.Models
 {
     public class PdfDict : PdfObj
     {
-        public int Size { get; set; }
-        public override string DisplayKey => $"/{Key} {Size} entity";
-        public override string DisplayValue => $"/{Size} entity";
+        public override string DisplayKey => $"/{Key} entitries";
+        public override string DisplayValue => $"/{Value} entity";
         public PdfDict()
         {
             Type = PdfType.Dictionary;

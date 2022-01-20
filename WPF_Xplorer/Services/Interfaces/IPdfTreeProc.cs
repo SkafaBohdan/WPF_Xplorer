@@ -17,8 +17,10 @@ namespace WPF_Xplorer.Services.Interfaces
         TreeViewItem GetCatalogNode(Obj root, Obj catalogObj, string name);
         TreeViewItem GetInfoNode(Obj infoObj, PDFDocInfo docInfo);
         //TODO: test
-        ObservableCollection<StringBuilder> GetKidNodesGRIDDD(Models.PdfObj obj);
+        void GetKidNodesKeyFromGridView(Models.PdfObj obj);
         ObservableCollection<StringBuilder> GetGridListItemKey();
+        ObservableCollection<StringBuilder> GetGridListItemType();
+        ObservableCollection<StringBuilder> GetGridListItemValue();
     }
 
     public interface IStreamService

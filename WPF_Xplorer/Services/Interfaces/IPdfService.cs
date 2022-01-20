@@ -17,5 +17,7 @@ namespace WPF_Xplorer.Services.Interfaces
         void AddKidNodes(TreeViewItem ancestor);
         //TODO: test
         ObservableCollection<StringBuilder> GetGridListItemKey();
+        ObservableCollection<StringBuilder> GetGridListItemType();
+        ObservableCollection<StringBuilder> GetGridListItemValue();
     }
 }

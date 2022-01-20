@@ -90,9 +90,15 @@ namespace WPF_Xplorer.Services
         //TODO: test zone
         public ObservableCollection<StringBuilder> GetGridListItemKey()
         {
-            var t = pdfTreeProc.GetGridListItemKey();
-            var c = t.Count;
             return pdfTreeProc.GetGridListItemKey();
+        }
+        public ObservableCollection<StringBuilder> GetGridListItemType()
+        {
+            return pdfTreeProc.GetGridListItemType();
+        }
+        public ObservableCollection<StringBuilder> GetGridListItemValue()
+        {
+            return pdfTreeProc.GetGridListItemValue();
         }
 
         ///

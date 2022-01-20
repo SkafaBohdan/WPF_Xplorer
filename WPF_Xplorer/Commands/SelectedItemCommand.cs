@@ -18,6 +18,9 @@ namespace WPF_Xplorer.Commands
             if (parameter is TreeViewItem {Tag: BinderObj binder})
             {
                 ViewModel.SelectedObject = binder.PdfObj;
+                ViewModel.PdfDocProc.GridListItemKey.Clear();
+                ViewModel.PdfDocProc.GridListItemType.Clear();
+                ViewModel.PdfDocProc.GridListItemValue.Clear();
             }
         }
     }
