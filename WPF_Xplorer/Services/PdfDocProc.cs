@@ -48,9 +48,11 @@ namespace WPF_Xplorer.Services
 
         public void RelativeLeaveAdd(ref TreeViewItem treeViewItem)
         {
-            var items = treeViewItem.Items;
-            if (items.Count > 1 || items.Count == 0)
-                return;
+            //var items = treeViewItem.Items;
+            //if (items.Count > 1 || items.Count == 0)
+            //{
+            //    return;
+            //}
 
             treeViewItem.Items.Clear();
 
@@ -76,9 +78,6 @@ namespace WPF_Xplorer.Services
         }
 
 
-
-        //TESTZOONEEE 
-        //TODO: test zone
         private ObservableCollection<StringBuilder> gridListItemKey;
         public ObservableCollection<StringBuilder> GridListItemKey
         {
@@ -122,8 +121,6 @@ namespace WPF_Xplorer.Services
                 OnPropertyChanged(nameof(GridListItemValue));
             }
         }
-
-        ////
 
     }
 }

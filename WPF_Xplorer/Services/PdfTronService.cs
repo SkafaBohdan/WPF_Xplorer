@@ -1,5 +1,4 @@
-﻿using pdftron.Filters;
-using pdftron.PDF;
+﻿using pdftron.PDF;
 using pdftron.SDF;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +46,7 @@ namespace WPF_Xplorer.Services
 
         public IEnumerable<TreeViewItem> GetKidNodes(Obj obj, string name)
         {
+            if(obj == null) return new List<TreeViewItem>();   
             switch (obj.GetType())
             {
                 case Obj.ObjType.e_dict:

@@ -23,6 +23,9 @@ namespace WPF_Xplorer.Commands
 
             if (treeViewItem != null)
             {
+                ViewModel.PdfDocProc.GridListItemKey.Clear();
+                ViewModel.PdfDocProc.GridListItemType.Clear();
+                ViewModel.PdfDocProc.GridListItemValue.Clear();
                 ViewModel.PdfDocProc.RelativeLeaveAdd(ref treeViewItem);
             }
         }

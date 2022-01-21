@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace WPF_Xplorer.Models
 {
-    public class ObjectArrayCollection: IEnumerable<KeyValuePair<string, Obj>>, IDisposable
+    public class ObjectArrayCollection: IEnumerable<KeyValuePair<string, Obj>>//, IDisposable
     {
         private readonly Obj arrayObj;
         private readonly string parentName;
@@ -29,7 +29,7 @@ namespace WPF_Xplorer.Models
 
         public void Dispose()
         {
-            arrayObj.Dispose();
+              arrayObj.Dispose();
         }
     }
 
@@ -92,7 +92,7 @@ namespace WPF_Xplorer.Models
 
         public void Dispose()
         {
-            arrayObj.Dispose();
+         //   arrayObj.Dispose();
         }
     }
 

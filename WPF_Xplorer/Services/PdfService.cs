@@ -36,7 +36,7 @@ namespace WPF_Xplorer.Services
         {
             if (!(parent.Tag is BinderObj binder)) return;
 
-            var children = pdfTronService.GetKidNodes(binder.Obj, binder.PdfObj.Key);
+            var children = pdfTronService.GetKidNodes(binder.Obj, binder.PdfObj.Key);       
 
             foreach (var treeViewItem in children)
             {
@@ -87,7 +87,7 @@ namespace WPF_Xplorer.Services
             }
         }
 
-        //TODO: test zone
+     
         public ObservableCollection<StringBuilder> GetGridListItemKey()
         {
             return pdfTreeProc.GetGridListItemKey();
@@ -100,8 +100,6 @@ namespace WPF_Xplorer.Services
         {
             return pdfTreeProc.GetGridListItemValue();
         }
-
-        ///
 
     }
 }

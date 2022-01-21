@@ -34,7 +34,7 @@ namespace WPF_Xplorer.Services
         public IEnumerable<TreeViewItem> GetKidNodes(IEnumerable<KeyValuePair<string, Obj>> dictionary)
         {
             var child = dictionary.Select(item => GetKid(item.Key, item.Value)).Where(child => child.Tag is BinderObj);
-
+       
             return child;
         }
 
@@ -113,8 +113,6 @@ namespace WPF_Xplorer.Services
         }
 
 
-        //TEST ZOONEEE 
-        //TODO: test zone
         private ObservableCollection<StringBuilder> gridListItemKey = new ObservableCollection<StringBuilder>();
         private ObservableCollection<StringBuilder> gridListItemType = new ObservableCollection<StringBuilder>();
         private ObservableCollection<StringBuilder> gridListItemValue = new ObservableCollection<StringBuilder>();
@@ -136,10 +134,10 @@ namespace WPF_Xplorer.Services
             StringBuilder childGridType = new StringBuilder();
             StringBuilder childGridValue = new StringBuilder();
 
+
             gridListItemKey.Add(childGridKey.Append(obj.Key));
             gridListItemType.Add(childGridType.Append(obj.DisplayType));
             gridListItemValue.Add(childGridValue.Append(obj.DisplayValue));
         }
-        ////
     }
 }
