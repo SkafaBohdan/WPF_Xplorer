@@ -46,7 +46,7 @@ namespace WPF_Xplorer.Services
 
         public IEnumerable<TreeViewItem> GetKidNodes(Obj obj, string name)
         {
-            if(obj == null) return new List<TreeViewItem>();   
+            if (obj == null) return new List<TreeViewItem>();   
             switch (obj.GetType())
             {
                 case Obj.ObjType.e_dict:
@@ -93,6 +93,7 @@ namespace WPF_Xplorer.Services
             doc = new PDFDoc(path);
             doc.InitSecurityHandler();
         }
+
 
     }
 }

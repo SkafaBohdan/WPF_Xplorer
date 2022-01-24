@@ -12,6 +12,7 @@ namespace WPF_Xplorer.ViewModels
     public class ApplicationMainWindowViewModel : INotifyPropertyChanged
     {
         private PdfObj selectedItem;
+        
 
         public IPdfDocProc PdfDocProc { get; set; }
 
@@ -29,6 +30,7 @@ namespace WPF_Xplorer.ViewModels
         public ICommand ClosePdfFileCommand { get; set; }
         public ICommand SelectedItemCommand { get; set; }
         public ICommand ExpandCommand { get; set; }
+        public ICommand OpenBookmarkCommand { get; set; }
 
      
         private void CreateCommands()
@@ -37,6 +39,7 @@ namespace WPF_Xplorer.ViewModels
             ClosePdfFileCommand = new ClosePdfFileCommand(this);
             SelectedItemCommand = new SelectedItemCommand(this);
             ExpandCommand = new ExpandCommand(this);
+            OpenBookmarkCommand = new OpenBookmarkCommand(this);
         }
 
         #endregion

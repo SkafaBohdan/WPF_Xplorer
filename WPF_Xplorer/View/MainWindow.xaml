@@ -50,7 +50,7 @@
             
         <ToolBar Grid.Row="1" HorizontalAlignment="Left">
             <Button Command="{Binding OpenFileCommand}" 
-                    CommandParameter="{Binding ElementName=tree_pdf}">
+                    CommandParameter="{Binding ElementName=tree_pdf}" >
                 <Image Source="/Static/Image/open2.ico"/>
             </Button>
             <Separator/>
@@ -59,6 +59,10 @@
                 <Button.Command>
                     <command:HelpAppCommand/>
                 </Button.Command>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding OpenBookmarkCommand}">
+                <Image Source="/Static/Image/bookmark--v1.png"/>
             </Button>
         </ToolBar>
 
