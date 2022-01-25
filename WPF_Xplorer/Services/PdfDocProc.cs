@@ -85,7 +85,7 @@ namespace WPF_Xplorer.Services
         public ObservableCollection<StringBuilder> GridListItemKey
         {
             get
-            {   
+            {
                 gridListItemKey = service.GetGridListItemKey();
                 return gridListItemKey;
             }
@@ -96,7 +96,7 @@ namespace WPF_Xplorer.Services
             }
         }
         private ObservableCollection<StringBuilder> gridListItemType;
-        
+
         public ObservableCollection<StringBuilder> GridListItemType
         {
             get
@@ -126,97 +126,22 @@ namespace WPF_Xplorer.Services
         }
 
 
-
-
-
-
-
-
-
-        //TODO: TestZone
-        //TEST ZONE
-
-        static StringBuilder bookmarks = new StringBuilder();
-
-        static void PrintIndent(Bookmark item)
-        {
-            int indent = item.GetIndent() - 1;
-            for (int i = 0; i < indent; ++i)
-                bookmarks.Append("  ");
-        }
-
-        // Распечатывает дерево схемы на стандартный вывод
-        static StringBuilder PrintOutlineTree(Bookmark item)
-        {
-            for (; item.IsValid(); item = item.GetNext())
-            {
-                PrintIndent(item);
-                bookmarks.Append($"{(item.IsOpen() ? "- " : "+ ")}{item.GetTitle()} ACTION ->  \n");
-
-                // Print Action
-                pdftron.PDF.Action action = item.GetAction();
-                if (action.IsValid())
-                {
-                    if (action.GetType() == pdftron.PDF.Action.Type.e_GoTo)
-                    {
-                        Destination dest = action.GetDest();
-                        if (dest.IsValid())
-                        {
-                            pdftron.PDF.Page page = dest.GetPage();
-                            bookmarks.Append($"GoTo Page {page.GetIndex()} \n");
-                        }
-                    }
-                    else
-                    {
-                        bookmarks.Append("Not a 'GoTo' action  \n");
-                    }
-                }
-                else
-                {
-                    bookmarks.Append("NULL \n");
-                }
-
-                if (item.HasChildren())  // Рекурсивно печатать дочерние поддеревья
-                {
-                    PrintOutlineTree(item.GetFirstChild());
-                }
-            }
-            return bookmarks;
-        }
-
         public StringBuilder PrintBookmarks()
         {
             try
             {
-                var path = docPath.Replace("\\", "/");
-                using (PDFDoc doc = new PDFDoc(path))
-                {
-                    doc.InitSecurityHandler();
-
-                    Bookmark root = doc.GetFirstBookmark();
-                    if (root == null)
-                    {
-                        System.Windows.MessageBox.Show("No bookmarks found", "Bookmarks");
-                        return null;
-                    }
-                    else
-                    {
-                        return PrintOutlineTree(root);
-                    }
-                }
+                return service.PrintBookmarks();
             }
-            catch (PDFNetException e)
+            catch (ArgumentException e)
             {
-                System.Windows.MessageBox.Show(e.GetMessage(), "Error");
+                System.Windows.MessageBox.Show(e.Message, "Bookmarks");
                 return null;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 System.Windows.MessageBox.Show(e.Message, "Error");
                 return null;
             }
         }
-
-        //////
     }
 }

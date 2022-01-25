@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using pdftron.PDF;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Controls;
 
@@ -14,5 +15,7 @@ namespace WPF_Xplorer.Services.Interfaces
         ObservableCollection<StringBuilder> GetGridListItemKey();
         ObservableCollection<StringBuilder> GetGridListItemType();
         ObservableCollection<StringBuilder> GetGridListItemValue();
+        StringBuilder PrintOutlineTree(Bookmark bookItem);
+        StringBuilder PrintBookmarks();
     }
 }

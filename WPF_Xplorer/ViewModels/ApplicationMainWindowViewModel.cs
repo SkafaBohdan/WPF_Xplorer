@@ -39,7 +39,7 @@ namespace WPF_Xplorer.ViewModels
             ClosePdfFileCommand = new ClosePdfFileCommand(this);
             SelectedItemCommand = new SelectedItemCommand(this);
             ExpandCommand = new ExpandCommand(this);
-            OpenBookmarkCommand = new OpenBookmarkCommand(this);
+            OpenBookmarkCommand = new OpenBookmarkCommand(this, new BookmarksViewModel());
         }
 
         #endregion

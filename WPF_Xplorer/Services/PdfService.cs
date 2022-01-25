@@ -1,4 +1,5 @@
 ﻿using pdftron.Common;
+using pdftron.PDF;
 using System;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -20,6 +21,7 @@ namespace WPF_Xplorer.Services
             this.pdfTronService = pdfTronService;
             this.pdfTreeProc = pdfTreeProc;
         }
+      
 
         public void AddCatalogNode(TreeViewItem parent)
         {
@@ -99,6 +101,82 @@ namespace WPF_Xplorer.Services
         public ObservableCollection<StringBuilder> GetGridListItemValue()
         {
             return pdfTreeProc.GetGridListItemValue();
+        }
+
+     
+        public StringBuilder PrintBookmarks()
+        {
+            try
+            {
+                var doc = pdfTronService.GetDoc();
+                Bookmark root = doc.GetFirstBookmark();
+
+                if (root == null)
+                {
+                    throw new ArgumentException();
+                }
+                else
+                {
+                    return PrintOutlineTree(root);
+                }
+
+            }
+            catch (ArgumentException e)
+            {
+                throw new ArgumentException("No bookmarks");
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        StringBuilder bookmarks = new StringBuilder();
+
+        void PrintIndent(Bookmark item)
+        {
+            int indent = item.GetIndent() - 1;
+            for (int i = 0; i < indent; ++i)
+                bookmarks.Append("  ");
+        }
+
+       
+        public StringBuilder PrintOutlineTree(Bookmark bookItem)
+        {
+            for (; bookItem.IsValid(); bookItem = bookItem.GetNext())
+            {
+                PrintIndent(bookItem);
+                bookmarks.Append($"{(bookItem.IsOpen() ? "- " : "+ ")}{bookItem.GetTitle()} ACTION ->  ");
+
+                // Print Action
+                pdftron.PDF.Action action = bookItem.GetAction();
+                if (action.IsValid())
+                {
+                    if (action.GetType() == pdftron.PDF.Action.Type.e_GoTo)
+                    {
+                        Destination dest = action.GetDest();
+                        if (dest.IsValid())
+                        {
+                            pdftron.PDF.Page page = dest.GetPage();
+                            bookmarks.Append($"GoTo Page {page.GetIndex()} \n");
+                        }
+                    }
+                    else
+                    {
+                        bookmarks.Append("Not a 'GoTo' action  \n");
+                    }
+                }
+                else
+                {
+                    bookmarks.Append("NULL \n");
+                }
+
+                if (bookItem.HasChildren())  
+                {
+                    PrintOutlineTree(bookItem.GetFirstChild());
+                }
+            }
+            return bookmarks;
         }
 
     }

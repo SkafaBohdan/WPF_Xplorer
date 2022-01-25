@@ -13,9 +13,11 @@ namespace WPF_Xplorer.Commands
     public class OpenBookmarkCommand : BaseCommand
     {
         public ApplicationMainWindowViewModel ViewModel { get; set; }
-        public OpenBookmarkCommand(ApplicationMainWindowViewModel viewModel)
+        public BookmarksViewModel BookmarksViewModel { get; set; }
+        public OpenBookmarkCommand(ApplicationMainWindowViewModel viewModel, BookmarksViewModel bookmarksViewModel)
         {
             ViewModel = viewModel;
+            BookmarksViewModel = bookmarksViewModel;
         }
 
         public override bool CanExecute(object parameter)
@@ -29,8 +31,11 @@ namespace WPF_Xplorer.Commands
             if (stringBookmarks != null)
             {
                 string bookmarksPrint = stringBookmarks.ToString();
+                BookmarksViewModel.TextBookmarks = bookmarksPrint;
+                BookmarkListWindow bookmarkList = new BookmarkListWindow(BookmarksViewModel);
 
-                MessageBox.Show(bookmarksPrint);                
+                bookmarkList.Show();
+                stringBookmarks.Clear();
             }
         }
     }

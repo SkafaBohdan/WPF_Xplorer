@@ -12,6 +12,7 @@ namespace WPF_Xplorer.HostBuilders
             host.ConfigureServices(services =>
             {
                 services.AddSingleton(provider => new MainWindow(provider.GetRequiredService<ApplicationMainWindowViewModel>()));
+                services.AddScoped(provider => new BookmarkListWindow(provider.GetRequiredService<BookmarksViewModel>()));
             });
 
             return host;
