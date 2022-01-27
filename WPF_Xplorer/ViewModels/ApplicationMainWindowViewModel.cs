@@ -12,8 +12,6 @@ namespace WPF_Xplorer.ViewModels
     public class ApplicationMainWindowViewModel : INotifyPropertyChanged
     {
         private PdfObj selectedItem;
-        
-
         public IPdfDocProc PdfDocProc { get; set; }
 
 
@@ -63,4 +61,7 @@ namespace WPF_Xplorer.ViewModels
 
     }
 }
+
+
+//TODO: написать тесты, к bookmarks, пофиксить прошлые, пересмотреть прошлые, так как некоторые функционал был изменен
 

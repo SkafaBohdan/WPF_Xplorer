@@ -1,5 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
+using System.Collections.ObjectModel;
+using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 using WPF_Xplorer.Commands;
@@ -47,6 +49,9 @@ namespace WPF_Xplorer.Tests.CommandsTests
         public void Execute_Open_ReturnFileLoaded()
         {
             argsConverter.Setup(conv => conv.ConverterTreeViewItem(It.IsAny<object>())).Returns(treeViewItem);
+            pdfDocProc.Setup(docProc => docProc.GridListItemKey).Returns(new ObservableCollection<StringBuilder>());
+            pdfDocProc.Setup(docProc => docProc.GridListItemType).Returns(new ObservableCollection<StringBuilder>());
+            pdfDocProc.Setup(docProc => docProc.GridListItemValue).Returns(new ObservableCollection<StringBuilder>());
 
             expandCommand.Execute(It.IsAny<object>());
 

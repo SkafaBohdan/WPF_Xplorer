@@ -1,5 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
+using System.Collections.ObjectModel;
+using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 using WPF_Xplorer.Commands;
@@ -56,7 +58,10 @@ namespace WPF_Xplorer.Tests.CommandsTests
         {
             TreeView treeView = new TreeView();
             treeView.Items.Add(null);
-                
+            pdfDocProc.Setup(docProc => docProc.GridListItemKey).Returns(new ObservableCollection<StringBuilder>());
+            pdfDocProc.Setup(docProc => docProc.GridListItemType).Returns(new ObservableCollection<StringBuilder>());
+            pdfDocProc.Setup(docProc => docProc.GridListItemValue).Returns(new ObservableCollection<StringBuilder>());
+
             closeCommand.Execute(treeView);
 
             Assert.AreEqual(0, treeView.Items.Count);   
@@ -67,6 +72,9 @@ namespace WPF_Xplorer.Tests.CommandsTests
         {
             TreeView treeView = new TreeView();
             treeView.Items.Add(null);
+            pdfDocProc.Setup(docProc => docProc.GridListItemKey).Returns(new ObservableCollection<StringBuilder>());
+            pdfDocProc.Setup(docProc => docProc.GridListItemType).Returns(new ObservableCollection<StringBuilder>());
+            pdfDocProc.Setup(docProc => docProc.GridListItemValue).Returns(new ObservableCollection<StringBuilder>());
 
             closeCommand.Execute(treeView);
 

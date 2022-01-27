@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+using WPF_Xplorer.Services.Interfaces;
 using WPF_Xplorer.View;
 using WPF_Xplorer.ViewModels;
 
@@ -14,6 +10,7 @@ namespace WPF_Xplorer.Commands
     {
         public ApplicationMainWindowViewModel ViewModel { get; set; }
         public BookmarksViewModel BookmarksViewModel { get; set; }
+
         public OpenBookmarkCommand(ApplicationMainWindowViewModel viewModel, BookmarksViewModel bookmarksViewModel)
         {
             ViewModel = viewModel;
@@ -27,15 +24,29 @@ namespace WPF_Xplorer.Commands
 
         public override void Execute(object parameter)
         {
-            var stringBookmarks = ViewModel.PdfDocProc.PrintBookmarks();
-            if (stringBookmarks != null)
+            StringBuilder stringBookmarks;
+            try
             {
-                string bookmarksPrint = stringBookmarks.ToString();
-                BookmarksViewModel.TextBookmarks = bookmarksPrint;
-                BookmarkListWindow bookmarkList = new BookmarkListWindow(BookmarksViewModel);
+                stringBookmarks = ViewModel.PdfDocProc.PrintBookmarks();
+                if (stringBookmarks != null)
+                {
+                    string bookmarksPrint = stringBookmarks.ToString();
+                    BookmarksViewModel.TextBookmarks = bookmarksPrint;
+                    BookmarkListWindow bookmarkList = new BookmarkListWindow(BookmarksViewModel);
 
-                bookmarkList.Show();
-                stringBookmarks.Clear();
+                    bookmarkList.Show();
+                    stringBookmarks.Clear();
+                }
+            }
+            catch (ArgumentException e)
+            {
+                //TODO: обернуть мессадж бокс, и возможно весь тру-кетч обернуть куда-то в интерфейс
+                System.Windows.MessageBox.Show(e.Message, "Bookmarks");
+               
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message, "Error");
             }
         }
     }

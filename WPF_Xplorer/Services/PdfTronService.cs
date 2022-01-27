@@ -94,7 +94,6 @@ namespace WPF_Xplorer.Services
             doc.InitSecurityHandler();
         }
 
- 
         public PDFDoc GetDoc()
         {
             return doc; 

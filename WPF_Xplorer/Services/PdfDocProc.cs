@@ -125,23 +125,9 @@ namespace WPF_Xplorer.Services
             }
         }
 
-
         public StringBuilder PrintBookmarks()
         {
-            try
-            {
-                return service.PrintBookmarks();
-            }
-            catch (ArgumentException e)
-            {
-                System.Windows.MessageBox.Show(e.Message, "Bookmarks");
-                return null;
-            }
-            catch (Exception e)
-            {
-                System.Windows.MessageBox.Show(e.Message, "Error");
-                return null;
-            }
+            return service.PrintBookmarks();
         }
     }
 }

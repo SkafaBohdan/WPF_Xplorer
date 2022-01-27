@@ -15,7 +15,7 @@ namespace WPF_Xplorer.Services.Interfaces
         ObservableCollection<StringBuilder> GetGridListItemKey();
         ObservableCollection<StringBuilder> GetGridListItemType();
         ObservableCollection<StringBuilder> GetGridListItemValue();
-        StringBuilder PrintOutlineTree(Bookmark bookItem);
+     //   StringBuilder PrintOutlineTree(Bookmark bookItem);
         StringBuilder PrintBookmarks();
     }
 }

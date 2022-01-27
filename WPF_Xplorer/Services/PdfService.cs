@@ -115,13 +115,10 @@ namespace WPF_Xplorer.Services
                 {
                     throw new ArgumentException();
                 }
-                else
-                {
-                    return PrintOutlineTree(root);
-                }
 
+                return PrintOutlineTree(root);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 throw new ArgumentException("No bookmarks");
             }
@@ -141,7 +138,7 @@ namespace WPF_Xplorer.Services
         }
 
        
-        public StringBuilder PrintOutlineTree(Bookmark bookItem)
+        StringBuilder PrintOutlineTree(Bookmark bookItem)
         {
             for (; bookItem.IsValid(); bookItem = bookItem.GetNext())
             {
