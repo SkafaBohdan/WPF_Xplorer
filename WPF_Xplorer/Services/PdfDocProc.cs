@@ -51,12 +51,6 @@ namespace WPF_Xplorer.Services
 
         public void RelativeLeaveAdd(ref TreeViewItem treeViewItem)
         {
-            //var items = treeViewItem.Items;
-            //if (items.Count > 1 || items.Count == 0)
-            //{
-            //    return;
-            //}
-
             treeViewItem.Items.Clear();
 
             var type = ((BinderObj)treeViewItem.Tag).PdfObj.Type;
@@ -91,7 +85,7 @@ namespace WPF_Xplorer.Services
             }
             set
             {
-                gridListItemKey = value;
+                //gridListItemKey = value;
                 OnPropertyChanged(nameof(GridListItemKey));
             }
         }
@@ -106,7 +100,7 @@ namespace WPF_Xplorer.Services
             }
             set
             {
-                gridListItemType = value;
+            //   gridListItemType = value;
                 OnPropertyChanged(nameof(GridListItemType));
             }
         }
@@ -120,7 +114,7 @@ namespace WPF_Xplorer.Services
             }
             set
             {
-                gridListItemValue = value;
+              //  gridListItemValue = value;
                 OnPropertyChanged(nameof(GridListItemValue));
             }
         }

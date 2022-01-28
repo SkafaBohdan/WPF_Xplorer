@@ -103,32 +103,20 @@ namespace WPF_Xplorer.Services
             return pdfTreeProc.GetGridListItemValue();
         }
 
-     
-        public StringBuilder PrintBookmarks()
-        {
-            try
-            {
-                var doc = pdfTronService.GetDoc();
-                Bookmark root = doc.GetFirstBookmark();
-
-                if (root == null)
-                {
-                    throw new ArgumentException();
-                }
-
-                return PrintOutlineTree(root);
-            }
-            catch (ArgumentException)
-            {
-                throw new ArgumentException("No bookmarks");
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
 
         StringBuilder bookmarks = new StringBuilder();
+        public StringBuilder PrintBookmarks()
+        {
+            var doc = pdfTronService.GetDoc();
+            Bookmark root = doc.GetFirstBookmark();
+
+            if (root == null)
+            {
+                return bookmarks.Append("No Bookmarks!");
+            }
+
+            return PrintOutlineTree(root);
+        }
 
         void PrintIndent(Bookmark item)
         {
@@ -145,7 +133,6 @@ namespace WPF_Xplorer.Services
                 PrintIndent(bookItem);
                 bookmarks.Append($"{(bookItem.IsOpen() ? "- " : "+ ")}{bookItem.GetTitle()} ACTION ->  ");
 
-                // Print Action
                 pdftron.PDF.Action action = bookItem.GetAction();
                 if (action.IsValid())
                 {

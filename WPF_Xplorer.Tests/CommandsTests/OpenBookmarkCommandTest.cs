@@ -1,14 +1,12 @@
 ﻿using Moq;
 using NUnit.Framework;
-using System;
 using System.Text;
 using System.Threading;
 using WPF_Xplorer.Commands;
 using WPF_Xplorer.Services.Interfaces;
-using WPF_Xplorer.View;
 using WPF_Xplorer.ViewModels;
 
-namespace WPF_Xplorer.Tests.BookmarksTests
+namespace WPF_Xplorer.Tests.CommandTests
 {
     [TestFixture]
     [Apartment(ApartmentState.STA)]
@@ -41,15 +39,7 @@ namespace WPF_Xplorer.Tests.BookmarksTests
         [Test]
         public void Execute_Verify()
         {
-            openBookmarkCommand.Execute(It.IsAny<StringBuilder>());
-
-            pdfDocProc.Verify(docProc => docProc.PrintBookmarks(), Times.Once);
-        }
-
-        [Test]
-        public void Execute_Exception()
-        {
-            pdfDocProc.Setup(DocProc => DocProc.PrintBookmarks()).Throws(new Exception());
+            pdfDocProc.Setup(docProc => docProc.PrintBookmarks()).Returns(new StringBuilder());
 
             openBookmarkCommand.Execute(It.IsAny<StringBuilder>());
 

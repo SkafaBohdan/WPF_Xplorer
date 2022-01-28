@@ -1,6 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using pdftron.SDF;
+using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 using WPF_Xplorer.Models;
@@ -21,7 +22,7 @@ namespace WPF_Xplorer.Tests.ServicesTests
 
 
         [SetUp]
-        public void SetUp() 
+        public void SetUp()
         {
             pdfService = new Mock<IPdfService>();
             pdfDocProc = new PdfDocProc(pdfService.Object);
@@ -89,5 +90,15 @@ namespace WPF_Xplorer.Tests.ServicesTests
         }
 
 
+        [Test]
+        public void PrintBookmarks_Called_ReturnStringBuilder()
+        {
+            pdfService.Setup(service => service.PrintBookmarks()).Returns(new StringBuilder());
+
+            var result = pdfDocProc.PrintBookmarks();
+
+            pdfService.Verify(service => service.PrintBookmarks(), Times.Once);
+            Assert.IsInstanceOf<StringBuilder>(result);
+        }
     }
 }

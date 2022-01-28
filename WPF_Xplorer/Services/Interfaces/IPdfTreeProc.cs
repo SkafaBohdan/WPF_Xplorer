@@ -16,7 +16,6 @@ namespace WPF_Xplorer.Services.Interfaces
         TreeViewItem GetDocumentNode(string path);
         TreeViewItem GetCatalogNode(Obj root, Obj catalogObj, string name);
         TreeViewItem GetInfoNode(Obj infoObj, PDFDocInfo docInfo);
-        void GetKidNodesKeyFromGridView(Models.PdfObj obj);
         ObservableCollection<StringBuilder> GetGridListItemKey();
         ObservableCollection<StringBuilder> GetGridListItemType();
         ObservableCollection<StringBuilder> GetGridListItemValue();

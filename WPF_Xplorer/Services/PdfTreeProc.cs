@@ -13,7 +13,10 @@ namespace WPF_Xplorer.Services
     public class PdfTreeProc : IPdfTreeProc
     {
         private readonly IPdfObjProc pdfObjectProc;
-
+        private ObservableCollection<StringBuilder> gridListItemKey = new ObservableCollection<StringBuilder>();
+        private ObservableCollection<StringBuilder> gridListItemType = new ObservableCollection<StringBuilder>();
+        private ObservableCollection<StringBuilder> gridListItemValue = new ObservableCollection<StringBuilder>();
+       
         public PdfTreeProc(IPdfObjProc pdfObjectProc)
         {
             this.pdfObjectProc = pdfObjectProc;
@@ -113,9 +116,6 @@ namespace WPF_Xplorer.Services
         }
 
 
-        private ObservableCollection<StringBuilder> gridListItemKey = new ObservableCollection<StringBuilder>();
-        private ObservableCollection<StringBuilder> gridListItemType = new ObservableCollection<StringBuilder>();
-        private ObservableCollection<StringBuilder> gridListItemValue = new ObservableCollection<StringBuilder>();
         public ObservableCollection<StringBuilder> GetGridListItemKey()
         {
             return gridListItemKey;
@@ -128,7 +128,7 @@ namespace WPF_Xplorer.Services
         {
             return gridListItemValue;
         }
-        public void GetKidNodesKeyFromGridView(Models.PdfObj obj)
+        private void GetKidNodesKeyFromGridView(Models.PdfObj obj)
         {
             StringBuilder childGridKey = new StringBuilder();
             StringBuilder childGridType = new StringBuilder();

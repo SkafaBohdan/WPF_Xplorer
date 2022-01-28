@@ -25,29 +25,15 @@ namespace WPF_Xplorer.Commands
         public override void Execute(object parameter)
         {
             StringBuilder stringBookmarks;
-            try
-            {
-                stringBookmarks = ViewModel.PdfDocProc.PrintBookmarks();
-                if (stringBookmarks != null)
-                {
-                    string bookmarksPrint = stringBookmarks.ToString();
-                    BookmarksViewModel.TextBookmarks = bookmarksPrint;
-                    BookmarkListWindow bookmarkList = new BookmarkListWindow(BookmarksViewModel);
 
-                    bookmarkList.Show();
-                    stringBookmarks.Clear();
-                }
-            }
-            catch (ArgumentException e)
-            {
-                //TODO: обернуть мессадж бокс, и возможно весь тру-кетч обернуть куда-то в интерфейс
-                System.Windows.MessageBox.Show(e.Message, "Bookmarks");
-               
-            }
-            catch (Exception e)
-            {
-                System.Windows.MessageBox.Show(e.Message, "Error");
-            }
+            stringBookmarks = ViewModel.PdfDocProc.PrintBookmarks();
+
+            string bookmarksPrint = stringBookmarks.ToString();
+            BookmarksViewModel.TextBookmarks = bookmarksPrint;
+            BookmarkListWindow bookmarkList = new BookmarkListWindow(BookmarksViewModel);
+
+            bookmarkList.Show();
+            stringBookmarks.Clear();
         }
     }
 }
