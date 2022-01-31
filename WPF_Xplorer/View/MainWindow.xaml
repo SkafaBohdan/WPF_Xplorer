@@ -21,6 +21,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
         <Menu Grid.ColumnSpan="2" FontSize="14" Margin="3">
@@ -47,8 +48,9 @@
         <TextBlock Margin="100 6 5 5" Text="Name Pdf file:"/>
         <TextBlock  Margin="180 6 5 5" Grid.ColumnSpan="2" Text="{Binding PdfDocProc.Name,  Mode=OneWay, 
             UpdateSourceTrigger=PropertyChanged}" />
-            
+
         <ToolBar Grid.Row="1" HorizontalAlignment="Left">
+          
             <Button Command="{Binding OpenFileCommand}" 
                     CommandParameter="{Binding ElementName=tree_pdf}" >
                 <Image Source="/Static/Image/open2.ico"/>
@@ -80,7 +82,6 @@
             </i:Interaction.Triggers>
 
             <TreeView.Resources>
-                
                 <Style TargetType="{x:Type TreeViewItem}" >
                     <Setter Property="command:Behaviour.ExpandingBehaviour"
                                     Value="{Binding ExpandCommand}"/>
@@ -148,8 +149,18 @@
             </TreeView.Resources>
         </TreeView>
 
+        <StatusBar Grid.Row="3" 
+                   Grid.ColumnSpan="2"
+                   Margin="2"  
+                   Background="AliceBlue">
+            <TextBlock Text="Pdf Xplorer / Version: 1.03 " FontSize="8" Margin="3 0 0 0 "/>
+            <Separator />
+            <TextBlock Text="Path pdf file: " FontSize="8"/>
+            <TextBlock Text="{Binding PdfDocProc.DocPath}" FontSize="8"/>
+        </StatusBar>
 
-        <Grid Grid.Row="2"
+
+            <Grid Grid.Row="2"
               Grid.Column="1"
               Background="White"
               Name="Description">

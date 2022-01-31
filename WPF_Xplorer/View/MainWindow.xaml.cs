@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using WPF_Xplorer.ViewModels;
 
 namespace WPF_Xplorer.View
 {
@@ -13,6 +12,12 @@ namespace WPF_Xplorer.View
             InitializeComponent();
 
             DataContext = dataContext;
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
+            e.Cancel = true;
         }
     }
 }

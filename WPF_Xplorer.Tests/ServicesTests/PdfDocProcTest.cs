@@ -42,14 +42,15 @@ namespace WPF_Xplorer.Tests.ServicesTests
         }
 
 
-        [Test]
-        public void OpenFile_Called_SetPath()
+        [TestCase("path", true)]
+        [TestCase(null, false)]
+        public void OpenFile_Called_SetPath(string path, bool boolTest)
         {
-            string path = "path";
+            pdfService.Setup(service => service.GetDocumentNode(It.IsAny<string>(), It.IsAny<TreeView>(), out boolTest));
 
             pdfDocProc.OpenFile(path, ref treeView);
 
-            pdfService.Verify(service => service.GetDocumentNode(path, treeView), Times.Once);
+            pdfService.Verify(service => service.GetDocumentNode(path, treeView, out boolTest), Times.Once);
             Assert.AreEqual(path, pdfDocProc.DocPath);
         }
 

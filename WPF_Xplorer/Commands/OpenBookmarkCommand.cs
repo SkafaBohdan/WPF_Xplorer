@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using WPF_Xplorer.Services.Interfaces;
+﻿using System.Text;
 using WPF_Xplorer.View;
 using WPF_Xplorer.ViewModels;
 
@@ -10,11 +8,13 @@ namespace WPF_Xplorer.Commands
     {
         public ApplicationMainWindowViewModel ViewModel { get; set; }
         public BookmarksViewModel BookmarksViewModel { get; set; }
+        static BookmarkListWindow bookmarkListView;
 
         public OpenBookmarkCommand(ApplicationMainWindowViewModel viewModel, BookmarksViewModel bookmarksViewModel)
         {
             ViewModel = viewModel;
             BookmarksViewModel = bookmarksViewModel;
+            bookmarkListView = new BookmarkListWindow(bookmarksViewModel);
         }
 
         public override bool CanExecute(object parameter)
@@ -25,14 +25,12 @@ namespace WPF_Xplorer.Commands
         public override void Execute(object parameter)
         {
             StringBuilder stringBookmarks;
-
             stringBookmarks = ViewModel.PdfDocProc.PrintBookmarks();
-
             string bookmarksPrint = stringBookmarks.ToString();
             BookmarksViewModel.TextBookmarks = bookmarksPrint;
-            BookmarkListWindow bookmarkList = new BookmarkListWindow(BookmarksViewModel);
 
-            bookmarkList.Show();
+            bookmarkListView.Show();
+            bookmarkListView.Activate();
             stringBookmarks.Clear();
         }
     }

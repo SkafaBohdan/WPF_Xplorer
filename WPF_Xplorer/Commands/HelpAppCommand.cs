@@ -6,8 +6,7 @@ namespace WPF_Xplorer.Commands
     {
         public override void Execute(object parameter)
         {
-            MessageBox.Show("Wpf Xplorer \n Version 1.3", "Wpf Xplorer", MessageBoxButton.OK);
-            
+            MessageBox.Show("Wpf Xplorer \n Version 1.3", "Wpf Xplorer", MessageBoxButton.OK);   
         }
     }
 }

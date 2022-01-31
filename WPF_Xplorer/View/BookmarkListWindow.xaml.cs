@@ -12,6 +12,10 @@ namespace WPF_Xplorer.View
             InitializeComponent();
             DataContext = dataContext;
         }
-
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            this.Visibility = Visibility.Hidden;
+            e.Cancel = true;
+        }
     }
 }

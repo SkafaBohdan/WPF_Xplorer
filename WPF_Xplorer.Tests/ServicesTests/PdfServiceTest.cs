@@ -67,7 +67,7 @@ namespace WPF_Xplorer.Tests.ServicesTests
             string path = "TestPath";
             pdfTreeProcMock.Setup(service => service.GetDocumentNode(path)).Returns(treeViewItem);
 
-            pdfService.GetDocumentNode(path, treeView);
+            pdfService.GetDocumentNode(path, treeView, out bool boolPath);
 
             pdfTreeProcMock.Verify(service => service.GetDocumentNode(path), Times.Once);
             Assert.AreEqual(1, treeView.Items.Count);

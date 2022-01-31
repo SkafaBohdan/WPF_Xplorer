@@ -1,7 +1,4 @@
-﻿using pdftron.Common;
-using pdftron.PDF;
-using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Controls;
 using WPF_Xplorer.Services.Interfaces;
@@ -23,7 +20,6 @@ namespace WPF_Xplorer.Services
 
         public string DocPath
         {
-
             get => docPath;
             set
             {
@@ -38,15 +34,32 @@ namespace WPF_Xplorer.Services
             get => name;
             set
             {
-                name = value;
+                LastIndexOf(value);
                 OnPropertyChanged(nameof(Name));
+            }
+        }
+        private void LastIndexOf(string value)
+        {
+            if (value != null)
+            {
+                var last = value.LastIndexOf("\\");
+                name = value.Substring(last + 1);
+            }
+            else
+            {
+                name = value;
             }
         }
 
         public void OpenFile(string path, ref TreeView treeView)
         {
-            service.GetDocumentNode(path, treeView);
-            DocPath = path;
+            service.GetDocumentNode(path, treeView, out bool boolPath);
+            if (boolPath)
+            {
+                DocPath = path;
+            }
+            else
+                DocPath = null;
         }
 
         public void RelativeLeaveAdd(ref TreeViewItem treeViewItem)

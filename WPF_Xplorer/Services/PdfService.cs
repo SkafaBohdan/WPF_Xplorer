@@ -69,7 +69,7 @@ namespace WPF_Xplorer.Services
             }
         }
 
-        public void GetDocumentNode(string path, TreeView parent)
+        public void GetDocumentNode(string path, TreeView parent, out bool boolPath)
         {
             try
             {
@@ -78,14 +78,17 @@ namespace WPF_Xplorer.Services
                 var documentNode = pdfTreeProc.GetDocumentNode(path);
                 documentNode.Items.Add(null);
                 parent.Items.Add(documentNode);
+                boolPath = true;
             }
             catch (PDFNetException e)
             {
                 MessageBox.Show(e.GetMessage(), "Error!");
+                boolPath = false;
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error!");
+                boolPath = false;
             }
         }
 
