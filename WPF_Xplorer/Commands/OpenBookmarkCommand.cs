@@ -29,8 +29,8 @@ namespace WPF_Xplorer.Commands
             string bookmarksPrint = stringBookmarks.ToString();
             BookmarksViewModel.TextBookmarks = bookmarksPrint;
 
-            bookmarkListView.Show();
-            bookmarkListView.Activate();
+            bookmarkListView.ShowDialog();
+
             stringBookmarks.Clear();
         }
     }

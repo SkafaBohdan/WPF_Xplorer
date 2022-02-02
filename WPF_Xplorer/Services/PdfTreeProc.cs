@@ -86,6 +86,7 @@ namespace WPF_Xplorer.Services
         public TreeViewItem GetStream(string name, IStreamService streamService, Obj value)
         {
             var pdfStream = pdfObjectProc.StreamObj(value, streamService, name);
+            GetKidNodesKeyFromGridView(pdfStream);
 
             return new TreeViewItem
             {

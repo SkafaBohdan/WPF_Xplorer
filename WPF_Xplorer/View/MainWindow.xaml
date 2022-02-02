@@ -50,7 +50,12 @@
             UpdateSourceTrigger=PropertyChanged}" />
 
         <ToolBar Grid.Row="1" HorizontalAlignment="Left">
-          
+            <ToolBar.Style>
+                <Style TargetType="ToolBar">
+                    <Setter Property="ToolBar.OverflowMode" Value="Never"/>
+                    <Setter Property="OverflowMode" Value="Never" />
+                </Style>
+            </ToolBar.Style>
             <Button Command="{Binding OpenFileCommand}" 
                     CommandParameter="{Binding ElementName=tree_pdf}" >
                 <Image Source="/Static/Image/open2.ico"/>
@@ -151,7 +156,7 @@
 
         <StatusBar Grid.Row="3" 
                    Grid.ColumnSpan="2"
-                   Margin="2"  
+                   Margin="2"
                    Background="AliceBlue">
             <TextBlock Text="Pdf Xplorer / Version: 1.03 " FontSize="8" Margin="3 0 0 0 "/>
             <Separator />
@@ -224,7 +229,7 @@
             <TextBox Grid.ColumnSpan="3" 
                      Grid.Row="3" 
                      Grid.Column="0" 
-                     Margin="0 15 15 15" 
+                     Margin="0 15 15 0" 
                      ScrollViewer.CanContentScroll="True"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"
                      Text="{Binding SelectedObject.StreamValue, 
