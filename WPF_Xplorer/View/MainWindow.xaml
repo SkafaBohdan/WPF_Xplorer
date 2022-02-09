@@ -71,6 +71,10 @@
             <Button Command="{Binding OpenBookmarkCommand}">
                 <Image Source="/Static/Image/bookmark--v1.png"/>
             </Button>
+            <Separator/>
+            <Button Command="{Binding OpenBookmarkUpdateWindowCommand}">
+                <Image Source="/Static/Image/addAndDelete.png"/>
+            </Button>
         </ToolBar>
 
         <TreeView Grid.Row="2" Padding="2"

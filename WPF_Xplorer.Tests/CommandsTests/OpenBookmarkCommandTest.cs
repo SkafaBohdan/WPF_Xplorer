@@ -1,6 +1,5 @@
 ﻿using Moq;
 using NUnit.Framework;
-using System.Text;
 using System.Threading;
 using WPF_Xplorer.Commands;
 using WPF_Xplorer.Services.Interfaces;
@@ -13,6 +12,8 @@ namespace WPF_Xplorer.Tests.CommandTests
     public class OpenBookmarkCommandTest
     {
         private Mock<IPdfDocProc> pdfDocProc;
+        private Mock<IBookmarksUpdateService> bookUpdateService;
+        private BookmarkUpdateViewModel bookmarkUpdateViewModel;
         private ApplicationMainWindowViewModel viewMainModel;
         private BookmarksViewModel bookmarksViewModel;
         private OpenBookmarkCommand openBookmarkCommand;
@@ -21,7 +22,9 @@ namespace WPF_Xplorer.Tests.CommandTests
         public void SetUp()
         {
             pdfDocProc = new Mock<IPdfDocProc>();
-            viewMainModel = new ApplicationMainWindowViewModel(pdfDocProc.Object);
+            bookUpdateService = new Mock<IBookmarksUpdateService>();
+            bookmarkUpdateViewModel = new BookmarkUpdateViewModel(bookUpdateService.Object);
+            viewMainModel = new ApplicationMainWindowViewModel(pdfDocProc.Object, bookmarkUpdateViewModel);
             bookmarksViewModel = new BookmarksViewModel();
             openBookmarkCommand = new OpenBookmarkCommand(viewMainModel, bookmarksViewModel);
         }
@@ -37,13 +40,13 @@ namespace WPF_Xplorer.Tests.CommandTests
 
         
         [Test]
-        public void Execute_Verify()
+        public void CanExecute_True()
         {
-            pdfDocProc.Setup(docProc => docProc.PrintBookmarks()).Returns(new StringBuilder());
+            pdfDocProc.Setup(service => service.DocPath).Returns("true");
 
-            openBookmarkCommand.Execute(It.IsAny<StringBuilder>());
+            var result = openBookmarkCommand.CanExecute(It.IsAny<object>());
 
-            pdfDocProc.Verify(docProc => docProc.PrintBookmarks(), Times.Once);
+            Assert.IsTrue(result);
         }
 
     }

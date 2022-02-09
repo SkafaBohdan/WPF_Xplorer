@@ -6,6 +6,7 @@ using WPF_Xplorer.Interfaces;
 using WPF_Xplorer.Services;
 using WPF_Xplorer.Services.Interfaces;
 
+
 namespace WPF_Xplorer.HostBuilders
 {
     public static class AddServicesHostBuilderExtension
@@ -27,6 +28,7 @@ namespace WPF_Xplorer.HostBuilders
                 services.AddScoped<IPdfTronService, PdfTronService>();
                 services.AddScoped<IPdfService, PdfService>();
                 services.AddScoped<IPdfDocProc, PdfDocProc>();
+                services.AddScoped<IBookmarksUpdateService, BookmarksUpdateService>();
 
             });
 

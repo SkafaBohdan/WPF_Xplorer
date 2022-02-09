@@ -15,6 +15,8 @@ namespace WPF_Xplorer.Tests.CommandsTests
     public class ClosePdfFileCommandTest
     {
         private Mock<IPdfDocProc> pdfDocProc;
+        private Mock<IBookmarksUpdateService> bookUpdateService;
+        private BookmarkUpdateViewModel bookmarkUpdateViewModel;
         private ApplicationMainWindowViewModel viewModel;
         private ClosePdfFileCommand closeCommand;
 
@@ -22,7 +24,9 @@ namespace WPF_Xplorer.Tests.CommandsTests
         public void SetUp()
         {
             pdfDocProc = new Mock<IPdfDocProc>();
-            viewModel = new ApplicationMainWindowViewModel(pdfDocProc.Object);
+            bookUpdateService = new Mock<IBookmarksUpdateService>();
+            bookmarkUpdateViewModel = new BookmarkUpdateViewModel(bookUpdateService.Object);
+            viewModel = new ApplicationMainWindowViewModel(pdfDocProc.Object, bookmarkUpdateViewModel);
             closeCommand = new ClosePdfFileCommand(viewModel);
         }
 

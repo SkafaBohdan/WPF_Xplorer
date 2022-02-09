@@ -16,6 +16,8 @@ namespace WPF_Xplorer.Tests.CommandsTests
     {
         private Mock<IDialogOpen> openDialog;
         private Mock<IPdfDocProc> pdfDocProc;
+        private Mock<IBookmarksUpdateService> bookUpdateService;
+        private BookmarkUpdateViewModel bookmarkUpdateViewModel;
         private ApplicationMainWindowViewModel viewModel;
         private OpenFileCommand openCommand;
 
@@ -26,7 +28,9 @@ namespace WPF_Xplorer.Tests.CommandsTests
         {
             openDialog = new Mock<IDialogOpen>();
             pdfDocProc = new Mock<IPdfDocProc>();
-            viewModel = new ApplicationMainWindowViewModel(pdfDocProc.Object);
+            bookUpdateService = new Mock<IBookmarksUpdateService>();
+            bookmarkUpdateViewModel = new BookmarkUpdateViewModel(bookUpdateService.Object);
+            viewModel = new ApplicationMainWindowViewModel(pdfDocProc.Object, bookmarkUpdateViewModel);
             openCommand = new OpenFileCommand(viewModel, openDialog.Object);
         }
 

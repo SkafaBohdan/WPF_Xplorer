@@ -14,6 +14,8 @@ namespace WPF_Xplorer.Tests.CommandsTests
     public class SelectedItemCommandTest
     {
         private Mock<IPdfDocProc> pdfDocProc;
+        private Mock<IBookmarksUpdateService> bookUpdateService;
+        private BookmarkUpdateViewModel bookmarkUpdateViewModel;
         private ApplicationMainWindowViewModel viewModel;
         private SelectedItemCommand selectedItemCommand;
 
@@ -21,7 +23,9 @@ namespace WPF_Xplorer.Tests.CommandsTests
         public void SetUp()
         {
             pdfDocProc = new Mock<IPdfDocProc>();
-            viewModel = new ApplicationMainWindowViewModel(pdfDocProc.Object);
+            bookUpdateService = new Mock<IBookmarksUpdateService>();
+            bookmarkUpdateViewModel = new BookmarkUpdateViewModel(bookUpdateService.Object);
+            viewModel = new ApplicationMainWindowViewModel(pdfDocProc.Object, bookmarkUpdateViewModel);
             selectedItemCommand = new SelectedItemCommand(viewModel);
         }
 

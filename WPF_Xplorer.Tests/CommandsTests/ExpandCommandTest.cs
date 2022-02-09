@@ -17,6 +17,8 @@ namespace WPF_Xplorer.Tests.CommandsTests
     {
         private Mock<IArgsConverter> argsConverter;
         private Mock<IPdfDocProc> pdfDocProc;
+        private Mock<IBookmarksUpdateService> bookUpdateService;
+        private BookmarkUpdateViewModel bookmarkUpdateViewModel;
         private ApplicationMainWindowViewModel viewModel;
         private ExpandCommand expandCommand;
 
@@ -27,7 +29,9 @@ namespace WPF_Xplorer.Tests.CommandsTests
         {
             argsConverter = new Mock<IArgsConverter>();
             pdfDocProc = new Mock<IPdfDocProc>();
-            viewModel = new ApplicationMainWindowViewModel(pdfDocProc.Object);
+            bookUpdateService = new Mock<IBookmarksUpdateService>();
+            bookmarkUpdateViewModel = new BookmarkUpdateViewModel(bookUpdateService.Object);
+            viewModel = new ApplicationMainWindowViewModel(pdfDocProc.Object, bookmarkUpdateViewModel);
             expandCommand = new ExpandCommand(viewModel);
             expandCommand.ArgsConverter = argsConverter.Object;
 

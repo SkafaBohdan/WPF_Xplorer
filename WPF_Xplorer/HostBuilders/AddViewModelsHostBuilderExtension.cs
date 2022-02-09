@@ -13,6 +13,7 @@ namespace WPF_Xplorer.HostBuilders
             host.ConfigureServices(services =>
             {
                 services.AddSingleton(CreatePdfViewModel);
+                services.AddSingleton(CreateBookmarkViewModel);
             });
 
             return host;
@@ -21,7 +22,14 @@ namespace WPF_Xplorer.HostBuilders
         private static ApplicationMainWindowViewModel CreatePdfViewModel(IServiceProvider provider)
         {
             var docProc = provider.GetRequiredService<IPdfDocProc>();
-            return new ApplicationMainWindowViewModel(docProc);
+            var viewModel = provider.GetRequiredService<BookmarkUpdateViewModel>();
+
+            return new ApplicationMainWindowViewModel(docProc, viewModel);
+        }
+        private static BookmarkUpdateViewModel CreateBookmarkViewModel(IServiceProvider provider)
+        {
+            var bookService = provider.GetRequiredService<IBookmarksUpdateService>();
+            return new BookmarkUpdateViewModel(bookService);
         }
     }
 }
