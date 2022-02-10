@@ -96,11 +96,7 @@ namespace WPF_Xplorer.Services
                 gridListItemKey = service.GetGridListItemKey();
                 return gridListItemKey;
             }
-            set
-            {
-                //gridListItemKey = value;
-                OnPropertyChanged(nameof(GridListItemKey));
-            }
+          
         }
         private ObservableCollection<StringBuilder> gridListItemType;
 
@@ -111,11 +107,6 @@ namespace WPF_Xplorer.Services
                 gridListItemType = service.GetGridListItemType();
                 return gridListItemType;
             }
-            set
-            {
-            //   gridListItemType = value;
-                OnPropertyChanged(nameof(GridListItemType));
-            }
         }
         private ObservableCollection<StringBuilder> gridListItemValue;
         public ObservableCollection<StringBuilder> GridListItemValue
@@ -125,11 +116,7 @@ namespace WPF_Xplorer.Services
                 gridListItemValue = service.GetGridListItemValue();
                 return gridListItemValue;
             }
-            set
-            {
-              //  gridListItemValue = value;
-                OnPropertyChanged(nameof(GridListItemValue));
-            }
+            
         }
 
         public StringBuilder PrintBookmarks()

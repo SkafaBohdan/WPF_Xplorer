@@ -6,6 +6,8 @@
         void AddBookmark(string name, int page);
         void DeleteBookmark(string name);
         void SaveBookmarks(string path);
+        void AddChildBookmark(string findName, string name, int page);
+        void InitPageCount();
     }
 }
     

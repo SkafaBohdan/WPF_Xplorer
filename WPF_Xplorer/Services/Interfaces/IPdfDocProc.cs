@@ -12,9 +12,9 @@ namespace WPF_Xplorer.Services.Interfaces
     {
         string DocPath { get; set; }
         string Name { get; }
-        ObservableCollection<StringBuilder> GridListItemKey { get; set; }
-        ObservableCollection<StringBuilder> GridListItemType { get; set; }
-        ObservableCollection<StringBuilder> GridListItemValue { get; set; }
+        ObservableCollection<StringBuilder> GridListItemKey { get; }
+        ObservableCollection<StringBuilder> GridListItemType { get; }
+        ObservableCollection<StringBuilder> GridListItemValue { get; }
         void OpenFile(string path, ref TreeView treeView);
         void RelativeLeaveAdd(ref TreeViewItem treeViewItem);
         StringBuilder PrintBookmarks();

@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using WPF_Xplorer.Commands;
@@ -7,13 +6,12 @@ using WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand;
 using WPF_Xplorer.Models;
 using WPF_Xplorer.Services;
 using WPF_Xplorer.Services.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace WPF_Xplorer.ViewModels
 {
     public class ApplicationMainWindowViewModel : INotifyPropertyChanged
     {
-        private readonly BookmarkUpdateViewModel bookmarkUpdateViewModel;
+        public  BookmarkUpdateViewModel bookmarkUpdateViewModel;
         private PdfObj selectedItem;
         public IPdfDocProc PdfDocProc { get; set; }
     
@@ -21,8 +19,8 @@ namespace WPF_Xplorer.ViewModels
         public ApplicationMainWindowViewModel(IPdfDocProc pdfDocProc, BookmarkUpdateViewModel viewModel)
         {
             bookmarkUpdateViewModel = viewModel;
-            CreateCommands();
             PdfDocProc = pdfDocProc;
+            CreateCommands();
         }
         
         #region Command
@@ -74,5 +72,4 @@ namespace WPF_Xplorer.ViewModels
 
 
 //TODO: пофиксить отображение сайза(велью) для некоторых стримов
-//TODO: сделать кнопку, которая открывает новое окно, в которой будет список страниц и можно будет добавить закладку на какую-то из страниц
 

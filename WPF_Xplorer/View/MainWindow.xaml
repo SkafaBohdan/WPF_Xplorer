@@ -57,23 +57,26 @@
                 </Style>
             </ToolBar.Style>
             <Button Command="{Binding OpenFileCommand}" 
-                    CommandParameter="{Binding ElementName=tree_pdf}" >
+                    CommandParameter="{Binding ElementName=tree_pdf}"
+                    ToolTip="Open File">
                 <Image Source="/Static/Image/open2.ico"/>
             </Button>
             <Separator/>
-            <Button>
+            <Button ToolTip="Info">
                 <Image Source="/Static/Image/about.png" />
                 <Button.Command>
                     <command:HelpAppCommand/>
                 </Button.Command>
             </Button>
             <Separator/>
-            <Button Command="{Binding OpenBookmarkCommand}">
+            <Button Command="{Binding OpenBookmarkCommand}"
+                    ToolTip="Views bookmarks">
                 <Image Source="/Static/Image/bookmark--v1.png"/>
             </Button>
             <Separator/>
-            <Button Command="{Binding OpenBookmarkUpdateWindowCommand}">
-                <Image Source="/Static/Image/addAndDelete.png"/>
+            <Button Command="{Binding OpenBookmarkUpdateWindowCommand}"
+                    ToolTip="Add or delete bookmarks">
+                <Image Source="/Static/Image/addBookmarks.png"/>
             </Button>
         </ToolBar>
 
@@ -160,11 +163,11 @@
 
         <StatusBar Grid.Row="3" 
                    Grid.ColumnSpan="2"
-                   Margin="2"
+                   Margin="2 1 0 -1"
                    Background="AliceBlue">
-            <TextBlock Text="Pdf Xplorer / Version: 1.03 " FontSize="8" Margin="3 0 0 0 "/>
+            <TextBlock Text="Pdf Xplorer / Version: 1.03 " FontSize="9" Margin="3 -1 0 0"/>
             <Separator />
-            <TextBlock Text="Path pdf file: " FontSize="8"/>
+            <TextBlock Text="Path pdf file: " FontSize="9"  Margin="3 -1 0 0 "/>
             <TextBlock Text="{Binding PdfDocProc.DocPath}" FontSize="8"/>
         </StatusBar>
 

@@ -5,19 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Xplorer.View" xmlns:viewmodels="clr-namespace:WPF_Xplorer.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:BookmarkUpdateViewModel}"
         mc:Ignorable="d"
-        Title="BookmarkUpdateWindow" MinHeight="360" MinWidth="520"
-        Height="360" Width="520">
+        Title="BookmarkUpdateWindow" 
+        MinHeight="360" MinWidth="520"
+        Height="360" Width="520"
+        Name="BookmarksUpdateWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="90*"/>
+            <RowDefinition  Height="13*"/>
+            <RowDefinition Height="80*"/>
             <RowDefinition  Height="10*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Column="0" 
+        <ToolBar Grid.ColumnSpan="2" ToolBarTray.IsLocked="True" Margin="-5 -1 -13 0">
+            <Button Command="{Binding OpenBookmarkAddChildBookmarkWindowCommand}" Margin=" 5 -5"
+                    ToolTip="Add child bookmarks">
+                <Image Source="/Static/Image/childBookmark.png" />
+            </Button>
+        </ToolBar>
+
+        <Border Grid.Column="0"
+                Grid.Row="1"
                 BorderBrush="Black" 
                 BorderThickness="0 0 1 0" >
             <StackPanel Margin="2">
@@ -26,17 +37,16 @@
                 <Label Content="Name"/>
                 <TextBox x:Name="AddName" Text="{Binding NameAdd, UpdateSourceTrigger=PropertyChanged}" />
                 <Label Content="Page"/>
-                <TextBox x:Name="Page" Text="{Binding ElementName=SliderPage, 
+                <TextBox x:Name="Page" Text="{Binding ElementName=SliderPageChild, 
                     Path=Value,
-                    Mode=TwoWay, 
-                    UpdateSourceTrigger=PropertyChanged}"/>
-                <Slider x:Name="SliderPage" 
+                    Mode=TwoWay}"/>
+                <Slider x:Name="SliderPageChild" 
                         Margin="0 3 0 3"
                         IsSnapToTickEnabled="True"
                         TickFrequency="1"
                         Minimum="1"
                         Maximum="{Binding BookService.PageCount}"
-                        Value="{Binding NumberPage, UpdateSourceTrigger=PropertyChanged}"/>
+                        Value="{Binding NumberPage}"/>
                 <Button Height="23" 
                         Width="103"
                         Background="DarkSeaGreen"
@@ -45,15 +55,9 @@
             </StackPanel>
         </Border>
 
-        <Button Grid.Row="1" Grid.ColumnSpan="2"
-                Height="23"
-                Margin="125,5,125,2"
-                Background="DodgerBlue"
-                Content="Save File"
-                Command="{Binding SaveFileDialogCommand}"/>
-
-
-        <StackPanel Grid.Column="1" Margin="2">
+        <StackPanel Grid.Column="1"
+                    Grid.Row="1"
+                    Margin="2">
             <Label Content="Delete"/>
             <Separator />
             <Label Content="Name"/>
@@ -65,6 +69,25 @@
                     Content="Delete bookmark"
                     Command="{Binding OpenBookmarkUpdateDeleteBookmarkCommand}"/>
         </StackPanel>
+
+        <Button Grid.Row="2" Grid.ColumnSpan="2"
+                Height="23"
+                Margin="125,5,125,2"
+                Background="DodgerBlue"
+                Content="Save File"
+                Command="{Binding SaveFileDialogCommand}"/>
+
+        <Button Grid.Row="2"
+                Grid.Column="1"
+                Height="23"
+                Width="57"
+                Margin="0 4 4 0"
+                HorizontalAlignment="Right"
+                Background="IndianRed"
+                Content="Exit"
+                Command="{Binding ExitWindow}"
+                CommandParameter="{Binding ElementName=BookmarksUpdateWindow}" />
+
 
     </Grid>
 </Window>

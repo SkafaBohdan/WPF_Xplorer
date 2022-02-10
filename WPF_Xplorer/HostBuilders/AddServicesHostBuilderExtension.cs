@@ -28,7 +28,7 @@ namespace WPF_Xplorer.HostBuilders
                 services.AddScoped<IPdfTronService, PdfTronService>();
                 services.AddScoped<IPdfService, PdfService>();
                 services.AddScoped<IPdfDocProc, PdfDocProc>();
-                services.AddScoped<IBookmarksUpdateService, BookmarksUpdateService>();
+                services.AddSingleton<IBookmarksUpdateService, BookmarksUpdateService>();
 
             });
 

@@ -10,15 +10,19 @@ namespace WPF_Xplorer.ViewModels
     {
         public IBookmarksUpdateService BookService { get; set; }
 
+        private string nameAdd;
+        private int numberPage = 1;
+        private string nameDelete;
+        private string findName;
+        private string childName;
+        private int numberChildPage = 1;
+
+
         public BookmarkUpdateViewModel(IBookmarksUpdateService bookService)
         {
             BookService = bookService;
             CreateCommands();
         }
-
-        private string nameAdd;
-        private int numberPage = 1;
-        private string nameDelete;
 
 
         public string NameAdd
@@ -48,17 +52,57 @@ namespace WPF_Xplorer.ViewModels
                 OnPropertyChanged(nameof(NameDelete));
             }
         }
-
+        public string FindName
+        {
+            get => findName;
+            set
+            {
+                findName = value;
+                OnPropertyChanged(nameof(FindName));
+            }
+        }
+        public string ChildName
+        {
+            get => childName;
+            set
+            {
+                childName = value;
+                OnPropertyChanged(nameof(ChildName));
+            }
+        }
+        public int NumberChildPage
+        {
+            get => numberChildPage;
+            set
+            {
+                numberChildPage = value;
+                OnPropertyChanged(nameof(NumberChildPage));
+            }
+        }
+       
 
         public ICommand OpenBookmarkUpdateAddBookmarkCommand { get; set; }
         public ICommand OpenBookmarkUpdateDeleteBookmarkCommand { get; set; }
         public ICommand SaveFileDialogCommand { get; set; }
 
+     
+        public ICommand OpenBookmarkAddChildBookmarkWindowCommand { get; set; }
+        public ICommand AddChildBookmarkCommand { get; set; }
+        public ICommand ExitWindow { get; set; }
+
         private void CreateCommands()
         {
-            OpenBookmarkUpdateAddBookmarkCommand = new OpenBookmarkUpdateAddBookmarkCommand(this, BookService);
-            OpenBookmarkUpdateDeleteBookmarkCommand = new OpenBookmarkUpdateDeleteBookmarkCommand(this, BookService);
-            SaveFileDialogCommand = new SaveFileDialogCommand(this, BookService);
+            OpenBookmarkUpdateAddBookmarkCommand = new AddBookmarkCommand(this);
+            OpenBookmarkUpdateDeleteBookmarkCommand = new DeleteBookmarkCommand(this);
+            SaveFileDialogCommand = new SaveFileDialogCommand(this);
+
+            OpenBookmarkAddChildBookmarkWindowCommand = new OpenBookmarkAddChildBookmarkWindowCommand(this);
+            AddChildBookmarkCommand = new AddChildBookmarkCommand(this);
+            ExitWindow = new ExitWindow();
+        }
+        public void TESTOpenChildBookmarks()
+        {
+            OpenBookmarkAddChildBookmarkWindowCommand = new OpenBookmarkAddChildBookmarkWindowCommand(this);
         }
 
     }

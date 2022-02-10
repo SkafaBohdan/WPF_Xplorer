@@ -1,9 +1,6 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace WPF_Xplorer.ViewModels
+﻿namespace WPF_Xplorer.ViewModels
 {
-    public class BookmarksViewModel : INotifyPropertyChanged
+    public class BookmarksViewModel : NotifyPropertyChanged
     {
         private string textBookmarks { get; set; }
         public string TextBookmarks
@@ -14,13 +11,6 @@ namespace WPF_Xplorer.ViewModels
                 textBookmarks = value;
                 OnPropertyChanged(nameof(TextBookmarks));
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

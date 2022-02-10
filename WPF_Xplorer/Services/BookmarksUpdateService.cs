@@ -8,7 +8,7 @@ namespace WPF_Xplorer.Services
     public class BookmarksUpdateService : NotifyPropertyChanged, IBookmarksUpdateService
     {
         private readonly IPdfTronService pdfTronService;
-        private int pageCount;
+        private int pageCount = 0;
         PDFDoc doc;
 
 
@@ -21,14 +21,22 @@ namespace WPF_Xplorer.Services
         {
             get
             {
-                doc = pdfTronService.GetDoc();
-                if (doc == null) return 0;
-               
-                pageCount = doc.GetPageCount();
                 return pageCount;
+            }
+            set
+            {
+                pageCount = value;
+                OnPropertyChanged(nameof(PageCount));
             }
         }
 
+        public void InitPageCount()
+        {
+            doc = pdfTronService.GetDoc();
+            if (doc == null) return;
+
+            PageCount = doc.GetPageCount();
+        }
 
         public void AddBookmark(string name, int page)
         {
@@ -53,8 +61,24 @@ namespace WPF_Xplorer.Services
                 bookmark.Delete();
                 MessageBox.Show("Закладка удалена");
             }
-         
         }
+
+        public void AddChildBookmark(string findName, string name, int page)
+        {
+            Bookmark bookmark = doc.GetFirstBookmark().Find(findName);
+            if (bookmark == null)
+            {
+                MessageBox.Show("Закладка не найдена");
+            }
+            else
+            {
+                Bookmark childBookmark = bookmark.AddChild(name);
+                childBookmark.SetAction(pdftron.PDF.Action.CreateGoto(Destination.CreateFit(doc.GetPage(page))));
+
+                MessageBox.Show("Закладка добавлена");
+            }
+        }
+        
 
         public void SaveBookmarks(string path)
         {
