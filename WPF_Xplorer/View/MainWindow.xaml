@@ -49,7 +49,7 @@
         <TextBlock  Margin="180 6 5 5" Grid.ColumnSpan="2" Text="{Binding PdfDocProc.Name,  Mode=OneWay, 
             UpdateSourceTrigger=PropertyChanged}" />
 
-        <ToolBar Grid.Row="1" HorizontalAlignment="Left">
+        <ToolBar Grid.Row="1" Margin="0 0 -545 0" >
             <ToolBar.Style>
                 <Style TargetType="ToolBar">
                     <Setter Property="ToolBar.OverflowMode" Value="Never"/>

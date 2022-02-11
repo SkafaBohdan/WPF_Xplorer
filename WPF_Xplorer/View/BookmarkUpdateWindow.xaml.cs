@@ -19,5 +19,6 @@ namespace WPF_Xplorer.View
             this.Visibility = Visibility.Hidden;
             e.Cancel = true;
         }
+
     }
 }

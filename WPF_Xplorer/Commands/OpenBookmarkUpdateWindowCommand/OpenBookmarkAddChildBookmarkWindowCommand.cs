@@ -18,9 +18,10 @@ namespace WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand
 
         public override void Execute(object parameter)
         {
-            //TODO: Сделать кнопку сохранить(сохранить как уже есть). 
             //TODO: Сделать тесты 
-            //TODO: ++ивент, сделать делегат в котором буду вызывать фкункцию определениея пейдж каунта, а изначально он будет инициирован в прайвете. В гете будет только его получение.
+            //TODO: почитать статью за впф
+            //TODO: почитать за делегаты и ивенты
+
             bookmarkAddChildWindow.ShowDialog();
         }
     }

@@ -46,7 +46,7 @@ namespace WPF_Xplorer.Services
             Destination bookmarkDestination = Destination.CreateFit(doc.GetPage(page));
             bookmark.SetAction(pdftron.PDF.Action.CreateGoto(bookmarkDestination));
 
-            MessageBox.Show("Закладка добавлена");
+            MessageBox.Show("Закладка добавлена", "Ok");
         }
 
         public void DeleteBookmark(string name)
@@ -54,12 +54,12 @@ namespace WPF_Xplorer.Services
             Bookmark bookmark = doc.GetFirstBookmark().Find(name);
             if (bookmark == null)
             {
-                MessageBox.Show("Закладка не найдена");
+                MessageBox.Show("Закладка не найдена", "Ne Ok");
             }
             else
             {
                 bookmark.Delete();
-                MessageBox.Show("Закладка удалена");
+                MessageBox.Show("Закладка удалена", "Ok");
             }
         }
 
@@ -68,20 +68,21 @@ namespace WPF_Xplorer.Services
             Bookmark bookmark = doc.GetFirstBookmark().Find(findName);
             if (bookmark == null)
             {
-                MessageBox.Show("Закладка не найдена");
+                MessageBox.Show("Закладка не найдена", "Ne Ok");
             }
             else
             {
                 Bookmark childBookmark = bookmark.AddChild(name);
                 childBookmark.SetAction(pdftron.PDF.Action.CreateGoto(Destination.CreateFit(doc.GetPage(page))));
 
-                MessageBox.Show("Закладка добавлена");
+                MessageBox.Show("Закладка добавлена", "Ok");
             }
         }
         
 
-        public void SaveBookmarks(string path)
+        public void SaveBookmarks(string? path)
         {
+            if (path == null) path = doc.GetFileName();
             doc.Save(path, 0);
         }
     } 

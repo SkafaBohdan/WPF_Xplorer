@@ -43,11 +43,6 @@ namespace WPF_Xplorer.ViewModels
             OpenBookmarkUpdateWindowCommand = new OpenBookmarkUpdateWindowCommand(this, bookmarkUpdateViewModel);
         }
 
-        public void CreateBookmarks()
-        {
-            OpenBookmarkUpdateWindowCommand = new OpenBookmarkUpdateWindowCommand(this, bookmarkUpdateViewModel);
-        }
-
         #endregion
 
         public PdfObj SelectedObject

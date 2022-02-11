@@ -23,7 +23,6 @@ namespace WPF_Xplorer.Commands
                 ViewModel.ClosePdfFileCommand.Execute(parameter);
                 ViewModel.PdfDocProc.OpenFile(fileName, ref treeView);
                 ViewModel.bookmarkUpdateViewModel.BookService.InitPageCount();
-               // ViewModel.CreateBookmarks();
             }
         }
     }

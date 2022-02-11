@@ -4,11 +4,11 @@ using WPF_Xplorer.ViewModels;
 
 namespace WPF_Xplorer.Commands
 {
-    public class SaveFileDialogCommand : BaseCommand
+    public class SaveAsFileDialogCommand : BaseCommand
     {
         public BookmarkUpdateViewModel BookmarkUpdateViewModel { get; set; }
 
-        public SaveFileDialogCommand(BookmarkUpdateViewModel bookmarkViewModel)
+        public SaveAsFileDialogCommand(BookmarkUpdateViewModel bookmarkViewModel)
         {
             BookmarkUpdateViewModel = bookmarkViewModel;
         }

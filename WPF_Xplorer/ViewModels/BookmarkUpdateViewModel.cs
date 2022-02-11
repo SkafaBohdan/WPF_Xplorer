@@ -83,7 +83,8 @@ namespace WPF_Xplorer.ViewModels
 
         public ICommand OpenBookmarkUpdateAddBookmarkCommand { get; set; }
         public ICommand OpenBookmarkUpdateDeleteBookmarkCommand { get; set; }
-        public ICommand SaveFileDialogCommand { get; set; }
+        public ICommand SaveFileCommand { get; set; }
+        public ICommand SaveAsFileDialogCommand { get; set; }
 
      
         public ICommand OpenBookmarkAddChildBookmarkWindowCommand { get; set; }
@@ -94,15 +95,12 @@ namespace WPF_Xplorer.ViewModels
         {
             OpenBookmarkUpdateAddBookmarkCommand = new AddBookmarkCommand(this);
             OpenBookmarkUpdateDeleteBookmarkCommand = new DeleteBookmarkCommand(this);
-            SaveFileDialogCommand = new SaveFileDialogCommand(this);
+            SaveFileCommand = new SaveFileCommand(this);
+            SaveAsFileDialogCommand = new SaveAsFileDialogCommand(this);
 
             OpenBookmarkAddChildBookmarkWindowCommand = new OpenBookmarkAddChildBookmarkWindowCommand(this);
             AddChildBookmarkCommand = new AddChildBookmarkCommand(this);
             ExitWindow = new ExitWindow();
-        }
-        public void TESTOpenChildBookmarks()
-        {
-            OpenBookmarkAddChildBookmarkWindowCommand = new OpenBookmarkAddChildBookmarkWindowCommand(this);
         }
 
     }
