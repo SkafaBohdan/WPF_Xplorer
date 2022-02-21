@@ -1,6 +1,8 @@
-﻿using System.Windows.Input;
+﻿using pdftron.PDF;
+using System.Windows.Input;
 using WPF_Xplorer.Commands;
 using WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand;
+using WPF_Xplorer.Models;
 using WPF_Xplorer.Services.Interfaces;
 
 
@@ -13,10 +15,12 @@ namespace WPF_Xplorer.ViewModels
         private string nameAdd;
         private int numberPage = 1;
         private string nameDelete;
-        private string findName;
+        private int pageDelete;
+        private string parentNameBookmark;
         private string childName;
         private int numberChildPage = 1;
-
+        private Bookmark selectedBookmark;
+      
 
         public BookmarkUpdateViewModel(IBookmarksUpdateService bookService)
         {
@@ -52,13 +56,23 @@ namespace WPF_Xplorer.ViewModels
                 OnPropertyChanged(nameof(NameDelete));
             }
         }
-        public string FindName
+        public int PageDelete
         {
-            get => findName;
+            get => pageDelete;
             set
             {
-                findName = value;
-                OnPropertyChanged(nameof(FindName));
+                pageDelete = value;
+                OnPropertyChanged(nameof(PageDelete));
+            }
+        }
+        
+        public string ParentNameBookmark
+        {
+            get => parentNameBookmark;
+            set
+            {
+                parentNameBookmark = value;
+                OnPropertyChanged(nameof(ParentNameBookmark));
             }
         }
         public string ChildName
@@ -79,14 +93,26 @@ namespace WPF_Xplorer.ViewModels
                 OnPropertyChanged(nameof(NumberChildPage));
             }
         }
+
+        public Bookmark SelectedBookmark
+        {
+            get => selectedBookmark;
+            set
+            {
+                selectedBookmark = value;
+                OnPropertyChanged(nameof(SelectedBookmark));
+            }
+        }
        
 
         public ICommand OpenBookmarkUpdateAddBookmarkCommand { get; set; }
         public ICommand OpenBookmarkUpdateDeleteBookmarkCommand { get; set; }
         public ICommand SaveFileCommand { get; set; }
         public ICommand SaveAsFileDialogCommand { get; set; }
+        public ICommand SelectedItemBookmark { get; set; }
+        public ICommand ExpandBookmarkCommand { get; set; }
 
-     
+
         public ICommand OpenBookmarkAddChildBookmarkWindowCommand { get; set; }
         public ICommand AddChildBookmarkCommand { get; set; }
         public ICommand ExitWindow { get; set; }
@@ -97,6 +123,8 @@ namespace WPF_Xplorer.ViewModels
             OpenBookmarkUpdateDeleteBookmarkCommand = new DeleteBookmarkCommand(this);
             SaveFileCommand = new SaveFileCommand(this);
             SaveAsFileDialogCommand = new SaveAsFileDialogCommand(this);
+            SelectedItemBookmark = new SelectedItemBookmarkCommand(this);
+            ExpandBookmarkCommand = new ExpandBookmarkCommand(this);
 
             OpenBookmarkAddChildBookmarkWindowCommand = new OpenBookmarkAddChildBookmarkWindowCommand(this);
             AddChildBookmarkCommand = new AddChildBookmarkCommand(this);

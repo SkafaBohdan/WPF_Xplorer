@@ -1,10 +1,5 @@
 ﻿using pdftron.PDF;
 using pdftron.SDF;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WPF_Xplorer.Models;
 
 namespace WPF_Xplorer.Services
@@ -14,12 +9,26 @@ namespace WPF_Xplorer.Services
         public Obj Obj { get; set; }
         public PdfObj PdfObj { get; set; }
         public PDFDocInfo InfoDoc { get; set; }
-    
-        public BinderObj (PdfObj pdfObject, Obj obj)
+
+        public BinderObj(PdfObj pdfObject, Obj obj)
         {
             Obj = obj;
             PdfObj = pdfObject;
         }
-    
+
+
+        //TODO: TEST ZONE Binding Bookmarks
+
+        public Bookmark BookmarkObj { get; set; }
+        public PdfBookmark PdfBookmarkObj { get; set; }
+
+        public BinderObj(PdfBookmark pdfBookmarkObj, Bookmark bookmarkObj)
+        {
+            BookmarkObj = bookmarkObj;
+            PdfBookmarkObj = pdfBookmarkObj;
+        }
+
+        //
+
     }
 }

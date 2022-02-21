@@ -16,6 +16,11 @@ namespace WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand
             bookmarkAddChildWindow = new BookmarkAddChildBookmarkWindow(this.bookmarkUpdateViewModel);
         }
 
+        public override bool CanExecute(object parameter)
+        {
+            return !string.IsNullOrEmpty(bookmarkUpdateViewModel.ParentNameBookmark);
+        }
+
         public override void Execute(object parameter)
         {
             //TODO: Сделать тесты 

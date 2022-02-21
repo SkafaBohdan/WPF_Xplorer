@@ -20,7 +20,8 @@ namespace WPF_Xplorer.Models
             Array,
             Name,
             Info,
-            Null
+            Null,
+            Bookmark
         }
 
         public string Key

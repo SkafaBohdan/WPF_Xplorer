@@ -19,6 +19,8 @@ namespace WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand
         public override void Execute(object parameter)
         {
             bookmarkUpdateViewModel.BookService.AddBookmark(bookmarkUpdateViewModel.NameAdd, bookmarkUpdateViewModel.NumberPage);
+            bookmarkUpdateViewModel.NameAdd = null;
+            bookmarkUpdateViewModel.NumberPage = 0;
         }
     }
 }

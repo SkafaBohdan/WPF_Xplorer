@@ -59,7 +59,7 @@ namespace WPF_Xplorer.Tests.CommandsTests
 
             expandCommand.Execute(It.IsAny<object>());
 
-            pdfDocProc.Verify(service => service.RelativeLeaveAdd(ref treeViewItem), Times.Once);
+            pdfDocProc.Verify(service => service.RelativeLeaveAdd(treeViewItem), Times.Once);
         }
 
     }

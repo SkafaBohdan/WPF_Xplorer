@@ -48,7 +48,7 @@ namespace WPF_Xplorer.Tests.ServicesTests
         {
             pdfService.Setup(service => service.GetDocumentNode(It.IsAny<string>(), It.IsAny<TreeView>(), out boolTest));
 
-            pdfDocProc.OpenFile(path, ref treeView);
+            pdfDocProc.OpenFile(path, treeView);
 
             pdfService.Verify(service => service.GetDocumentNode(path, treeView, out boolTest), Times.Once);
             Assert.AreEqual(path, pdfDocProc.DocPath);
@@ -59,7 +59,7 @@ namespace WPF_Xplorer.Tests.ServicesTests
         {
             treeViewItem.Tag = new BinderObj(new PdfObj() { Type = PdfObj.PdfType.Document }, It.IsAny<Obj>());
 
-            pdfDocProc.RelativeLeaveAdd(ref treeViewItem);
+            pdfDocProc.RelativeLeaveAdd(treeViewItem);
 
             pdfService.Verify(service => service.AddCatalogNode(treeViewItem), Times.Once);
             pdfService.Verify(service => service.AddInfoNode(treeViewItem), Times.Once);
@@ -71,7 +71,7 @@ namespace WPF_Xplorer.Tests.ServicesTests
         {
             treeViewItem.Tag = new BinderObj(new PdfObj() { Type = PdfObj.PdfType.Info }, It.IsAny<Obj>());
 
-            pdfDocProc.RelativeLeaveAdd(ref treeViewItem);
+            pdfDocProc.RelativeLeaveAdd(treeViewItem);
 
             pdfService.Verify(service => service.AddInfoStrings(treeViewItem), Times.Once);
         }
@@ -85,7 +85,7 @@ namespace WPF_Xplorer.Tests.ServicesTests
         {
             treeViewItem.Tag = new BinderObj(new PdfObj() { Type = pdfType }, It.IsAny<Obj>());
 
-            pdfDocProc.RelativeLeaveAdd(ref treeViewItem);
+            pdfDocProc.RelativeLeaveAdd(treeViewItem);
 
             pdfService.Verify(service => service.AddKidNodes(treeViewItem), Times.Once);
         }

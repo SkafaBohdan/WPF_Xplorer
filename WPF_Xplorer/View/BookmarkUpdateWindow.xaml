@@ -4,32 +4,138 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Xplorer.View" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:command="clr-namespace:WPF_Xplorer.Commands" 
         xmlns:viewmodels="clr-namespace:WPF_Xplorer.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:BookmarkUpdateViewModel}"
         mc:Ignorable="d"
         Title="BookmarkUpdateWindow" 
-        MinHeight="360" MinWidth="520"
-        Height="360" Width="520"
+        MinHeight="460" MinWidth="720"
+        Height="460" Width="720"
         Name="BookmarksUpdateWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition  Height="13*"/>
+            <RowDefinition  Height="44"/>
             <RowDefinition Height="80*"/>
             <RowDefinition  Height="10*"/>
         </Grid.RowDefinitions>
 
-        <ToolBar Grid.ColumnSpan="2" ToolBarTray.IsLocked="True" Margin="-5 -1 -13 0">
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Content="Bookmarks"
+               BorderBrush="Black"
+               BorderThickness="0 0 1 1"
+               Padding="10"
+               FontSize="14"
+               FontWeight="DemiBold"
+               FontStyle="Italic" />
+
+        <ToolBar Grid.Column="1"
+                 Grid.ColumnSpan="2" 
+                 ToolBarTray.IsLocked="True" 
+                 Margin="-3 -1 -13 0">
             <Button Command="{Binding OpenBookmarkAddChildBookmarkWindowCommand}" 
-                    Margin=" 5 -5"
+                    Margin="5 -5"
                     ToolTip="Add child bookmarks">
                 <Image Source="/Static/Image/childBookmark.png" />
             </Button>
         </ToolBar>
 
         <Border Grid.Column="0"
+                Grid.Row="1"
+                Grid.RowSpan="2">
+
+            <TreeView VirtualizingStackPanel.IsVirtualizing="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling" 
+                      Name="tree_bookmarks"
+                      BorderBrush="Black"
+                      BorderThickness="0 0 1 0" >
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectedItemChanged" >
+                        <i:InvokeCommandAction
+                        Command="{Binding SelectedItemBookmark}"
+                        CommandParameter="{Binding SelectedItem, 
+                            ElementName=tree_bookmarks}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+               
+                <TreeView.Resources>
+                    <Style TargetType="{x:Type TreeViewItem}" >
+                        <Setter Property="command:Behaviour.ExpandingBehaviour"
+                                    Value="{Binding ExpandBookmarkCommand, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition MinWidth="19" Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <ToggleButton Grid.Column="0"
+                                                x:Name="Expander"
+                                                IsChecked="{Binding Path=IsExpanded,
+                                                RelativeSource={RelativeSource TemplatedParent}}" 
+                                                ClickMode="Press"
+                                                Width="16" Height="16">
+                                        </ToggleButton>
+                                        <ContentPresenter Grid.Row="0"
+                                                              Grid.Column="1"
+                                                              x:Name="Item_Header"
+                                                              ContentSource="Header"
+                                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                        <ItemsPresenter x:Name="ItemsHost"
+                                                Grid.Row="1"
+                                                Grid.Column="1"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsExpanded" Value="false">
+                                            <Setter TargetName="ItemsHost"
+                                                        Property="Visibility"
+                                                        Value="Collapsed"/>
+                                        </Trigger>
+                                        <Trigger Property="HasItems" Value="false">
+                                            <Setter TargetName="Expander"
+                                                        Property="Visibility" 
+                                                        Value="Hidden"/>
+                                        </Trigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="HasHeader" Value="false"/>
+                                                <Condition Property="Width" Value="Auto"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter TargetName="Item_Header" Property="MinWidth" Value="75"/>
+                                        </MultiTrigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="HasHeader" Value="false"/>
+                                                <Condition Property="Height" Value="Auto"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter TargetName="Item_Header" Property="MinHeight" Value="18"/>
+                                        </MultiTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                </TreeView.Resources>
+            
+            </TreeView>
+        </Border>
+        
+        
+        <Border Grid.Column="1"
                 Grid.Row="1"
                 BorderBrush="Black" 
                 BorderThickness="0 0 1 0" >
@@ -41,7 +147,8 @@
                 <Label Content="Page"/>
                 <TextBox x:Name="Page" Text="{Binding ElementName=SliderPageChild, 
                     Path=Value,
-                    Mode=TwoWay}"/>
+                    Mode=TwoWay, 
+                    UpdateSourceTrigger=PropertyChanged}"/>
                 <Slider x:Name="SliderPageChild" 
                         Margin="0 3 0 3"
                         IsSnapToTickEnabled="True"
@@ -57,13 +164,19 @@
             </StackPanel>
         </Border>
 
-        <StackPanel Grid.Column="1"
+        <StackPanel Grid.Column="2"
                     Grid.Row="1"
                     Margin="2">
             <Label Content="Delete"/>
             <Separator />
             <Label Content="Name"/>
-            <TextBox x:Name="DeleteName" Text="{Binding NameDelete, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="DeleteName" 
+                     IsEnabled="False"
+                     Text="{Binding NameDelete, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Page"/>
+            <TextBox x:Name="DeletePage"
+                     IsEnabled="False"
+                     Text="{Binding PageDelete, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Height="23"
                     Width="103"
                     Margin="7"
@@ -73,21 +186,23 @@
         </StackPanel>
 
         <Button Grid.Row="2"
+                Grid.Column="1"
                 Height="23"
-                Margin="114,6,28,4"
+                Margin="28,6,28,4"
                 Background="DodgerBlue"
                 Content="Save"
                 Command="{Binding SaveFileCommand}" />
 
         <Button Grid.Row="2"
+                Grid.Column="2"
                 Height="23"
-                Margin="25,6,117,4"
+                Margin="25,6,87,4"
                 Background="DodgerBlue"
                 Content="Save as.."
-                Command="{Binding SaveAsFileDialogCommand}" Grid.Column="1" />
+                Command="{Binding SaveAsFileDialogCommand}" />
 
         <Button Grid.Row="2"
-                Grid.Column="1"
+                Grid.Column="2"
                 Height="23"
                 Width="57"
                 Margin="0 4 4 0"

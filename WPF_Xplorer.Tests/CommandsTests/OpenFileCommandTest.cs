@@ -54,7 +54,7 @@ namespace WPF_Xplorer.Tests.CommandsTests
 
             openCommand.Execute(treeView);
 
-            pdfDocProc.Verify(service => service.OpenFile(It.IsAny<string>(), ref treeView), Times.Once);
+            pdfDocProc.Verify(service => service.OpenFile(It.IsAny<string>(), treeView), Times.Once);
         }
 
 
@@ -66,7 +66,7 @@ namespace WPF_Xplorer.Tests.CommandsTests
 
             openCommand.Execute(treeView);
 
-            pdfDocProc.Verify(service => service.OpenFile(It.IsAny<string>(), ref treeView), Times.Never);
+            pdfDocProc.Verify(service => service.OpenFile(It.IsAny<string>(), treeView), Times.Never);
         }
         
     }

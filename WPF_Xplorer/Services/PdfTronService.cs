@@ -1,6 +1,7 @@
 ﻿using pdftron.PDF;
 using pdftron.SDF;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Controls;
 using WPF_Xplorer.Models;
@@ -98,5 +99,62 @@ namespace WPF_Xplorer.Services
         {
             return doc; 
         }
+
+
+
+        public IEnumerable<TreeViewItem> GetBookmarksTree()
+        {
+            var doc = GetDoc();
+            Bookmark bookItem = doc.GetFirstBookmark();
+
+            var bookmarks = GetBookmarkTree(bookItem);
+
+            return bookmarks;
+        }
+
+
+        private IEnumerable<TreeViewItem> GetBookmarkTree(Bookmark bookItem)
+        {
+            var treeViewItems = new List<TreeViewItem>();
+
+            for (; bookItem.IsValid(); bookItem = bookItem.GetNext())
+            {
+                var pdfBookmark = CreatePdfBookmarkObj(bookItem);
+                var treeViewItemBookmark = CreateBookmarkTreeViewItem(pdfBookmark, bookItem);
+
+                if (bookItem.HasChildren())
+                {
+                    var children = GetBookmarkTree(bookItem.GetFirstChild());
+                    foreach (var item in children)
+                    {
+                        treeViewItemBookmark.Items.Add(item);
+                    }
+                }
+
+                treeViewItems.Add(treeViewItemBookmark);
+            }
+
+            return treeViewItems;
+        }
+
+        
+        private PdfBookmark CreatePdfBookmarkObj(Bookmark bookItem)
+        {
+            return new PdfBookmark()
+            {
+                Title = bookItem.GetTitle(),
+                Page = bookItem.GetAction().GetDest().GetPage().GetIndex()
+            };
+        }
+
+        private TreeViewItem CreateBookmarkTreeViewItem(PdfBookmark pdfBookmark, Bookmark bookmark)
+        {
+            return new TreeViewItem()
+            {
+                Header = pdfBookmark.DisplayTitleAndPage,
+                Tag = new BinderObj(pdfBookmark, bookmark)
+            };
+        }
+
     }
 }

@@ -51,7 +51,7 @@ namespace WPF_Xplorer.Services
             }
         }
 
-        public void OpenFile(string path, ref TreeView treeView)
+        public void OpenFile(string path, TreeView treeView)
         {
             service.GetDocumentNode(path, treeView, out bool boolPath);
             if (boolPath)
@@ -62,7 +62,8 @@ namespace WPF_Xplorer.Services
                 DocPath = null;
         }
 
-        public void RelativeLeaveAdd(ref TreeViewItem treeViewItem)
+
+        public void RelativeLeaveAdd(TreeViewItem treeViewItem)
         {
             treeViewItem.Items.Clear();
 

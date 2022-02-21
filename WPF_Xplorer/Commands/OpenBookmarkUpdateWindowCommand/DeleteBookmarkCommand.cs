@@ -14,10 +14,14 @@ namespace WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand
         {
             return !string.IsNullOrEmpty(BookmarkUpdateViewModel.NameDelete);
         }
-         
+
         public override void Execute(object parameter)
         {
-            BookmarkUpdateViewModel.BookService.DeleteBookmark(BookmarkUpdateViewModel.NameDelete);
+            BookmarkUpdateViewModel.BookService.DeleteBookmark(BookmarkUpdateViewModel.SelectedBookmark);
+            BookmarkUpdateViewModel.NameDelete = null;
+            BookmarkUpdateViewModel.PageDelete = 0;
+            BookmarkUpdateViewModel.ParentNameBookmark = null;
+           
         }
     }
 }

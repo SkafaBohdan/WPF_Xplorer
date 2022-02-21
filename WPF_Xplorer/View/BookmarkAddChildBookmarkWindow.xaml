@@ -25,13 +25,14 @@
                 <Label Content="Add child bookmark"/>
                 <Separator />
                 <Label Content="Name the MAIN bookmark"/>
-                <TextBox x:Name="FindName" Text="{Binding FindName, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox x:Name="ParentName" Text="{Binding ParentNameBookmark, UpdateSourceTrigger=PropertyChanged}" />
                 <Label Content="Name the NEW bookmark"/>
                 <TextBox x:Name="ChildName" Text="{Binding ChildName, UpdateSourceTrigger=PropertyChanged}" />
                 <Label Content="Page the new bookmark"/>
                 <TextBox x:Name="ChildPage" Text="{Binding ElementName=SliderPage, 
                     Path=Value,
-                    Mode=TwoWay }"/>
+                    Mode=TwoWay,
+                    UpdateSourceTrigger=PropertyChanged}"/>
                 <Slider x:Name="SliderPage" 
                         Margin="0 3 0 3"
                         IsSnapToTickEnabled="True"

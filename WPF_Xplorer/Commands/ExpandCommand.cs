@@ -1,5 +1,4 @@
-﻿using System.Text;
-using WPF_Xplorer.Converters;
+﻿using WPF_Xplorer.Converters;
 using WPF_Xplorer.Interfaces;
 using WPF_Xplorer.ViewModels;
 
@@ -26,7 +25,7 @@ namespace WPF_Xplorer.Commands
                 ViewModel.PdfDocProc.GridListItemKey.Clear();
                 ViewModel.PdfDocProc.GridListItemType.Clear();
                 ViewModel.PdfDocProc.GridListItemValue.Clear();
-                ViewModel.PdfDocProc.RelativeLeaveAdd(ref treeViewItem);
+                ViewModel.PdfDocProc.RelativeLeaveAdd(treeViewItem);
             }
         }
     }

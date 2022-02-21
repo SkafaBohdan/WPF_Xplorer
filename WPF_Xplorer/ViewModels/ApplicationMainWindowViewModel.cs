@@ -1,15 +1,14 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using WPF_Xplorer.Commands;
 using WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand;
 using WPF_Xplorer.Models;
 using WPF_Xplorer.Services;
 using WPF_Xplorer.Services.Interfaces;
 
+
 namespace WPF_Xplorer.ViewModels
 {
-    public class ApplicationMainWindowViewModel : INotifyPropertyChanged
+    public class ApplicationMainWindowViewModel : NotifyPropertyChanged
     {
         public  BookmarkUpdateViewModel bookmarkUpdateViewModel;
         private PdfObj selectedItem;
@@ -53,13 +52,6 @@ namespace WPF_Xplorer.ViewModels
                 selectedItem = value;
                 OnPropertyChanged(nameof(SelectedObject));
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
     }

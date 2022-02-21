@@ -15,8 +15,8 @@ namespace WPF_Xplorer.Services.Interfaces
         ObservableCollection<StringBuilder> GridListItemKey { get; }
         ObservableCollection<StringBuilder> GridListItemType { get; }
         ObservableCollection<StringBuilder> GridListItemValue { get; }
-        void OpenFile(string path, ref TreeView treeView);
-        void RelativeLeaveAdd(ref TreeViewItem treeViewItem);
+        void OpenFile(string path, TreeView treeView);
+        void RelativeLeaveAdd(TreeViewItem treeViewItem);
         StringBuilder PrintBookmarks();
     }
 }

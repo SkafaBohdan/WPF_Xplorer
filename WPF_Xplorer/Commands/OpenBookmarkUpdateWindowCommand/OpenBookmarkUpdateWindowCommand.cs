@@ -14,7 +14,6 @@ namespace WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand
             AppViewModel = appViewModel;
             this.bookmarkUpdateViewModel = bookmarkUpdateViewModel;
             bookmarkUpdateWindow = new BookmarkUpdateWindow(this.bookmarkUpdateViewModel);
-
         }
 
         public override bool CanExecute(object parameter)
@@ -24,6 +23,8 @@ namespace WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand
 
         public override void Execute(object parameter)
         {
+            var treeView = bookmarkUpdateWindow.tree_bookmarks;
+            bookmarkUpdateViewModel.BookService.GetBookmarksTreeViewItem(treeView);
             bookmarkUpdateWindow.ShowDialog();
         }
     }

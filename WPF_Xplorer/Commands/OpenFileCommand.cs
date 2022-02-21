@@ -21,7 +21,7 @@ namespace WPF_Xplorer.Commands
             if(parameter is TreeView treeView)
             {
                 ViewModel.ClosePdfFileCommand.Execute(parameter);
-                ViewModel.PdfDocProc.OpenFile(fileName, ref treeView);
+                ViewModel.PdfDocProc.OpenFile(fileName, treeView);
                 ViewModel.bookmarkUpdateViewModel.BookService.InitPageCount();
             }
         }
