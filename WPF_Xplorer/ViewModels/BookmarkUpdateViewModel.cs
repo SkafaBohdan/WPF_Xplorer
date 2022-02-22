@@ -2,15 +2,16 @@
 using System.Windows.Input;
 using WPF_Xplorer.Commands;
 using WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand;
-using WPF_Xplorer.Models;
 using WPF_Xplorer.Services.Interfaces;
-
+using WPF_Xplorer.View;
 
 namespace WPF_Xplorer.ViewModels
 {
     public class BookmarkUpdateViewModel : NotifyPropertyChanged
     {
         public IBookmarksUpdateService BookService { get; set; }
+        static BookmarkUpdateWindow bookmarkUpdateWindow { get; set; }
+
 
         private string nameAdd;
         private int numberPage = 1;
@@ -20,14 +21,23 @@ namespace WPF_Xplorer.ViewModels
         private string childName;
         private int numberChildPage = 1;
         private Bookmark selectedBookmark;
-      
-
+        
         public BookmarkUpdateViewModel(IBookmarksUpdateService bookService)
         {
             BookService = bookService;
             CreateCommands();
+            BookmarkUpdateWindow = new BookmarkUpdateWindow(this);
         }
 
+        public BookmarkUpdateWindow BookmarkUpdateWindow
+        {
+            get => bookmarkUpdateWindow;
+            set
+            {
+                bookmarkUpdateWindow = value;
+                OnPropertyChanged(nameof(BookmarkUpdateWindow));
+            }
+        }
 
         public string NameAdd
         {

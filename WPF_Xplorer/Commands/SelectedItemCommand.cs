@@ -6,18 +6,18 @@ namespace WPF_Xplorer.Commands
 {
     public class SelectedItemCommand : BaseCommand
     {
-        public ApplicationMainWindowViewModel ViewModel { get; set; }
+        ApplicationMainWindowViewModel viewModel { get; set; }
    
         public SelectedItemCommand(ApplicationMainWindowViewModel viewModel)
         {
-            ViewModel = viewModel;
+            this.viewModel = viewModel;
         }
 
         public override void Execute (object parameter)
         {
             if (parameter is TreeViewItem {Tag: BinderObj binder})
             {
-                ViewModel.SelectedObject = binder.PdfObj;
+                viewModel.SelectedObject = binder.PdfObj;
             }
         }
     }

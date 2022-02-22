@@ -4,7 +4,7 @@ namespace WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand
 {
     public class AddBookmarkCommand : BaseCommand
     {
-        public BookmarkUpdateViewModel bookmarkUpdateViewModel { get; set; }
+        BookmarkUpdateViewModel bookmarkUpdateViewModel { get; set; }
 
         public AddBookmarkCommand(BookmarkUpdateViewModel bookmarkViewModel)
         {
@@ -21,6 +21,9 @@ namespace WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand
             bookmarkUpdateViewModel.BookService.AddBookmark(bookmarkUpdateViewModel.NameAdd, bookmarkUpdateViewModel.NumberPage);
             bookmarkUpdateViewModel.NameAdd = null;
             bookmarkUpdateViewModel.NumberPage = 0;
+
+            var treeView = bookmarkUpdateViewModel.BookmarkUpdateWindow.tree_bookmarks;
+            bookmarkUpdateViewModel.BookService.GetBookmarksTreeViewItem(treeView);
         }
     }
 }

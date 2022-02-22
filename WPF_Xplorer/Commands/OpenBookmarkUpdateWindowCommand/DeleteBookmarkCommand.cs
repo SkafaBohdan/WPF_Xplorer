@@ -1,4 +1,6 @@
-﻿using WPF_Xplorer.ViewModels;
+﻿using System.Windows.Controls;
+using WPF_Xplorer.View;
+using WPF_Xplorer.ViewModels;
 
 namespace WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand
 {
@@ -22,6 +24,8 @@ namespace WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand
             BookmarkUpdateViewModel.PageDelete = 0;
             BookmarkUpdateViewModel.ParentNameBookmark = null;
            
+            var treeView = BookmarkUpdateViewModel.BookmarkUpdateWindow.tree_bookmarks;
+            BookmarkUpdateViewModel.BookService.GetBookmarksTreeViewItem(treeView);
         }
     }
 }

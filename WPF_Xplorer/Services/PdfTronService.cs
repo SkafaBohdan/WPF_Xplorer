@@ -115,7 +115,7 @@ namespace WPF_Xplorer.Services
 
         private IEnumerable<TreeViewItem> GetBookmarkTree(Bookmark bookItem)
         {
-            var treeViewItems = new List<TreeViewItem>();
+            var treeViewItems = new ObservableCollection<TreeViewItem>();
 
             for (; bookItem.IsValid(); bookItem = bookItem.GetNext())
             {

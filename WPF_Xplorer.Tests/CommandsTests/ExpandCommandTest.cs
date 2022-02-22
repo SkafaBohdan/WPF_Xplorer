@@ -33,8 +33,7 @@ namespace WPF_Xplorer.Tests.CommandsTests
             bookmarkUpdateViewModel = new BookmarkUpdateViewModel(bookUpdateService.Object);
             viewModel = new ApplicationMainWindowViewModel(pdfDocProc.Object, bookmarkUpdateViewModel);
             expandCommand = new ExpandCommand(viewModel);
-            expandCommand.ArgsConverter = argsConverter.Object;
-
+            expandCommand.argsConverter = argsConverter.Object;
             treeViewItem = new TreeViewItem();
         }
 

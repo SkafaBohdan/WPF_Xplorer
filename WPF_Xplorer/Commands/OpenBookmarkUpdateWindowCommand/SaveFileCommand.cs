@@ -6,7 +6,7 @@ namespace WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand
 {
     public class SaveFileCommand : BaseCommand
     {
-        private BookmarkUpdateViewModel bookmarkUpdateViewModel { get; set; }
+        BookmarkUpdateViewModel bookmarkUpdateViewModel { get; set; }
 
         public SaveFileCommand(BookmarkUpdateViewModel bookmarkViewModel)
         {

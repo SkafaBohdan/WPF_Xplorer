@@ -6,11 +6,11 @@ namespace WPF_Xplorer.Commands
 {
     public class SaveAsFileDialogCommand : BaseCommand
     {
-        public BookmarkUpdateViewModel BookmarkUpdateViewModel { get; set; }
+        BookmarkUpdateViewModel bookmarkUpdateViewModel { get; set; }
 
         public SaveAsFileDialogCommand(BookmarkUpdateViewModel bookmarkViewModel)
         {
-            BookmarkUpdateViewModel = bookmarkViewModel;
+            bookmarkUpdateViewModel = bookmarkViewModel;
         }
 
         public override void Execute(object parameter)
@@ -19,7 +19,7 @@ namespace WPF_Xplorer.Commands
             saveFileDialog.Filter = "Pdf file  (*.pdf) | *.pdf";
             if (saveFileDialog.ShowDialog() == true)
             {
-                BookmarkUpdateViewModel.BookService.SaveBookmarks(saveFileDialog.FileName);
+                bookmarkUpdateViewModel.BookService.SaveBookmarks(saveFileDialog.FileName);
                 MessageBox.Show("Файл сохранен");
             }
         }

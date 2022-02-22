@@ -25,7 +25,8 @@
                 <Label Content="Add child bookmark"/>
                 <Separator />
                 <Label Content="Name the MAIN bookmark"/>
-                <TextBox x:Name="ParentName" Text="{Binding ParentNameBookmark, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox x:Name="ParentName" Text="{Binding ParentNameBookmark, UpdateSourceTrigger=PropertyChanged}" 
+                         IsEnabled="False"/>
                 <Label Content="Name the NEW bookmark"/>
                 <TextBox x:Name="ChildName" Text="{Binding ChildName, UpdateSourceTrigger=PropertyChanged}" />
                 <Label Content="Page the new bookmark"/>

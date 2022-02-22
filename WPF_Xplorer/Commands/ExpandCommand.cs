@@ -6,26 +6,26 @@ namespace WPF_Xplorer.Commands
 {
     public class ExpandCommand : BaseCommand
     {
-        public ApplicationMainWindowViewModel ViewModel { get; set; }
-        public IArgsConverter ArgsConverter { get; set; }
+        ApplicationMainWindowViewModel viewModel { get; set; }
+        public IArgsConverter argsConverter { get; set; }
 
         public ExpandCommand(ApplicationMainWindowViewModel pdfViewModel)
         {
-            ViewModel = pdfViewModel;
-            ArgsConverter = new ArgsConverter();
+            viewModel = pdfViewModel;
+            argsConverter = new ArgsConverter();
         }
 
 
         public override void Execute(object parameter)
         {
-            var treeViewItem = ArgsConverter.ConverterTreeViewItem(parameter);
+            var treeViewItem = argsConverter.ConverterTreeViewItem(parameter);
 
             if (treeViewItem != null)
             {
-                ViewModel.PdfDocProc.GridListItemKey.Clear();
-                ViewModel.PdfDocProc.GridListItemType.Clear();
-                ViewModel.PdfDocProc.GridListItemValue.Clear();
-                ViewModel.PdfDocProc.RelativeLeaveAdd(treeViewItem);
+                viewModel.PdfDocProc.GridListItemKey.Clear();
+                viewModel.PdfDocProc.GridListItemType.Clear();
+                viewModel.PdfDocProc.GridListItemValue.Clear();
+                viewModel.PdfDocProc.RelativeLeaveAdd(treeViewItem);
             }
         }
     }

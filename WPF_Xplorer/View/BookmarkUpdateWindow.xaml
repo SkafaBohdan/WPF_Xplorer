@@ -54,7 +54,7 @@
                       Name="tree_bookmarks"
                       BorderBrush="Black"
                       BorderThickness="0 0 1 0" >
-
+                
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectedItemChanged" >
                         <i:InvokeCommandAction
@@ -64,8 +64,23 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
 
-               
+
                 <TreeView.Resources>
+                    <Style x:Key="ExpandCollapse"
+                               TargetType="{x:Type ToggleButton}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                    <Image Width="15" x:Name="image" Source="/Static/Image/plus.png" />
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="true">
+                                            <Setter TargetName="image" Property="Source" Value="/Static/Image/minus.png" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
                     <Style TargetType="{x:Type TreeViewItem}" >
                         <Setter Property="command:Behaviour.ExpandingBehaviour"
                                     Value="{Binding ExpandBookmarkCommand, UpdateSourceTrigger=PropertyChanged}"/>
@@ -86,6 +101,7 @@
                                                 x:Name="Expander"
                                                 IsChecked="{Binding Path=IsExpanded,
                                                 RelativeSource={RelativeSource TemplatedParent}}" 
+                                                Style="{StaticResource ExpandCollapse}"
                                                 ClickMode="Press"
                                                 Width="16" Height="16">
                                         </ToggleButton>
@@ -99,6 +115,14 @@
                                                 Grid.Column="1"/>
                                     </Grid>
                                     <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="ItemsControl.FontSize" 
+                                                    Value="14"  
+                                                    TargetName="Item_Header"/>
+                                            <Setter Property="ItemsControl.FontStyle"
+                                                    Value="Italic"  
+                                                    TargetName="Item_Header"/>
+                                        </Trigger>
                                         <Trigger Property="IsExpanded" Value="false">
                                             <Setter TargetName="ItemsHost"
                                                         Property="Visibility"
@@ -133,7 +157,6 @@
             
             </TreeView>
         </Border>
-        
         
         <Border Grid.Column="1"
                 Grid.Row="1"

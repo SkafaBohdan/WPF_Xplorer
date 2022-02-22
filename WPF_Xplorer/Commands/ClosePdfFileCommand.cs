@@ -5,28 +5,28 @@ namespace WPF_Xplorer.Commands
 {
     public class ClosePdfFileCommand : BaseCommand
     {
-        public ApplicationMainWindowViewModel ViewModel { get; set; }
+        ApplicationMainWindowViewModel viewModel { get; set; }
 
         public ClosePdfFileCommand (ApplicationMainWindowViewModel viewModel)
         {
-            ViewModel = viewModel;
+            this.viewModel = viewModel;
         }
 
         public override bool CanExecute(object parameter)
         {
-            return !string.IsNullOrEmpty(ViewModel.PdfDocProc.DocPath);
+            return !string.IsNullOrEmpty(viewModel.PdfDocProc.DocPath);
         } 
         public override void Execute(object parameter)
         {
             if (!(parameter is TreeView treeView)) return;
 
             treeView.Items.Clear();
-            ViewModel.SelectedItemCommand = null;
-            ViewModel.SelectedObject = null;
-            ViewModel.PdfDocProc.DocPath = null;
-            ViewModel.PdfDocProc.GridListItemKey.Clear();
-            ViewModel.PdfDocProc.GridListItemType.Clear();
-            ViewModel.PdfDocProc.GridListItemValue.Clear();
+            viewModel.SelectedItemCommand = null;
+            viewModel.SelectedObject = null;
+            viewModel.PdfDocProc.DocPath = null;
+            viewModel.PdfDocProc.GridListItemKey.Clear();
+            viewModel.PdfDocProc.GridListItemType.Clear();
+            viewModel.PdfDocProc.GridListItemValue.Clear();
         }
     }
 }

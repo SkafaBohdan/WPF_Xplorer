@@ -13,7 +13,9 @@
     <None Remove="Static\Image\bookmark--v1.png" />
     <None Remove="Static\Image\bookmark.png" />
     <None Remove="Static\Image\childBookmark.png" />
+    <None Remove="Static\Image\minus.png" />
     <None Remove="Static\Image\open2.ico" />
+    <None Remove="Static\Image\plus.png" />
     <None Remove="Static\Image\rectangle.png" />
   </ItemGroup>
 
@@ -36,7 +38,13 @@
     <Content Include="Static\Image\childBookmark.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Static\Image\minus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Static\Image\open2.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Static\Image\plus.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Static\Image\rectangle.png">

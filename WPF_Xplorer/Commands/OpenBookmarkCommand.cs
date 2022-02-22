@@ -6,28 +6,28 @@ namespace WPF_Xplorer.Commands
 {
     public class OpenBookmarkCommand : BaseCommand
     {
-        public ApplicationMainWindowViewModel ViewModel { get; set; }
-        public BookmarksViewModel BookmarksViewModel { get; set; }
+        ApplicationMainWindowViewModel viewModel { get; set; }
+        BookmarksViewModel bookmarksViewModel { get; set; }
         static BookmarkListWindow bookmarkListView;
 
         public OpenBookmarkCommand(ApplicationMainWindowViewModel viewModel, BookmarksViewModel bookmarksViewModel)
         {
-            ViewModel = viewModel;
-            BookmarksViewModel = bookmarksViewModel;
+            this.viewModel = viewModel;
+            this.bookmarksViewModel = bookmarksViewModel;
             bookmarkListView = new BookmarkListWindow(bookmarksViewModel);
         }
 
         public override bool CanExecute(object parameter)
         {
-            return !string.IsNullOrEmpty(ViewModel.PdfDocProc.DocPath);
+            return !string.IsNullOrEmpty(viewModel.PdfDocProc.DocPath);
         }
 
         public override void Execute(object parameter)
         {
             StringBuilder stringBookmarks;
-            stringBookmarks = ViewModel.PdfDocProc.PrintBookmarks();
+            stringBookmarks = viewModel.PdfDocProc.PrintBookmarks();
             string bookmarksPrint = stringBookmarks.ToString();
-            BookmarksViewModel.TextBookmarks = bookmarksPrint;
+            bookmarksViewModel.TextBookmarks = bookmarksPrint;
 
             bookmarkListView.ShowDialog();
 

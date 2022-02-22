@@ -7,11 +7,11 @@ namespace WPF_Xplorer.Commands
     public class OpenFileCommand : BaseCommand
     {
         private readonly IDialogOpen openDialog;
-        public ApplicationMainWindowViewModel ViewModel { get; set; }
+        ApplicationMainWindowViewModel viewModel { get; set; }
 
         public OpenFileCommand(ApplicationMainWindowViewModel viewModel, IDialogOpen openDialog)
         {
-            ViewModel = viewModel;
+            this.viewModel = viewModel;
             this.openDialog = openDialog;
         }
 
@@ -20,9 +20,9 @@ namespace WPF_Xplorer.Commands
             if (!openDialog.OpenDialog(parameter, out var fileName)) return;
             if(parameter is TreeView treeView)
             {
-                ViewModel.ClosePdfFileCommand.Execute(parameter);
-                ViewModel.PdfDocProc.OpenFile(fileName, treeView);
-                ViewModel.bookmarkUpdateViewModel.BookService.InitPageCount();
+                viewModel.ClosePdfFileCommand.Execute(parameter);
+                viewModel.PdfDocProc.OpenFile(fileName, treeView);
+                viewModel.bookmarkUpdateViewModel.BookService.InitPageCount();
             }
         }
     }

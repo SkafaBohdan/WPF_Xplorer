@@ -6,7 +6,7 @@ namespace WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand
 {
     public class OpenBookmarkAddChildBookmarkWindowCommand : BaseCommand
     {
-        public BookmarkUpdateViewModel bookmarkUpdateViewModel { get; set; }
+        BookmarkUpdateViewModel bookmarkUpdateViewModel { get; set; }
         static BookmarkAddChildBookmarkWindow bookmarkAddChildWindow  { get; set; }
       
 

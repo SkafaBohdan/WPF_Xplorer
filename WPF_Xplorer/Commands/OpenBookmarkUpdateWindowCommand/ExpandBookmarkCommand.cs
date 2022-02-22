@@ -6,8 +6,8 @@ namespace WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand
 {
     public class ExpandBookmarkCommand : BaseCommand
     {
-        public BookmarkUpdateViewModel bookmarkViewModel { get; set; }
-        public IArgsConverter ArgsConverter { get; set; }
+        BookmarkUpdateViewModel bookmarkViewModel { get; set; }
+        IArgsConverter ArgsConverter { get; set; }
 
         public ExpandBookmarkCommand(BookmarkUpdateViewModel pdfViewModel)
         {

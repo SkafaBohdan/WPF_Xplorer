@@ -21,7 +21,6 @@ namespace WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand
                 bookmarkUpdateViewModel.NameDelete = binder.PdfBookmarkObj.Title;
                 bookmarkUpdateViewModel.PageDelete = binder.PdfBookmarkObj.Page;
                 bookmarkUpdateViewModel.ParentNameBookmark = binder.PdfBookmarkObj.Title;
-
             }
         }
     }
