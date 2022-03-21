@@ -34,7 +34,8 @@
                 <numeric:IntegerUpDown x:Name="ChildPage"
                                        Value="{Binding NumberChildPage}"
                                        Maximum="{Binding BookService.PageCount}" 
-                                       Minimum="1"/>
+                                       Minimum="1"
+                                       PreviewTextInput="ChildPage_PreviewTextInput"/>
                 <Button Height="23" 
                         Width="130"
                         Margin="5"

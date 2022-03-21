@@ -22,6 +22,9 @@ namespace WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand
         {
             var treeView = bookmarkUpdateViewModel.BookmarkUpdateWindow.tree_bookmarks;
             bookmarkUpdateViewModel.BookService.GetBookmarksTreeViewItem(treeView);
+            bookmarkUpdateViewModel.ParentNameBookmark = null;
+            bookmarkUpdateViewModel.NameDelete = null;
+            bookmarkUpdateViewModel.PageDelete = 0;
             bookmarkUpdateViewModel.BookmarkUpdateWindow.ShowDialog();
         }
     }

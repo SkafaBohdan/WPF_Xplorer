@@ -172,7 +172,8 @@
                 <numeric:IntegerUpDown x:Name="Page"
                                        Value="{Binding NumberPage}"
                                        Maximum="{Binding BookService.PageCount}"
-                                       Minimum="1" />
+                                       Minimum="1"
+                                       PreviewTextInput="Page_PreviewTextInput"/>
                 <Button Height="23" 
                         Width="103"
                         Background="DarkSeaGreen"

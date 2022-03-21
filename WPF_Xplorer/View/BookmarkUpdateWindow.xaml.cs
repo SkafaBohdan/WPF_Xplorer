@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace WPF_Xplorer.View
 {
@@ -7,6 +8,8 @@ namespace WPF_Xplorer.View
     /// </summary>
     public partial class BookmarkUpdateWindow : Window
     {
+        private static readonly Regex onlyNumbers = new Regex("[^0-9.-]+");
+
         public BookmarkUpdateWindow(object dataContext)
         {
             InitializeComponent();
@@ -20,5 +23,14 @@ namespace WPF_Xplorer.View
             e.Cancel = true;
         }
 
+        private void Page_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        private static bool IsTextAllowed(string text)
+        {
+            return !onlyNumbers.IsMatch(text);
+        }
     }
 }
