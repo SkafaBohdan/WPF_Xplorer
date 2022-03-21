@@ -106,7 +106,7 @@ namespace WPF_Xplorer.Services
         {
             var doc = GetDoc();
             Bookmark bookItem = doc.GetFirstBookmark();
-
+            
             var bookmarks = GetBookmarkTree(bookItem);
 
             return bookmarks;
@@ -116,6 +116,11 @@ namespace WPF_Xplorer.Services
         private IEnumerable<TreeViewItem> GetBookmarkTree(Bookmark bookItem)
         {
             var treeViewItems = new ObservableCollection<TreeViewItem>();
+
+            if(bookItem == null)
+            {
+                return treeViewItems;
+            }
 
             for (; bookItem.IsValid(); bookItem = bookItem.GetNext())
             {
