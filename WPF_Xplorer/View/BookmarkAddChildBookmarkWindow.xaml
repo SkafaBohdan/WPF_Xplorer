@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:numeric="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:WPF_Xplorer.View" xmlns:viewmodels="clr-namespace:WPF_Xplorer.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:BookmarkUpdateViewModel}"
         mc:Ignorable="d"
         Title="BookmarkAddChildBookmarkWindow" 
@@ -30,17 +31,10 @@
                 <Label Content="Name the NEW bookmark"/>
                 <TextBox x:Name="ChildName" Text="{Binding ChildName, UpdateSourceTrigger=PropertyChanged}" />
                 <Label Content="Page the new bookmark"/>
-                <TextBox x:Name="ChildPage" Text="{Binding ElementName=SliderPage, 
-                    Path=Value,
-                    Mode=TwoWay,
-                    UpdateSourceTrigger=PropertyChanged}"/>
-                <Slider x:Name="SliderPage" 
-                        Margin="0 3 0 3"
-                        IsSnapToTickEnabled="True"
-                        TickFrequency="1"
-                        Minimum="1"
-                        Maximum="{Binding BookService.PageCount}"
-                        Value="{Binding NumberChildPage}"/>
+                <numeric:IntegerUpDown x:Name="ChildPage"
+                                       Value="{Binding NumberChildPage}"
+                                       Maximum="{Binding BookService.PageCount}" 
+                                       Minimum="1"/>
                 <Button Height="23" 
                         Width="130"
                         Margin="5"

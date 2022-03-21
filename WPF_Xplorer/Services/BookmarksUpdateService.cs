@@ -10,7 +10,7 @@ namespace WPF_Xplorer.Services
     public class BookmarksUpdateService : NotifyPropertyChanged, IBookmarksUpdateService
     {
         private readonly IPdfTronService pdfTronService;
-        private int pageCount = 0;
+        private int pageCount = 1;
         PDFDoc doc;
 
         

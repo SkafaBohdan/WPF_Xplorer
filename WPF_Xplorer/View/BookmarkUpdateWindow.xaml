@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Xplorer.View" 
+        xmlns:numeric="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:command="clr-namespace:WPF_Xplorer.Commands" 
         xmlns:viewmodels="clr-namespace:WPF_Xplorer.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:BookmarkUpdateViewModel}"
@@ -168,17 +169,10 @@
                 <Label Content="Name"/>
                 <TextBox x:Name="AddName" Text="{Binding NameAdd, UpdateSourceTrigger=PropertyChanged}" />
                 <Label Content="Page"/>
-                <TextBox x:Name="Page" Text="{Binding ElementName=SliderPageChild, 
-                    Path=Value,
-                    Mode=TwoWay, 
-                    UpdateSourceTrigger=PropertyChanged}"/>
-                <Slider x:Name="SliderPageChild" 
-                        Margin="0 3 0 3"
-                        IsSnapToTickEnabled="True"
-                        TickFrequency="1"
-                        Minimum="1"
-                        Maximum="{Binding BookService.PageCount}"
-                        Value="{Binding NumberPage}"/>
+                <numeric:IntegerUpDown x:Name="Page"
+                                       Value="{Binding NumberPage}"
+                                       Maximum="{Binding BookService.PageCount}"
+                                       Minimum="1" />
                 <Button Height="23" 
                         Width="103"
                         Background="DarkSeaGreen"
