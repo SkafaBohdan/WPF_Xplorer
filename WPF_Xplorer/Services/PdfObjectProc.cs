@@ -112,13 +112,13 @@ namespace WPF_Xplorer.Services
         }
         public PdfObj StreamObj(Obj obj, IStreamService streamService, string name)
         {
-            var stream = streamService.CreateStream(obj, streamNumb++, out var fullPath);
+            var stream = streamService.CreateStream(obj, streamNumb++, out var fullPath, out int sizeStream);
 
             return new PdfStream()
             {
                 Key = name,
                 Path = fullPath,
-                Value = objValueProc.GetStreamSize(stream)
+                Value = sizeStream
             };
         }
 

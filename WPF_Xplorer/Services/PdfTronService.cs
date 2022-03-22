@@ -1,4 +1,5 @@
-﻿using pdftron.PDF;
+﻿using pdftron.Filters;
+using pdftron.PDF;
 using pdftron.SDF;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -91,16 +92,26 @@ namespace WPF_Xplorer.Services
 
         public void LoadDoc(string path)
         {
-            doc = new PDFDoc(path);
+            var buffer = GetBuffer(path);
+            doc = new PDFDoc(buffer, buffer.Length);
             doc.InitSecurityHandler();
+        }
+        private byte[] GetBuffer(string path)
+        {
+            var file = new MappedFile(path);
+            var fileReader = new FilterReader(file);
+
+            var fileSize = file.FileSize();
+            var buffer = new byte[fileSize];
+            fileReader.Read(buffer);
+
+            return buffer;
         }
 
         public PDFDoc GetDoc()
         {
             return doc; 
         }
-
-
 
         public IEnumerable<TreeViewItem> GetBookmarksTree()
         {
@@ -111,7 +122,6 @@ namespace WPF_Xplorer.Services
 
             return bookmarks;
         }
-
 
         private IEnumerable<TreeViewItem> GetBookmarkTree(Bookmark bookItem)
         {
@@ -141,7 +151,6 @@ namespace WPF_Xplorer.Services
 
             return treeViewItems;
         }
-
         
         private PdfBookmark CreatePdfBookmarkObj(Bookmark bookItem)
         {

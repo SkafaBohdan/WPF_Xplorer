@@ -28,7 +28,6 @@ namespace WPF_Xplorer
         protected override async void OnStartup(StartupEventArgs e)
         {
             await host.StartAsync();
-
             var windowMain = host.Services.GetService<MainWindow>();
             windowMain.Show();
             base.OnStartup(e);
@@ -40,10 +39,17 @@ namespace WPF_Xplorer
             await host.StopAsync();
             host.Dispose();
 
-            var PathDoc = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            DeleteFolderStreams();
+        }
+        
+        private void DeleteFolderStreams()
+        {
+            var PathDoc = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             var PathStream = Path.Combine(PathDoc, "tempStreams");
             if (Directory.Exists(PathStream))
+            {
                 Directory.Delete(PathStream, true);
+            }
         }
     }
 }

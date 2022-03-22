@@ -58,5 +58,3 @@ namespace WPF_Xplorer.ViewModels
 }
 
 
-//TODO: пофиксить отображение сайза(велью) для некоторых стримов
-

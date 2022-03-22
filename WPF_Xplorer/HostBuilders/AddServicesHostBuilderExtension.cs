@@ -42,7 +42,7 @@ namespace WPF_Xplorer.HostBuilders
 
         private static IStreamService CreateStreamService(IServiceProvider provider)
         {
-            var PathDoc = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var PathDoc = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             var PathStream = Path.Combine(PathDoc, "tempStreams");
 
             return new StreamService(PathStream);

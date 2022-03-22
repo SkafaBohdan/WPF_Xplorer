@@ -13,7 +13,6 @@ namespace WPF_Xplorer.Interfaces
         int GetObjectNumber(Obj obj);
         double GetNumber(Obj obj);
         bool GetBool(Obj obj);
-        double GetStreamSize(Filter stream);
         string GetName(Obj obj);
         string GetStringWithBuffer(Obj obj);
         int GetSize(Obj obj);

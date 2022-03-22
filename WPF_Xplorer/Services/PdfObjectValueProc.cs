@@ -1,5 +1,4 @@
-﻿using pdftron.Filters;
-using pdftron.PDF;
+﻿using pdftron.PDF;
 using pdftron.SDF;
 using System.Text;
 using WPF_Xplorer.Interfaces;
@@ -44,11 +43,6 @@ namespace WPF_Xplorer.Services
         public int GetSize(Obj obj)
         {
             return obj.Size();
-        }
-
-        public double GetStreamSize(Filter stream)
-        {
-            return stream.Size();
         }
 
         public Obj.ObjType GetType(Obj obj)

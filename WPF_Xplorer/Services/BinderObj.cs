@@ -17,8 +17,6 @@ namespace WPF_Xplorer.Services
         }
 
 
-        //TODO: TEST ZONE Binding Bookmarks
-
         public Bookmark BookmarkObj { get; set; }
         public PdfBookmark PdfBookmarkObj { get; set; }
 
@@ -27,8 +25,6 @@ namespace WPF_Xplorer.Services
             BookmarkObj = bookmarkObj;
             PdfBookmarkObj = pdfBookmarkObj;
         }
-
-        //
 
     }
 }

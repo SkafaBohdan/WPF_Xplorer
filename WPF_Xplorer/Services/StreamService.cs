@@ -15,7 +15,7 @@ namespace WPF_Xplorer.Services
             Path = path;
         }
 
-        public Filter CreateStream(Obj streamObj, int streamNumber, out string fullPath)
+        public Filter CreateStream(Obj streamObj, int streamNumber, out string fullPath, out int sizeStream)
         {
             if (!Directory.Exists(Path))
             {
@@ -23,8 +23,8 @@ namespace WPF_Xplorer.Services
             }
 
             var stream = streamObj.GetDecodedStream();
+            sizeStream = stream.Size();
             fullPath = System.IO.Path.Combine(Path, $"tempStream{streamNumber++}.txt");
-
             stream.WriteToFile(fullPath, true);
 
             return stream;

@@ -24,6 +24,6 @@ namespace WPF_Xplorer.Services.Interfaces
     public interface IStreamService
     {
         string Path { get; }
-        Filter CreateStream(Obj streamObj, int streamNumber, out string fullPath);
+        Filter CreateStream(Obj streamObj, int streamNumber, out string fullPath, out int sizeStream);
     }
 }
