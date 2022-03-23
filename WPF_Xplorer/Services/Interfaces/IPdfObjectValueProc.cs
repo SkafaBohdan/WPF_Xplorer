@@ -1,5 +1,4 @@
-﻿using pdftron.Filters;
-using pdftron.PDF;
+﻿using pdftron.PDF;
 using pdftron.SDF;
 
 namespace WPF_Xplorer.Interfaces

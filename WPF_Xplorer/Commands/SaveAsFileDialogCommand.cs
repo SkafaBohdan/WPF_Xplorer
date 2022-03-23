@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
-using System.Windows;
+using WPF_Xplorer.Interfaces;
+using WPF_Xplorer.Services;
 using WPF_Xplorer.ViewModels;
 
 namespace WPF_Xplorer.Commands
@@ -7,10 +8,12 @@ namespace WPF_Xplorer.Commands
     public class SaveAsFileDialogCommand : BaseCommand
     {
         BookmarkUpdateViewModel bookmarkUpdateViewModel { get; set; }
+        IMessageBox messageBox;
 
         public SaveAsFileDialogCommand(BookmarkUpdateViewModel bookmarkViewModel)
         {
             bookmarkUpdateViewModel = bookmarkViewModel;
+            messageBox = new MessageBoxWrapper();
         }
 
         public override void Execute(object parameter)
@@ -20,7 +23,7 @@ namespace WPF_Xplorer.Commands
             if (saveFileDialog.ShowDialog() == true)
             {
                 bookmarkUpdateViewModel.BookService.SaveBookmarks(saveFileDialog.FileName);
-                MessageBox.Show("Файл сохранен");
+                messageBox.MessageBoxShow("Файл сохранен", "Ok");
             }
         }
     }

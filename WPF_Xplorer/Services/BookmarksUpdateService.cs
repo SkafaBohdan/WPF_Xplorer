@@ -1,7 +1,7 @@
 ﻿using pdftron.PDF;
 using System.Text;
-using System.Windows;
 using System.Windows.Controls;
+using WPF_Xplorer.Interfaces;
 using WPF_Xplorer.Services.Interfaces;
 
 
@@ -10,6 +10,7 @@ namespace WPF_Xplorer.Services
     public class BookmarksUpdateService : NotifyPropertyChanged, IBookmarksUpdateService
     {
         private readonly IPdfTronService pdfTronService;
+        private readonly IMessageBox messageBox;
         private int pageCount = 1;
         PDFDoc doc;
 
@@ -17,6 +18,7 @@ namespace WPF_Xplorer.Services
         public BookmarksUpdateService(IPdfTronService pdfTronService)
         {
             this.pdfTronService = pdfTronService;
+            messageBox = new MessageBoxWrapper();
         }
 
         public int PageCount
@@ -48,7 +50,7 @@ namespace WPF_Xplorer.Services
             Destination bookmarkDestination = Destination.CreateFit(doc.GetPage(page));
             bookmark.SetAction(pdftron.PDF.Action.CreateGoto(bookmarkDestination));
 
-            MessageBox.Show("Закладка добавлена", "Ok");
+            messageBox.MessageBoxShow("Закладка добавлена", "Ok");
         }
      
         public void  GetBookmarksTreeViewItem(TreeView treeView)
@@ -65,12 +67,12 @@ namespace WPF_Xplorer.Services
         {
             if (bookmarkObj == null)
             {
-                MessageBox.Show("Закладка не найдена", "Ne Ok");
+                messageBox.MessageBoxShow("Закладка не найдена", "Ne Ok");
             }
             else
             {
                 bookmarkObj.Delete();
-                MessageBox.Show("Закладка удалена", "Ok");
+                messageBox.MessageBoxShow("Закладка удалена", "Ok");
             }
         }
 
@@ -80,7 +82,7 @@ namespace WPF_Xplorer.Services
             Bookmark childBookmark = parentBookmark.AddChild(name);
             childBookmark.SetAction(Action.CreateGoto(Destination.CreateFit(doc.GetPage(page))));
 
-            MessageBox.Show("Закладка добавлена", "Ok");
+            messageBox.MessageBoxShow("Закладка добавлена", "Ok");
         }
 
 
@@ -98,7 +100,7 @@ namespace WPF_Xplorer.Services
             return PrintOutlineTree(root);
         }
 
-        void PrintIndent(Bookmark item)
+        private void PrintIndent(Bookmark item)
         {
             int indent = item.GetIndent() - 1;
             for (int i = 0; i < indent; ++i)
@@ -106,7 +108,7 @@ namespace WPF_Xplorer.Services
         }
 
 
-        StringBuilder PrintOutlineTree(Bookmark bookItem)
+        private StringBuilder PrintOutlineTree(Bookmark bookItem)
         {
             for (; bookItem.IsValid(); bookItem = bookItem.GetNext())
             {
@@ -148,5 +150,6 @@ namespace WPF_Xplorer.Services
             if (path == null) path = doc.GetFileName();
             doc.Save(path, 0);
         }
+
     } 
 }

@@ -3,8 +3,8 @@ using pdftron.PDF;
 using System;
 using System.Collections.ObjectModel;
 using System.Text;
-using System.Windows;
 using System.Windows.Controls;
+using WPF_Xplorer.Interfaces;
 using WPF_Xplorer.Services.Interfaces;
 
 
@@ -14,12 +14,14 @@ namespace WPF_Xplorer.Services
     {
         private readonly IPdfTronService pdfTronService;
         private readonly IPdfTreeProc pdfTreeProc;
+        private readonly IMessageBox messageBox; 
 
 
         public PdfService(IPdfTronService pdfTronService, IPdfTreeProc pdfTreeProc)
         {
             this.pdfTronService = pdfTronService;
             this.pdfTreeProc = pdfTreeProc;
+            messageBox = new MessageBoxWrapper();
         }
       
 
@@ -82,12 +84,12 @@ namespace WPF_Xplorer.Services
             }
             catch (PDFNetException e)
             {
-                MessageBox.Show(e.GetMessage(), "Error!");
+                messageBox.MessageBoxShow(e.GetMessage(), "Error!");
                 boolPath = false;
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error!");
+                messageBox.MessageBoxShow(e.Message, "Error!");
                 boolPath = false;
             }
         }

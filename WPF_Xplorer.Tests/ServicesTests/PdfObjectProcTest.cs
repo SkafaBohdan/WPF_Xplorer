@@ -189,12 +189,11 @@ namespace WPF_Xplorer.Tests.ServicesTests
         {
             string path = "path";
             int size = 1;
-            streamService.Setup(service => service.CreateStream(It.IsAny<Obj>(), It.IsAny<int>(), out path));
-            pdfObjValueProc.Setup(service => service.GetStreamSize(It.IsAny<Filter>())).Returns(size);
+            streamService.Setup(service => service.CreateStream(It.IsAny<Obj>(), It.IsAny<int>(), out path, out size));
 
             var result = pdfObjectProc.StreamObj(obj, streamService.Object, key);
 
-            streamService.Verify(service => service.CreateStream(It.IsAny<Obj>(), It.IsAny<int>(), out path), Times.Once);
+            streamService.Verify(service => service.CreateStream(It.IsAny<Obj>(), It.IsAny<int>(), out path, out size), Times.Once);
             Assert.AreEqual(PdfObj.PdfType.Stream, result.Type);
             Assert.AreEqual(size, result.Value);
             Assert.AreEqual(key, result.Key);
