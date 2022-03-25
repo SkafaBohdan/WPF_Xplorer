@@ -28,8 +28,8 @@ namespace WPF_Xplorer.HostBuilders
                 services.AddScoped<IPdfTronService, PdfTronService>();
                 services.AddScoped<IPdfService, PdfService>();
                 services.AddScoped<IPdfDocProc, PdfDocProc>();
+                services.AddScoped<IMessageBox, MessageBoxWrapper>();
                 services.AddSingleton<IBookmarksUpdateService, BookmarksUpdateService>();
-
             });
 
             return host;

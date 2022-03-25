@@ -14,11 +14,6 @@ namespace WPF_Xplorer.Services.Interfaces
         IEnumerable<TreeViewItem> GetInfoStrings(BinderObj binder);
         IEnumerable<TreeViewItem> GetKidNodes(Obj obj, string name);
         PDFDoc GetDoc();
-
-        //void GetBookmarkRoot(TreeViewItem parent);
-        //IEnumerable<TreeViewItem> GetBookmarks(PdfBookmark bookmarkObj);
-   
-
         public IEnumerable<TreeViewItem> GetBookmarksTree();
     }
 }

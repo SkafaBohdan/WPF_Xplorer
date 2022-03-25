@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using WPF_Xplorer.Commands;
 using WPF_Xplorer.Commands.OpenBookmarkUpdateWindowCommand;
+using WPF_Xplorer.Services;
 using WPF_Xplorer.Services.Interfaces;
 using WPF_Xplorer.View;
 
@@ -131,8 +132,8 @@ namespace WPF_Xplorer.ViewModels
         {
             OpenBookmarkUpdateAddBookmarkCommand = new AddBookmarkCommand(this);
             OpenBookmarkUpdateDeleteBookmarkCommand = new DeleteBookmarkCommand(this);
-            SaveFileCommand = new SaveFileCommand(this);
-            SaveAsFileDialogCommand = new SaveAsFileDialogCommand(this);
+            SaveFileCommand = new SaveFileCommand(this, new MessageBoxWrapper());
+            SaveAsFileDialogCommand = new SaveAsFileDialogCommand(this, new MessageBoxWrapper());
             SelectedItemBookmark = new SelectedItemBookmarkCommand(this);
             ExpandBookmarkCommand = new ExpandBookmarkCommand(this);
 

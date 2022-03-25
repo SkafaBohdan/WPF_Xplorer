@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
 using WPF_Xplorer.Interfaces;
-using WPF_Xplorer.Services;
 using WPF_Xplorer.ViewModels;
 
 namespace WPF_Xplorer.Commands
@@ -10,10 +9,10 @@ namespace WPF_Xplorer.Commands
         BookmarkUpdateViewModel bookmarkUpdateViewModel { get; set; }
         IMessageBox messageBox;
 
-        public SaveAsFileDialogCommand(BookmarkUpdateViewModel bookmarkViewModel)
+        public SaveAsFileDialogCommand(BookmarkUpdateViewModel bookmarkViewModel, IMessageBox messageBox)
         {
             bookmarkUpdateViewModel = bookmarkViewModel;
-            messageBox = new MessageBoxWrapper();
+            this.messageBox = messageBox;
         }
 
         public override void Execute(object parameter)

@@ -15,10 +15,10 @@ namespace WPF_Xplorer.Services
         PDFDoc doc;
 
         
-        public BookmarksUpdateService(IPdfTronService pdfTronService)
+        public BookmarksUpdateService(IPdfTronService pdfTronService, IMessageBox messageBox)
         {
             this.pdfTronService = pdfTronService;
-            messageBox = new MessageBoxWrapper();
+            this.messageBox = messageBox;
         }
 
         public int PageCount
@@ -53,7 +53,7 @@ namespace WPF_Xplorer.Services
             messageBox.MessageBoxShow("Закладка добавлена", "Ok");
         }
      
-        public void  GetBookmarksTreeViewItem(TreeView treeView)
+        public void GetBookmarksTreeViewItem(TreeView treeView)
         {
             treeView.Items.Clear();
             var children = pdfTronService.GetBookmarksTree();
@@ -67,10 +67,10 @@ namespace WPF_Xplorer.Services
         {
             if (bookmarkObj == null)
             {
-                messageBox.MessageBoxShow("Закладка не найдена", "Ne Ok");
+                messageBox.MessageBoxShow("Закладка не найдена", "NotFound");
             }
             else
-            {
+            {               
                 bookmarkObj.Delete();
                 messageBox.MessageBoxShow("Закладка удалена", "Ok");
             }
@@ -78,7 +78,6 @@ namespace WPF_Xplorer.Services
 
         public void AddChildBookmark(Bookmark parentBookmark, string name, int page)
         {
-
             Bookmark childBookmark = parentBookmark.AddChild(name);
             childBookmark.SetAction(Action.CreateGoto(Destination.CreateFit(doc.GetPage(page))));
 
@@ -106,7 +105,6 @@ namespace WPF_Xplorer.Services
             for (int i = 0; i < indent; ++i)
                 bookmarks.Append("  ");
         }
-
 
         private StringBuilder PrintOutlineTree(Bookmark bookItem)
         {
