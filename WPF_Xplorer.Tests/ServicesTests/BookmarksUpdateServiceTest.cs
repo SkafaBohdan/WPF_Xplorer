@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using pdftron;
 using pdftron.PDF;
-using pdftron.SDF;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -27,10 +26,10 @@ namespace WPF_Xplorer.Tests.ServicesTests
         [SetUp]
         public void SetUp()
         {
+            PDFNet.Initialize("demo:1638797506699:7b62627f0300000000e7c9c9b56709b97ba1634ef4ec416ab001038e68");
             pdfTronService = new Mock<IPdfTronService>();
             messageBox = new Mock<IMessageBox>();
             bookmarksUpdateService = new BookmarksUpdateService(pdfTronService.Object, messageBox.Object);
-            PDFNet.Initialize("demo:1638797506699:7b62627f0300000000e7c9c9b56709b97ba1634ef4ec416ab001038e68");
             pdfDoc = new PDFDoc();
         }
 
@@ -106,19 +105,11 @@ namespace WPF_Xplorer.Tests.ServicesTests
         [Test]
         public void GetBookmarksTreeViewItem_AddItem()
         {
-            pdfTronService.Setup(service => service.GetBookmarksTree()).Returns(It.IsAny<IEnumerable<It.IsAny<TreeViewItem>()>>());
+            pdfTronService.Setup(service => service.GetBookmarksTree()).Returns(new List<TreeViewItem>());
 
-            bookmarksUpdateService.GetBookmarksTreeViewItem(It.IsAny<TreeView>());
+            bookmarksUpdateService.GetBookmarksTreeViewItem(new TreeView());
 
             pdfTronService.Verify(service => service.GetBookmarksTree(), Times.Once);
-            //public void GetBookmarksTreeViewItem(TreeView treeView)
-            //{
-            //    treeView.Items.Clear();
-            //    var children = pdfTronService.GetBookmarksTree();
-            //    foreach (var item in children)
-            //    {
-            //        treeView.Items.Add(item);
-            //    }
         }
 
 
